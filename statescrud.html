@@ -1,0 +1,153 @@
+<html>
+
+<head>
+    <title>STATE DATA</title>
+    <link rel="stylesheet" href="statescrud.css">
+</head>
+
+<body>
+    <div id="twoforms">
+        <div>
+            <h1 align="left">State Information</h1>
+            <div align="left" id="addbuttondiv">
+                <button type="button" id="addbutton" onclick="openstateForm()" width="100px">Add State Data</button>
+            </div>
+            <div id="dis" align="left">
+            </div>
+            <div align="left" id="add">
+                <form>
+                    <table>
+                        <tr>
+                            <td>
+                                <h2>Add State Data</h2>
+                            </td>
+                            <td> <button type="button" onclick="closestateForm()">X</button></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="state" placeholder="State Name" required></td>
+
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="cityname" placeholder="Capital Name" required></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="popu" placeholder="Population" required></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="cm" placeholder="CM Name" required></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" onclick="addstate()">Add</button></td>
+                            <td><button type="reset">Reset</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div>
+            <h1 align="right">Cities Information</h1>
+            <div align="right" id="addbuttondiv">
+                <button type="button" id="addbutton" onclick="opencityForm()" width="100px">Add City Data</button>
+            </div>
+            <div id="citydata">
+
+            </div>
+            <div id="dis" align="left">
+            </div>
+            <div align="right" id="city">
+                <form>
+                    <table>
+                        <tr>
+                            <td>
+                                <h2>Add City Data</h2>
+                            </td>
+                            <td> <button type="button" onclick="closecityForm()">X</button></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="cityname1" placeholder="city Name" required></td>
+
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="mla" placeholder="MLA Name" required></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="popu1" placeholder="City Population" required></td>
+                        </tr>
+                        <tr>
+                            <td><select  id="ccm1" >
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" onclick="addcity()">Add</button></td>
+                            <td><button type="reset">Reset</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="popupForm">
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <h2>State Edit Form</h2>
+                    </td>
+                    <td> <button type="button" onclick="closeeditForm()">X</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="ename" placeholder="State Name" required></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="eroll" placeholder="Capital Name" required></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="edept" placeholder="Population" required></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="ecm" placeholder="CM Name" required></td>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="stateedit()">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div>
+    <div id="citypopupForm">
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <h2>City Edit Form</h2>
+                    </td>
+                    <td> <button type="button" onclick="closecityeditForm()">X</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="cname" placeholder="City Name" required></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="croll" placeholder="MLA Name" required></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="cdept" placeholder="Population" required></td>
+                </tr>
+                <tr>
+                    <td><select  id="ccm">
+
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="cityedit()">Submit</button></td>
+                    <td><button type="reset">Reset</button></td>
+                </tr>
+                </table>
+        </form>
+    </div>
+    </div>
+    
+    <script src="statescrud.js"></script>
+</body>
+
+</html>

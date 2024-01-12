@@ -1,0 +1,76 @@
+<style>
+	.row {
+		display: flex;
+	}
+
+	.col {
+		width: 50px;
+		height: 50px;
+		border: 1px solid #ccc;
+	}
+
+	.cal {
+		float: left;
+		margin: 10px;
+		border: 2px solid black;
+	}
+
+	#moncolor {
+		color: red;
+	}
+</style>
+<script>
+	document.write("<div align='center' style='color:red'>Calender 2024</div>");
+	const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+	function monthpattern(k) {
+		var dt = new Date(2024, k, 1);
+		var m = dt.getMonth();
+		var start_week = dt.getDay();
+		var end_date = 31;
+		var t = dt.getTime();
+		t = t + (86400 * 25 * 1000);
+		for (var i = 0; i < 5; i++) {
+			t = t + (86400 * 1000);
+			dt = new Date(t);
+			if (m != dt.getMonth()) {
+				break;
+			}
+			end_date = dt.getDate();
+		}
+		document.write("<div id='moncolor'>" + month[k] + "</div>");
+		if (start_week == 0) {
+			start_week = 7;
+		}
+		var c = 1;
+		document.write("<div class='row'>");
+		document.write("<div class='col'>Sun</div>");
+		document.write("<div class='col'>Mon</div>");
+		document.write("<div class='col'>Tue</div>");
+		document.write("<div class='col'>Wed</div>");
+		document.write("<div class='col'>Thu</div>");
+		document.write("<div class='col'>Fri</div>");
+		document.write("<div class='col'>Sat</div>");
+		document.write("</div>");
+		for (var i = 0; i < 6; i++) {
+			document.write("<div class='row'>");
+			for (var j = 0; j < 7; j++) {
+				if (c <= end_date && start_week == 1) {
+					document.write("<div class='col'>" + c + "</div>");
+					c++;
+				} else {
+					document.write("<div class='col'>	</div>");
+					start_week--;
+				}
+				document.write("<br>")
+			}
+			document.write("</div>");
+		}
+	}
+	var x = 0
+	while (x < 12) {
+		document.write("<div class='cal'>");
+		monthpattern(x);
+		document.write("</div>");
+		x = x + 1;
+	}
+</script>

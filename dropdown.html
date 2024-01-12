@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dropdown</title>
+  <link rel="stylesheet" href="dropdown.css">
+</head>
+
+<body>
+
+  <!-- Dropdown menu with options -->
+  <table>
+    <tr>
+      <td><select id="dd1" onchange="aftertenth()">
+          <option value="">After tenth</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Polytechnic">Polytechnic</option>
+          <option value="ITI">ITI</option>
+          <option value="Para Medical">Para Medical</option>
+        </select></td>
+
+      <td><select id="dd2" onchange="aftertenth1()">
+        <option value="">Branch</option>
+      </select></td>
+
+      <td><select id="dd3">
+        <option value="">Carrer option</option>
+      </select>
+      </td>
+      <td> <button type="button" onclick="print()">Submit</button></td>
+    </tr>
+  </table>
+  <div id="result"></div>
+  <script src="dropdown.js"></script>
+</body>
+
+</html>

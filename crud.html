@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>STUDENT DATA</title>
+        <link  rel="stylesheet" href="cruddata.css">
+    </head>
+    <body>
+        <h1 align="center">Student Data</h1>
+        <div align="center" id="addbuttondiv">
+        <button type="button" id="addbutton" onclick="addForm()" width="100px">Add Data</button>
+    </div>
+        <div id="dis" align="center">
+        </div>
+        <div align="center" id="add">
+        <form>
+            <table>
+                <tr>
+                    <td><h2>Add Data</h2></td>
+                    <td> <button type="button" onclick="addcloseForm()">X</button></td>
+                </tr>
+            <tr><td><input type="text" id="name" placeholder="Enter Name" required></td></tr>
+            <tr><td><input type="text" id="roll" placeholder="Enter Roll" required></td></tr>
+            <tr><td><input type="text" id="dept" placeholder="Enter Department" required></td></tr>
+            <tr><td><button type="button" onclick="add()">Add</button></td>
+            <td><button type="reset" >Reset</button></td></tr>
+        </table>
+        </form>
+    </div>
+        <div  id="popupForm" align="center" >
+          <form >
+            <table>
+                <tr>
+                    <td><h2>Please Edit</h2></td>
+                    <td> <button type="button" onclick="closeForm()">X</button></td>
+                </tr>
+                <tr>
+            <td><input type="text" id="ename" placeholder="Your Name"  required></td></tr>
+            <tr><td><input type="text" id="eroll" placeholder="Your Roll"  required></td></tr>
+              <tr><td><input type="text" id="edept" placeholder="Your Department"  required></td>
+              </tr>
+              <tr>
+            <td><button type="button" onclick="Edit()">Submit</button></td>
+            <td><button type="reset" >Reset</button></td></tr>
+        </tr>
+          </form>
+        </div>
+    <script src="cruddata.js"></script>
+    </body>
+</html>
