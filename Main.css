@@ -1,0 +1,23 @@
+button {
+    border: solid;
+    height: 50px;
+    width: 200px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#front
+{
+    background-color: antiquewhite;
+}
+#front1
+{
+    padding-top: 200px;
+}
+table
+        {
+            height:100px;
+            width:100px;
+            border-color: black;
+            border-style: solid;
+
+        }
