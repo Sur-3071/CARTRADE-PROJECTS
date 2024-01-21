@@ -8,11 +8,19 @@ function getRandomElement(array) {
     var val1 = document.getElementById('coin');
     val1.innerHTML = v;
     var val2 = document.getElementById('result');
-    val2.innerHTML += v+'==>';
+    if(a.length%10==0)
+    {
+        val2.innerHTML += v+'==>'+`<br>`;
+    }
+    else
+    {
+        val2.innerHTML += v+'==>';
+    }
     console.log(a)
     if(a.length==0)
     {
         a=b;
+        val1.innerHTML="Game Start";
         val2.innerHTML="";
         alert("Game over")
     }
