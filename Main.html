@@ -1,50 +1,32 @@
-<!DOCTYPE html>
 <html>
-
-<head>
-  <title>
-    Project Page
-  </title>
-  <link rel="stylesheet" href="Main.css">
-</head>
-
-<body>
-  <div id="front1">
-    <table align="center" id="front">
-      <tr>
-        <td><a href="calculatorfrontpage.html">
-            <button>Calculator Project</button>
-          </a></td>
-        <td><a href="calender.html">
-            <button>Calender Project</button>
-          </a></td>
-        <td><a href="countiterate.html">
-            <button>Animation Project</button>
-          </a></td>
-      </tr>
-      <tr>
-        <td><a href="crud.html">
-            <button>Crud Form Project</button>
-          </a></td>
-        <td><a href="dropdown.html">
-            <button>dropdown Project</button>
-          </a></td>
-        <td><a href="org_struct.html">
-            <button>Orag structureProject</button>
-          </a></td>
-      </tr>
-      <tr>
-      <td><a href="statescrud.html">
-        <button>State City Form Project</button>
-      </a></td>
-        <td><a href="bill.html">
-        <button>Billing</button>
-          <td><a href="coin picker .html">
-        <button>Coin Picker</button>
-      </a></td>
-    </tr>
-    </table>
-  </div>
-</body>
-
+    <head>
+        <title>
+            Coin picker
+        </title>
+    <style>
+        #coin
+        {
+            padding-top: 80px;
+            font-size: 100px;
+        }
+        #result
+        {
+            padding-top: 20px;
+            font-size: 20px;
+        }
+        button{
+            background-color: pink;
+            border-color: green;
+        }
+    </style>
+    </head>
+    <body>
+        <h1 align="center" style="color: red;">TAMBOLA COIN PICKER</h1>
+        <div align="center">
+        <button type="button" onclick="coin()">Generate Coin</button>
+    </div>
+        <div id="coin" align="center">Game Start</div>
+        <div id="result" align="center"></div>
+    </body>
+    <script src="coin picker.js"></script>
 </html>
