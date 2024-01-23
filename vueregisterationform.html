@@ -1,0 +1,400 @@
+<html>
+
+<head>
+    <title>Vue Registeration Form</title>
+</head>
+<style>
+    table {
+        border: 2px solid black;
+    }
+
+    *:focus {
+        outline: none;
+    }
+
+    .error {
+        border: 1px solid red;
+    }
+</style>
+<link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css">
+<script src="bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>
+<script src="vue.global.js"></script>
+
+<body>
+    <div id="app">
+        <h1 align="center">School Registration Form</h1>
+        <form>
+            <table align="center">
+                <div class="bor">
+                    <tr>
+                        <td><label><b>Student Name </b></label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' placeholder="First Name" v-model="preview['Student First Name']"
+                                v-on:keyup="validate('Student First Name')" :class="{ 'error': errors['Student First Name']}" required>
+                            <div style="color:red;" v-if="errors['Student First Name']">{{ errors['Student First Name']
+                                }}</div>
+                        </td>
+                        <td><input type='text' v-on:keyup="validate('Student Middle Name')" placeholder="Middle Name"
+                                v-model="preview['Student Middle Name']"
+                                :class="{ 'error': errors['Student Middle Name']}">
+                            <div style="color:red;" v-if="errors['Student Middle Name']">{{ errors['Student Middle Name'] }}</div>
+                        </td>
+
+                        <td><input type='text' v-on:keyup="validate('Student Last Name')" placeholder="Last Name"
+                                v-model="preview['Student Last Name']" required
+                                :class="{ 'error': errors['Student Last Name']}">
+                            <div style="color:red;" v-if="errors['Student Last Name']">{{ errors['Student Last Name'] }}
+                            </div>
+                        </td>
+                    </tr>
+                </div>
+                <div class="bor">
+                    <tr>
+                        <td><label><b>Date Of Birth</b></label></td>
+                        <td colspan="2"><label><b>Age</b></label></td>
+                    </tr>
+                    <tr>
+                        <td><input type='date' required v-model="preview['Date Of Birth']"
+                                v-on:change="calc(preview['Date Of Birth'])" required></td>
+                        <td><input type='number' v-model="preview['Age']" required></td>
+                    </tr>
+                </div>
+                <div class="bor">
+                    <tr>
+                        <td><label><b>Gender</b></label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" value="Male" Name="gender" v-model="preview['Gender']" required> Male
+                        </td>
+                        <td><input type="radio" value="Female" Name="gender" v-model="preview['Gender']" required>
+                            Female</td>
+                    </tr>
+                </div>
+                <div class="bor">
+                    <tr>
+                        <td>
+                            <lable><b>Admission For Class</b></lable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select v-model="preview['Class Name'] " required>
+                                <option value="" selected disabled hidden>Select Class</option>
+                                <option v-for="i in class1">{{i}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </div>
+                <div class="bor">
+                    <tr>
+                        <td>
+                            <lable><b>Parent deatails</b></lable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <lable><b>Father Name</b></lable>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td><input type='text' placeholder="First Name" v-model="preview['Father First Name']" required>
+                        </td>
+                        <td><input type='text' placeholder="Middle Name" v-model="preview['Father Middle Name']"></td>
+                        <td><input type='text' placeholder="Last Name" v-model="preview['Father Last Name']" required>
+                        </td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <td>
+                            <lable><b>Mother Name</b></lable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type='text' placeholder="First Name" v-model="preview['Mother First Name']" required>
+                        </td>
+                        <td><input type='text' placeholder="Middle Name" v-model="preview['Mother Middle Name']"></td>
+                        <td><input type='text' placeholder="Last Name" v-model="preview['Mother Last Name']" required>
+                        </td>
+                    </tr>
+                </div>
+                <div class="bor">
+                    <tr>
+                        <td>
+                            <label><b>Address</b></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <input type='text' placeholder="Address line 1" style="width: 550px;"
+                                v-model="preview['Address1']" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <input type='text' placeholder="Address line 2" style="width: 550px;"
+                                v-model="preview['Address2']" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select v-model="preview['State']" required>
+                                <option value="" selected disabled hidden>select state Name</option>
+                                <option v-for="i in states" style="width: 50px;">{{i}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Enter City Name" v-model="preview['City']" required>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Enter District Name" v-model="preview['District']" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Enter Landmaek" v-model="preview['Landmark']" required>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Village" v-model="preview['Village']" required>
+                        </td>
+                        <td>
+                            <input type="tel" placeholder="Enter Pin Code" v-model="preview['Pincode']" required>
+                        </td>
+                    </tr>
+                </div>
+                <div class="bor">
+                    <tr>
+                        <td><b>Contact Details</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="email" placeholder="Enter Mail Address" v-model="preview['Email']"
+                             v-on:keyup="validate('Email')" :class="{ 'error': errors['Email']}" required>
+                             <div style="color:red;" v-if="errors['Email']">{{ errors['Email']}}
+                        </td>
+                        <td>
+                            <input type="tel" placeholder="Enter Phone number-1" v-model="preview['Phone number1']"
+                            v-on:keyup="validate('Phone number1')" :class="{ 'error': errors['Phone number1']}"required>
+                            <div style="color:red;" v-if="errors['Phone number1']">{{ errors['Phone number1']}}
+                        </td>
+                        <td>
+                            <input type="tel" placeholder="Enter Phone number-2" v-model="preview['Phone number2']"
+                            v-on:keyup="validate('Phone number2')" :class="{ 'error': errors['Phone number2']}"required>
+                            <div style="color:red;" v-if="errors['Phone number2']">{{ errors['Phone number2']}}
+                        </td>
+                    </tr>
+                </div>
+
+                <div class="bor">
+                    <tr>
+                        <td>
+                            <b>Extra curricular activities</b>
+                        </td>
+                    </tr>
+                    <tr v-for="i  in list">
+                        <td>
+                            <input type="checkbox" v-model="Activities" v-bind:value="i">
+                            <label>{{i}}</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <button type="button" class="btn btn-primary" v-on:click="result()">Preview</button></td>
+                    </tr>
+                </div>
+            </table>
+        </form>
+        <div>
+            <table border="2px" id="result1" style="display: none;" style="display:flex;">
+                <tr v-for="i,j in preview">
+                    <td>{{j}}</td>
+                    <td>{{" : "}}</td>
+                    <td colspan="5">{{i}}</td>
+                </tr>
+                <tr>
+                    <td>Extra curricular activities :</td>
+                    <ol>
+                        <td rowspan="8">
+                            <li v-for="i in Activities">
+                                {{i}}
+                            </li>
+                        </td>
+                    </ol>
+                <tr>
+                    <td> <button type="button" class="btn btn-primary" v-on:click="final()">submit</button></td>
+                </tr>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+        var app = Vue.createApp({
+            data() {
+                return {
+                    class1: [
+                        "1 Class",
+                        "2 Class",
+                        "3 Class",
+                        "4 Class",
+                        "5 Class",
+                        "6 Class",
+                        "7 Class",
+                        "8 Class",
+                        "9 Class",
+                        "10 Class"
+                    ],
+                    states: [
+                        "Andhra Pradesh",
+                        "Arunachal Pradesh",
+                        "Assam",
+                        "Bihar",
+                        "Chhattisgarh",
+                        "Chandigarh",
+                        "Goa",
+                        "Gujarat",
+                        "Haryana",
+                        "Himachal Pradesh",
+                        "Jharkhand",
+                        "Karnataka",
+                        "Kerala",
+                        "Madhya Pradesh",
+                        "Maharashtra",
+                        "Manipur",
+                        "Meghalaya",
+                        "Mizoram",
+                        "Nagaland",
+                        "Odisha",
+                        "Punjab",
+                        "Rajasthan",
+                        "Sikkim",
+                        "Tamil Nadu",
+                        "Telangana",
+                        "Tripura",
+                        "Uttar Pradesh",
+                        "Uttarakhand",
+                        "West Bengal"
+                    ],
+                    list: ["Sports and Athletics",
+                        "Arts and Creativity",
+                        "Academic Clubs",
+                        "Language and Literature",
+                        "Social and Community Service",
+                        "Technology and Coding",
+                        "Health and Wellness",
+                        "Hobby Clubs"
+                    ],
+                    Activities: [],
+                    inputBorderColor: 'initial',
+                    preview: {
+                        "Student First Name": "",
+                        "Student Middle Name": "",
+                        "Student Last Name": "",
+                        "Date Of Birth": "",
+                        "Age": "",
+                        "Gender": "",
+                        "Class Name": "",
+                        "Father First Name": "",
+                        "Father Middle Name": "",
+                        "Father Last Name": "",
+                        "Mother First Name": "",
+                        "Mother Middle Name": "",
+                        "Mother Last Name": "",
+                        "Address1": "",
+                        "Address2": "",
+                        "State": "",
+                        "City": "",
+                        "District": "",
+                        "Landmark": "",
+                        "Village": "",
+                        "Pincode": "",
+                        "Email": "",
+                        "Phone number1": "",
+                        "Phone number2": ""
+                    },
+                    errors: {
+                        "Student First Name": "",
+                        "Student Middle Name": "",
+                        "Student Last Name": "",
+                        "Date Of Birth": "",
+                        "Age": "",
+                        "Gender": "",
+                        "Class Name": "",
+                        "Father First Name": "",
+                        "Father Middle Name": "",
+                        "Father Last Name": "",
+                        "Mother First Name": "",
+                        "Mother Middle Name": "",
+                        "Mother Last Name": "",
+                        "Address1": "",
+                        "Address2": "",
+                        "State": "",
+                        "City": "",
+                        "District": "",
+                        "Landmark": "",
+                        "Village": "",
+                        "Pincode": "",
+                        "Email": "",
+                        "Phone number1": "",
+                        "Phone number2": ""
+                    }
+                };
+            },
+            methods:
+            {
+                result() {
+                    console.log("hi");
+                    document.getElementById("result1").style.display = "block";
+                },
+                calc(d) {
+                    var d1 = d.slice(0, 4);
+                    var d2 = new Date();
+                    var d3 = d2.getFullYear();
+                    this.preview['Age'] = d3 - d1;
+                },
+                final() {
+                    alert("Registeration Sucessfully Done")
+                    location.reload();
+                },
+                validate(field_name) {
+                    if (field_name == 'Student First Name' || field_name == 'Student Middle Name' || field_name == 'Student Last Name') {
+                        console.log("Validating: " + field_name + ": " + this.preview[field_name]);
+                        if (this.preview[field_name].match(/^[a-z A-Z]{3,}$/)) {
+                            this.errors[field_name] = '';
+                        }
+                        else {
+                            this.errors[field_name] = 'Format Mismatch';
+                        }
+                    }
+                    else {
+                        if (field_name == 'Phone number1' || field_name == 'Phone number2') {
+                            if (this.preview[field_name].match(/^[0-9]{10}$/)) {
+                                this.errors[field_name] = '';
+                            }
+                            else {
+                                this.errors[field_name] = 'Mobile Number error';
+                            }
+                        }
+                        else {
+                            if (field_name == 'Email') {
+                                if (this.preview[field_name].match(/^[[A-Z a-z 0-9]{5,25}\@[a-z]{5}\.[a-z]{2,3}$/)) {
+                                    this.errors[field_name] = '';
+                                }
+                                else {
+                                    this.errors[field_name] = 'Email error';
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
