@@ -19,6 +19,7 @@ function getRandomElement(array) {
     p.push(v)
     if (a.length == 0) {
         alert("game over")
+        location.reload();
         a = b;
         p = [];
         val1.innerHTML = v;
