@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <title>TO DO LIST</title>
+    <style>
+        #enter {
+            padding-top: 30px;
+        }
+
+        th {
+            color: green;
+        }
+
+        #work {
+            width: 200px;
+            height: 30px;
+        }
+
+        #work1 {
+            width: 200px;
+            height: 30px;
+        }
+
+        #list,
+        #list1 {
+            flex: 1;
+            margin: 0 100px;
+        }
+
+        #enter,
+        #enter1,
+        #year {
+            flex: 1;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        #maindiv {
+            display: flex;
+
+        }
+
+        #container1 {
+            display: flex;
+
+        }
+
+        #year th,
+        #year td {
+            border: 1px solid black;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="maindiv">
+        <div id="list" align="right">
+            <h1>Driver Leaves List</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="date" id='d1' placeholder="Enter Today Date">
+                        </td>
+                        <td>
+                            <input type="text" id="work" placeholder="Enter Reason">
+                            <button type="button" onclick="add()">Enter</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="list1" align="left">
+            <h1>Driver Salary List</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="date" id='d2' placeholder="Enter Today Date">
+                        </td>
+                        <td>
+                            <input type="text" id="work1" maxlength="5" placeholder="salary">
+                            <button type="button" onclick="addsalary()">Enter</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="container1">
+        <div id="enter" align="left">
+
+        </div>
+        <div id="year" align="center">
+        </div>
+
+        <div id="enter1" align="right">
+
+        </div>
+    </div>
+    <button type="button" onclick="storedef()">Click</button>
+    <script src="jcbdriverstatus.js"></script>
+</body>
+
+</html>
