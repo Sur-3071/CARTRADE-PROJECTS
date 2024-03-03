@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <title>TRIPS DATA</title>
+    <style>
+        #enter {
+            padding-top: 30px;
+        }
+
+        th {
+            color: green;
+        }
+
+        #trips {
+            width: 200px;
+            height: 30px;
+        }
+
+        #amount {
+            width: 200px;
+            height: 30px;
+        }
+
+        #list,
+        #list1 {
+            flex: 1;
+            margin: 0 100px;
+        }
+
+        #tripstable,
+        #amounttable,
+        #year {
+            flex: 1;
+        }
+
+        h1 {
+            color: red;
+        }
+        h2 {
+            color:green;
+        }
+
+        #maindiv {
+            display: flex;
+
+        }
+
+        #container1 {
+            display: flex;
+
+        }
+
+        #balanace th,
+        #balanace td {
+            border: 1px solid black;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 align="center">Colony Trips Data</h2>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div id="maindiv">
+        <div id="list" align="right">
+            <h1>Trips Data</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <lable>Enter date</lable>
+                            <input type="date" id='d1' placeholder="Enter Today Date">
+                        </td>
+                        <td>
+                            <input type="text" id="trips" placeholder="Enter Today Trips">
+                            <button type="button" onclick="addtrips()">Enter</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="list1" align="left">
+            <h1>Amount Given Data</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <lable>Enter date</lable>
+                            <input type="date" id='d2' placeholder="Enter Today Date">
+                        </td>
+                        <td>
+                            <input type="text" id="amount" maxlength="5" placeholder="Amount Given">
+                            <button type="button" onclick="addamount()">Enter</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <button type='button' onclick="defstorage()">
+        Reset
+    </button>
+    <div id="container1">
+        <div id="tripstable" align="left">
+
+        </div>
+        <div id="balanace" align="center">
+
+        </div>
+        <div id="amounttable" align="center">
+
+        </div>
+    </div>
+</body>
+<script src="tripsdata.js"></script>
+
+</html>
