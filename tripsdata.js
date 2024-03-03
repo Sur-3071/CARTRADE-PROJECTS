@@ -22,7 +22,7 @@ window.onload = function () {
     }
     for (var i = 0; i < y.length; i++) {
         if (y[i] == ',') {
-            tripscount+=parseInt(rea)
+             tripscount += Number(rea)
             tripslist.push(rea)
             rea = ""
         }
@@ -35,7 +35,7 @@ window.onload = function () {
         tripsdate.push(date)
     }
     if (rea.length > 0) {
-        tripscount+=parseInt(rea)
+        tripscount += Number(rea)
         tripslist.push(rea)
     }
     console.log("value is "+tripscount)
