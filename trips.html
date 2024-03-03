@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>TRIPS DATA</title>
     <style>
@@ -36,8 +35,9 @@
         h1 {
             color: red;
         }
+
         h2 {
-            color:green;
+            color: green;
         }
 
         #maindiv {
@@ -45,23 +45,32 @@
 
         }
 
-        #container1 {
-            display: flex;
 
-        }
 
         #balanace th,
         #balanace td {
             border: 1px solid black;
-            padding-left: 15px;
-            padding-right: 15px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            text-align: center;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        button{
+            border-radius: 25px;
+            box-shadow: 10px;
+            padding: 5px 5px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #btn
+        {
+            padding-bottom: 50px;
         }
     </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
     <h2 align="center">Colony Trips Data</h2>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,17 +110,25 @@
             </form>
         </div>
     </div>
-    <button type='button' onclick="defstorage()">
-        Balanace
-    </button>
-    <div id="container1">
-        <div id="tripstable" align="left">
+    <div align="center" id="btn">
+        <button type='button' onclick="getTrips()">
+            Open Trips Data
+        </button>
+        <button type='button' onclick="getbal()">
+            Open Balanace Data
+        </button>
+        <button type='button' onclick="getamount()">
+            Open Amount Data
+        </button>
+    </div>
+    <div id="container1" align="center">
+        <div id="tripstable" style="display: none">
 
         </div>
-        <div id="balanace" align="center">
+        <div id="balanace" style="display: none">
 
         </div>
-        <div id="amounttable" align="center">
+        <div id="amounttable" style="display: none">
 
         </div>
     </div>
