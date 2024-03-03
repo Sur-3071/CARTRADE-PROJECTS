@@ -2,10 +2,15 @@ var tripslist = []
 var tripsdate = []
 var amountdate = []
 var amount = []
-var l1=[]
-var l2=[]
-var tripscount=0
-var cash=0
+var l1 = []
+var l2 = []
+var tripscount = 0
+var cash = 0
+var d1 = []
+var d2 = []
+var k1=0
+var k2=0
+var k3=0
 window.onload = function () {
     var x = localStorage.getItem('tripsdate');
     var y = localStorage.getItem('trips');
@@ -22,7 +27,8 @@ window.onload = function () {
     }
     for (var i = 0; i < y.length; i++) {
         if (y[i] == ',') {
-             tripscount += Number(rea)
+            tripscount += Number(rea)
+            console.log(tripscount)
             tripslist.push(rea)
             rea = ""
         }
@@ -31,14 +37,14 @@ window.onload = function () {
         }
     }
     if (date.length > 0) {
-        
+
         tripsdate.push(date)
     }
     if (rea.length > 0) {
         tripscount += Number(rea)
         tripslist.push(rea)
     }
-    console.log("value is "+tripscount)
+    console.log("value is " + tripscount)
     displaytrips()
     var x1 = localStorage.getItem('amountdate');
     var y1 = localStorage.getItem('amountgiven');
@@ -55,7 +61,7 @@ window.onload = function () {
     }
     for (var i = 0; i < y1.length; i++) {
         if (y1[i] == ',') {
-            cash+=parseInt(rea)
+            cash += parseInt(rea)
             amount.push(rea)
             rea = ""
         }
@@ -67,7 +73,7 @@ window.onload = function () {
         amountdate.push(date)
     }
     if (rea.length > 0) {
-        cash+=parseInt(rea)
+        cash += parseInt(rea)
         amount.push(rea)
     }
     displayamount()
@@ -76,14 +82,12 @@ window.onload = function () {
 function addtrips() {
     var date = document.getElementById('d1').value;
     var trips = document.getElementById('trips').value;
-    if(date.length>0 && trips.length>0)
-    {
+    if (date.length > 0 && trips.length > 0) {
         tripslist.push(trips)
         tripsdate.push(date)
         storetrips()
     }
-    else
-    {
+    else {
         alert("Enter trips here...")
     }
 }
@@ -115,13 +119,12 @@ function displaytrips() {
 function addamount() {
     var date = document.getElementById('d2').value;
     var money = document.getElementById('amount').value;
-    if(date.length>0 && money.length>0)
-    {
+    if (date.length > 0 && money.length > 0) {
         amountdate.push(date)
         amount.push(money)
         storeamount()
     }
-    else{
+    else {
         alert("Enter amount...")
     }
 }
@@ -163,8 +166,8 @@ function delamount(i) {
 function defstorage() {
     var r = document.getElementById("balanace");
     r.innerHTML = "";
-    var tripsamount=tripscount*600
-    var bal=tripsamount-cash;
+    var tripsamount = tripscount * 600
+    var bal = tripsamount - cash;
     var out = `<table border="1px" >
             <tr>
                 <th>Trips</th>
@@ -173,10 +176,10 @@ function defstorage() {
                 <th>Balance</th>
             </tr>
             <tr>
-                <td id='t1'>`+tripscount+`</td>
-                <td id='t2'>`+tripsamount+`</td>
-                <td id='t3'>`+cash+`</td>
-                <td id='t4'>`+bal+`</td>
+                <td id='t1'>`+ tripscount + `</td>
+                <td id='t2'>`+ tripsamount + `</td>
+                <td id='t3'>`+ cash + `</td>
+                <td id='t4'>`+ bal + `</td>
             </tr>`;
     out = out + "</table>";
     r.innerHTML = out;
@@ -191,9 +194,55 @@ function storeamount() {
     localStorage.setItem('amountgiven', amount);
     displayamount()
 }
-function storebalanace(p,q,r) {
+function storebalanace(p, q, r) {
     localStorage.setItem('Months', p);
     localStorage.setItem('Salary', q);
     localStorage.setItem('Leaves', r);
-    display_year(p,q,r)
+    display_year(p, q, r)
+}
+function getTrips()
+{
+    if(k1==0)
+    {
+        var t=document.getElementById('tripstable');
+        t.style.display = "block";
+        k1=1
+    }
+    else
+    {
+        var t=document.getElementById('tripstable');
+        t.style.display = "none";
+        k1=0
+    }
+}
+function getbal()
+{
+    if(k2==0)
+    {
+        var t=document.getElementById('balanace');
+        t.style.display = "block";
+        k2=1
+    }
+    else
+    {
+        var t=document.getElementById('balanace');
+        t.style.display = "none";
+        k2=0
+    }
+}
+function getamount()
+{
+    if(k3==0)
+    {
+        var t=document.getElementById('amounttable');
+        t.style.display = "block";
+        k3=1
+    }
+    else
+    {
+        var t=document.getElementById('amounttable');
+        t.style.display = "none";
+        k3=0
+    }
+    
 }
