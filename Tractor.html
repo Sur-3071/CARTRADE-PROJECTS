@@ -1,0 +1,357 @@
+<html>
+
+<head>
+    <title>Tractor Driver Data</title>
+    <style>
+        #enter {
+            padding-top: 30px;
+        }
+
+        th {
+            color: green;
+        }
+
+        #trips {
+            width: 200px;
+            height: 30px;
+        }
+
+        #amount {
+            width: 200px;
+            height: 30px;
+        }
+
+        #list1,
+        #list2,
+        #list3 {
+            text-align: center;
+            flex: 1;
+            margin: 0 100px;
+            background-color: rgb(158, 213, 232);
+            box-shadow: rgba(0, 0, 0, 0.4) -5px 5px
+        }
+
+        input,
+        select {
+            height: 20px;
+        }
+
+        #tripstable,
+        #amounttable,
+        #driverdata {
+            flex: 1;
+        }
+
+        #tr1 {
+            padding-top: 50px;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        h2 {
+            color: green;
+        }
+
+        #maindiv {
+            display: flex;
+            justify-content: space-evenly;
+            padding-bottom: 50px;
+
+        }
+
+
+
+        #balanace th,
+        #balanace td {
+            border: 1px solid black;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        #driveramount,#driverbal,#amountdata
+        {
+            padding-bottom: 60px;
+            padding-top: 60px;
+        }
+        button {
+            border-radius: 25px;
+            box-shadow: 10px;
+            padding: 5px 5px;
+        }
+
+        button:hover {
+            background-color: rgb(177, 228, 177);
+        }
+
+        #buttonContainer {
+            text-align: center;
+            /* Align buttons to the center of the container */
+            margin-top: 20px;
+            /* Add some top margin */
+            padding-bottom: 50px;
+        }
+
+        .leftButton {
+            float: left;
+            /* Float the button to the left */
+            margin-right: 10px;
+            /* Add some right margin to separate from the other button */
+        }
+
+        .leftButton:hover {
+            background-color: red;
+        }
+
+        .rightButton:hover {
+            background-color: red;
+        }
+        #drivertrips
+        {
+            padding-bottom: 60px;
+            padding-top: 60px;
+        }
+
+        .rightButton {
+            float: right;
+            /* Float the button to the right */
+            margin-left: 10px;
+            /* Add some left margin to separate from the other button */
+        }
+
+        #img {
+            padding-bottom: 300px;
+        }
+
+        #com
+       {
+        display: flex;
+        justify-content: center;
+       } 
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="com">
+        <img src="company.png" style="padding-left: 20px;">
+    </div>
+    <h1 align="center">Tractor Driver Trips Data</h1>
+    <div id="buttonContainer">
+        <button type="button" class="leftButton" onclick="setup()">Reset</button>
+        <button type="button" class="rightButton" onclick="logout()">Log out</button>
+    </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div id="maindiv">
+        <div id="list1" align="right">
+            <h1 align="center">Trips Data</h1>
+            <form id="form">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="date" id='d1' placeholder="Enter Today Date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="dname1" onchange="box1()">
+                                <option hidden>select Driver Name</option>
+                                <option>Sai</option>
+                                <option>Batchu Raju</option>
+                                <option>venkanna</option>
+                                <option>swamy </option>
+                                <option>Chinnodu</option>
+                                <option>Abbulu</option>
+                                <option>Kick</option>
+                                <option>Nagu</option>
+                                <option>Radhakrishna</option>
+                                <option>srinu</option>
+                                <option>chanti</option>
+                                <option>Govindu</option>
+                                <option>(Pun)Nagu</option>
+                                <option>Nani</option>
+                                <option>Others</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="driver1" style="display: none;">
+                        <td>
+                            <input type="text" id="oname" placeholder="Enter Other Name">
+                        </td>
+                    <tr>
+                        <td>
+                            <input type="text" id="cname" placeholder="Enter Customer Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="aname" placeholder="Enter Price">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="trips" placeholder="Enter Today Trips">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" onclick="adddriverdata()">Enter</button>
+                        </td>
+                        <td>
+                            <button type='button' onclick="trans()" id="btn5">
+                                Open Translator
+                            </button>
+                        </td>
+                        <td>
+                            <button type='button' onclick="gettripsdata()" id="btn1">
+                                Open
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="list2" align="center">
+            <h1 align="center">Display Driver Data</h1>
+            <form>
+                <table>
+                    <div id="tr1">
+                        <tr>
+                            <td>
+                                <select id="dname2" onchange="box2()">
+                                    <option hidden>select Driver Name</option>
+                                    <option>Sai</option>
+                                    <option>Batchu Raju</option>
+                                    <option>venkanna</option>
+                                    <option>swamy </option>
+                                    <option>Chinnodu</option>
+                                    <option>Abbulu</option>
+                                    <option>Kick</option>
+                                    <option>Nagu</option>
+                                    <option>Radhakrishna</option>
+                                    <option>srinu</option>
+                                    <option>chanti</option>
+                                    <option>Govindu</option>
+                                    <option>(Pun)Nagu</option>
+                                    <option>Nani</option>
+                                    <option>Others</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+                    <tr id="driver2" style="display: none;">
+                        <td>
+                            <input type="text" id="oname1" placeholder="Enter Other Name">
+                        </td>
+                    <tr>
+                    <tr>
+                        <td>
+                            <button type="button" onclick="dispalydrivertrips(1)" id="bt1">Trips</button>
+                        </td>
+                        <td>
+                            <button type="button" onclick="dispalydriveramount(2)" id="bt2">Amount</button>
+                        </td>
+                        <td>
+                            <button type='button' onclick="dispalydriverbal(3)" id="bt3">Balanace</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="list3" align="right">
+            <h1 align="center">Amount Data</h1>
+            <form id="form2">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="date" id='d2' placeholder="Enter Today Date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="dname3" onchange="box3()">
+                                <option hidden>select Driver Name</option>
+                                <option>Sai</option>
+                                <option>Batchu Raju</option>
+                                <option>venkanna</option>
+                                <option>swamy </option>
+                                <option>Chinnodu</option>
+                                <option>Abbulu</option>
+                                <option>Kick</option>
+                                <option>Nagu</option>
+                                <option>Radhakrishna</option>
+                                <option>srinu</option>
+                                <option>chanti</option>
+                                <option>Govindu</option>
+                                <option>(Pun)Nagu</option>
+                                <option>Nani</option>
+                                <option>Others</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="driver3" style="display: none;">
+                        <td>
+                            <input type="text" id="oname2" placeholder="Enter Other Name">
+                        </td>
+                    <tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="amount" placeholder="Enter Given Amount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" onclick="adddriveramountdata()">Enter</button>
+                        </td>
+                        <td>
+                            <button type='button' onclick="getamountdata()" id="btn3">
+                                Open
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div>
+        <iframe src="https://www.typingbaba.com/translator/english-to-telugu-translation.php" id="trans" style="display: none;" width="80%" height="450px"></iframe>
+    </div>
+    <img src="abbulu.png" id="abbulu" style="display: none;">
+    <img src="chinnodu.png" id="chinnodu" style="display: none;">
+    <img src="chanti.png" id="chanti" style="display: none;">
+    <img src="govind.png" id="govind" style="display: none;">
+    <img src="kick.png" id="kick" style="display: none;">
+    <img src="nagu1.png" id="nagu1" style="display: none;">
+    <img src="nagu2.png" id="nagu2" style="display: none;">
+    <img src="nani.png" id="nani" style="display: none;">
+    <img src="radha.png" id="radha" style="display: none;">
+    <img src="raju.png" id="raju" style="display: none;">
+    <img src="sai.jpg" id="sai" style="display: none;">
+    <img src="srinu.png" id="srinu" style="display: none;">
+    <img src="swamy.png" id="swamy" style="display: none;">
+    <img src="venkanna.png" id="venkanna" style="display: none;">
+    <div id="tripsdata" align="center" style="display: none;">
+
+    </div>
+    <div id="drivertrips" align="center" style="display: none;">
+
+    </div>
+    <div id="driveramount" align="center" style="display: none;">
+
+    </div>
+    <div id="driverbal" align="center" style="display: none;">
+
+    </div>
+    <div id="amountdata" align="center" style="display: none;">
+
+    </div>
+    <marquee behavior="scroll" direction="left" scrollamount="10">
+        <img src="jcb.png" heigth="500px" width="500px">
+    </marquee>
+</body>
+<script src="Tractor.js"></script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Login</title>
+    <style>
+        body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+#login {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#otp-container {
+    margin-top: 20px;
+    padding-bottom: 30px;
+    
+}
+button
+{
+    border-radius: 25px;
+    height: 30px;
+    width: 100px;
+}
+button:hover
+{
+    background-color: green;
+}
+.otp-input {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    font-size: 1.5em;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the input on focus */
+.otp-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+    </style>
+</head>
+<body>
+    <div id="login">
+        <h1>Enter OTP</h1>
+        <div id="otp-container">
+            <input type="text" maxlength="1" id="digit1" class="otp-input" onkeyup="text1()">
+            <input type="text" maxlength="1" id="digit2" class="otp-input" onkeyup="text2()">
+            <input type="text" maxlength="1" id="digit3" class="otp-input" onkeyup="text3()">
+            <input type="text" maxlength="1" id="digit4" class="otp-input">
+        </div>
+        <button id="verify-btn" onclick="verify()">Verify</button>
+    </div>
+</body>
+<script src="tractorlogin.js"></script>
+</html>
