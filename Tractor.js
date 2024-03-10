@@ -84,6 +84,7 @@ function logout() {
     window.location.href = 'TractorLogin.html'
 }
 function setup() {
+    alert("Entire Data Can Be Deleted...")
     window.localStorage.setItem('Driverdata', [])
     window.localStorage.setItem('Driveramount', [])
     localStorage.setItem('session', 0)
