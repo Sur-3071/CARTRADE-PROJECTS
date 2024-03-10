@@ -548,3 +548,4 @@ function getamountdata() {
         k3 = 0
     }
 }
+//entire copy rights belongs to KONE RAM LAL SUFRRESH
