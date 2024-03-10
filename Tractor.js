@@ -269,13 +269,13 @@ function dispalydrivertrips(w) {
                 <th>తొలగించు</th>
             </tr>`;
         var k = 1;
-        var total=0;
+        var total = 0;
         for (var i = 0; i < driverdata.length; i++) {
             // Use strings as keys in the driverdata objects
             if (driverdata[i]['drivername'] == d) {
                 var trips = parseInt(driverdata[i]['trips'])
                 var amount = parseInt(driverdata[i]['price'])
-                var tripamount=trips * amount
+                var tripamount = trips * amount
                 total += tripamount;
                 out += `<tr>
                 <td>` + k + `</td>
@@ -291,18 +291,65 @@ function dispalydrivertrips(w) {
         }
         out += `<tr>
           <td colspan="5">ట్రిప్పులు మొత్తానికి అయిన డబ్బులు</td>
-          <td colspan="1">`+total+`</td>
+          <td colspan="1">`+ total + `</td>
         </tr>`
         out += "</table>";
         r.innerHTML = out;
     }
     getdrivertrips();
 }
+var x1 = 0
+var x2 = 0
+var x3 = 0
+function addtrip() {
+    var d = document.getElementById('list1');
+    var d1 = document.getElementById('b1');
+    if (x1 == 0) {
+        d.style.display = "block"
+        d1.textContent="Close"
+        x1=1
+    }
+    else {
+        d.style.display = "none"
+        d1.textContent="Add Data"
+        x1=0
+
+    }
+}
+function showdriver() {
+    var d = document.getElementById('list2');
+    var d1 = document.getElementById('b2');
+    if (x2 == 0) {
+        d.style.display = "block"
+        d1.textContent="Close"
+        x2=1
+    }
+    else {
+        d.style.display = "none"
+        d1.textContent="Driver Data"
+        x2=0
+
+    }
+}
+function addamount() {
+    var d = document.getElementById('list3');
+    var d1 = document.getElementById('b3');
+    if (x3 == 0) {
+        d.style.display = "block"
+        d1.textContent="Close"
+        x3=1
+    }
+    else {
+        d.style.display = "none"
+        d1.textContent="Amount Data"
+        x3=0
+    }
+}
 function dispalydriveramount(w) {
     var d = document.getElementById("dname2").value;
     var r = document.getElementById("driveramount");
     r.innerHTML = "";
-    var k6=0;
+    var k6 = 0;
     if (driveramount.length > 0) {
         var out = `<table border="1px" >
             <tr>
@@ -314,7 +361,7 @@ function dispalydriveramount(w) {
         for (var i = 0; i < driveramount.length; i++) {
             // Use strings as keys in the driverdata objects
             if (driveramount[i]['drivername'] == d) {
-                k6=k6+1
+                k6 = k6 + 1
                 out += `<tr>
                     <td>` + k6 + `</td>
                     <td>` + driveramount[i]['date'] + `</td>
