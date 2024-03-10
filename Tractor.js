@@ -444,7 +444,7 @@ function adddriveramountdata() {
 }
 setTimeout(function () {
     window.location.href = 'TractorLogin.html';
-}, 5 * 60000);
+}, 30 * 60000);
 function displayamountdata() {
     var r = document.getElementById("amountdata");
     r.innerHTML = "";
