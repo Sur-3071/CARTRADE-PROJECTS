@@ -9,7 +9,7 @@ button {
 {
     background-color: antiquewhite;
 }
-td:hover, td:hover * {
+td:hover, td:hover *{
     cursor: pointer;
 }
 #front1
