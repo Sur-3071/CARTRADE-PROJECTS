@@ -9,6 +9,9 @@ button {
 {
     background-color: antiquewhite;
 }
+td:hover, td:hover * {
+    cursor: pointer;
+}
 #front1
 {
     padding-top: 50px;
