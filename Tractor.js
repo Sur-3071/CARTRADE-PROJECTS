@@ -206,6 +206,7 @@ function adddriverdata() {
         };
         var v10=document.getElementById("done");
         v10.style.display="block";
+        console.log("Hi data entered");
         removedone();
     } else {
         alert("Please fill all fields!");
@@ -439,6 +440,7 @@ function adddriveramountdata() {
             drivername: "",
             amount: ""
         };
+        console.log("Hi data entered");
         var v10=document.getElementById("done");
         v10.style.display="block";
         removedone();
