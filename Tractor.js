@@ -204,6 +204,9 @@ function adddriverdata() {
             price: "",
             trips: ""
         };
+        var v10=document.getElementById("done");
+        v10.style.display="block";
+        removedone();
     } else {
         alert("Please fill all fields!");
     }
@@ -436,6 +439,9 @@ function adddriveramountdata() {
             drivername: "",
             amount: ""
         };
+        var v10=document.getElementById("done");
+        v10.style.display="block";
+        removedone();
     } else {
         alert("Please fill all fields!");
     }
@@ -472,7 +478,13 @@ function displayamountdata() {
         r.innerHTML = out;
     }
 }
-
+function removedone()
+{
+    setTimeout(function () {
+        var v7=document.getElementById("done");
+        v7.style.display="none";
+    }, 2000);
+}
 function gettripsdata() {
     var t = document.getElementById('tripsdata');
     var t1 = document.getElementById('btn1')
