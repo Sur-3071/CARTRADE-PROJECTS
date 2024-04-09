@@ -1,5 +1,6 @@
 <html>
 <!-- copy rights belongs to KONE RAM LAL SURESH -->
+
 <head>
     <title>Tractor Driver Data</title>
     <style>
@@ -10,7 +11,14 @@
         #enter {
             padding-top: 30px;
         }
-
+        input[type="submit"]:hover
+        {
+            background-color: green;
+        }
+        input[type="submit"]
+        {
+            font-size: 15px;
+        }
         th {
             color: green;
         }
@@ -24,6 +32,27 @@
             width: 200px;
             height: 30px;
         }
+        select{
+            border-radius: 25px;
+            width:"100%";
+            margin: 5px 0;
+            /* Adjust margin */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        input{
+            width: 100%;
+            /* Set the width to 100% */
+            padding: 15px;
+            /* Increase the padding */
+            margin: 5px 0;
+            /* Adjust margin */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            /* Include padding and border in the width */
+        }
 
         #list1,
         #list2,
@@ -31,6 +60,9 @@
             text-align: center;
             justify-content: center;
             position: absolute;
+            border-radius: 25px;
+            padding: 50px;
+            font-size: 30px;
             flex: 1;
             margin: 0 100px;
             background-color: rgb(158, 213, 232);
@@ -77,11 +109,14 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
-        #driveramount,#driverbal,#amountdata
-        {
+
+        #driveramount,
+        #driverbal,
+        #amountdata {
             padding-bottom: 60px;
             padding-top: 60px;
         }
+
         button {
             border-radius: 25px;
             box-shadow: 10px;
@@ -114,8 +149,8 @@
         .rightButton:hover {
             background-color: red;
         }
-        #drivertrips
-        {
+
+        #drivertrips {
             padding-bottom: 60px;
             padding-top: 60px;
         }
@@ -131,20 +166,21 @@
             padding-bottom: 300px;
         }
 
-        #com
-       {
-        display: flex;
-        justify-content: center;
-       } 
-       #convert
-       {
-        padding-top: 350px;
-       }
-       #show
-       {
-        padding-bottom: 80px;
-       }
+        #com {
+            display: flex;
+            justify-content: center;
+        }
 
+        #convert {
+            padding-top: 350px;
+        }
+        #maindiv
+        {
+            padding-bottom: 500px;
+        }
+        #show {
+            padding-bottom: 80px;
+        }
     </style>
 </head>
 
@@ -165,6 +201,7 @@
     </div>
     <img src="done.jpeg" id="done" style="display: none;" height="100px" width="100px">
     <div id="maindiv">
+
         <div id="list1" align="center" style="display: none;">
             <h1 align="center">Trips Data</h1>
             <form id="form">
@@ -217,22 +254,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" onclick="adddriverdata()">Enter</button>
-                        </td>
-                        <td>
-                            <button type='button' onclick="trans()" id="btn5">
-                                Open Translator
-                            </button>
-                        </td>
-                        <td>
-                            <button type='button' onclick="gettripsdata()" id="btn1">
-                                Open
-                            </button>
+                            <input type="submit" value="submit" class="sub" id="submit" style="border-radius: 25px; width: 35%; ">
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
+
         <div id="list2" align="center" style="display: none;">
             <h1 align="center">Display Driver Data</h1>
             <form>
@@ -336,7 +364,8 @@
         </div>
     </div>
     <div id="convert">
-        <iframe src="https://www.typingbaba.com/translator/english-to-telugu-translation.php" id="trans" style="display: none;" width="80%" height="450px"></iframe>
+        <iframe src="https://www.typingbaba.com/translator/english-to-telugu-translation.php" id="trans"
+            style="display: none;" width="80%" height="450px"></iframe>
     </div>
     <img src="abbulu.png" id="abbulu" style="display: none;">
     <img src="chinnodu.png" id="chinnodu" style="display: none;">
@@ -368,9 +397,13 @@
 
     </div>
     <marquee behavior="scroll" direction="left" scrollamount="10">
-        <img src="jcb.png" heigth="500px" width="500px">
+        <img src="jcb.png" heigth="500px" width="500px" id="jcb">
     </marquee>
 </body>
-<script src="Tractor.js"></script>
+<script src="script.js" type="module">
+
+</script>
+
+<script src="dummy tractor.js"></script>
 
 </html>
