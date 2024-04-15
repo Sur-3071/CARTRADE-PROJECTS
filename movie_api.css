@@ -1,0 +1,43 @@
+h1 {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+input {
+    height: 50px;
+    width: 300px;
+    border-radius: 25px;
+}
+
+button {
+    height: 30px;
+    width: 60px;
+    border-radius: 25px;
+}
+
+#search {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    align-items: center;
+    border-radius: 25px;
+    box-shadow: (0, 0, 0, 0.2) 5px -5px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 25px;
+    font-size: 30px;
+    margin: 0 200px;
+    background-color: aqua;
+    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px
+}
+
+.container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.container:hover {
+    box-shadow: 0 80px 16px 0 rgba(0, 0, 0, 1.0);
+}
