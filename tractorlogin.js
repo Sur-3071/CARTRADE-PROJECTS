@@ -33,7 +33,7 @@ function verify()
     if(s==='3071')
     {
         localStorage.setItem('session',1);
-        window.location.href = 'Tractor.html';
+        window.location.href = 'dummy tractor.html';
     }
     else
     {
