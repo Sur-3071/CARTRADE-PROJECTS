@@ -1,6 +1,6 @@
 function addCard() {
     const name = document.getElementById('name').value;
-    const name = document.getElementById('name').clear;
+    const name = document.getElementById('name').reset();
     const cardContainer = document.getElementById('cardContainer');
 
     const newCard = document.createElement('div');
