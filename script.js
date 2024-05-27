@@ -1,171 +1,233 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+document.addEventListener('DOMContentLoaded', () => {
+    const auth = document.getElementById('auth');
+    const sellerDashboard = document.getElementById('sellerDashboard');
+    const buyerDashboard = document.getElementById('buyerDashboard');
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+    const propertyForm = document.getElementById('propertyForm');
+    const propertiesList = document.getElementById('propertiesList');
+    const availableProperties = document.getElementById('availableProperties');
+    const filterInput = document.getElementById('filter');
+    const applyFilterButton = document.getElementById('applyFilter');
+    const prevPageButton = document.getElementById('prevPage');
+    const nextPageButton = document.getElementById('nextPage');
+    const currentPageSpan = document.getElementById('currentPage');
 
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "tractor-driver-data.firebaseapp.com",
-    projectId: "tractor-driver-data",
-    storageBucket: "tractor-driver-data.appspot.com",
-    messagingSenderId: "688935767962",
-    appId: "1:688935767962:web:d3d8d7569fd2470dfef423"
-};
+    let currentUser = null;
+    let properties = [];
+    let currentPage = 1;
+    const propertiesPerPage = 5;
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Get a reference to the database service
-const db = getDatabase(app);
-
-submit.addEventListener('click', function (e) {
-    e.preventDefault();
-    const d = document.getElementById("d1").value;
-    const drivername = document.getElementById("dname1").value;
-    const customer = document.getElementById("cname").value;
-    const day = document.getElementById("time").value;
-    const price = document.getElementById("aname").value;
-    const trips = document.getElementById("trips").value;
-    const db1 = "Trips";
-    const db2 = "Amount";
-    if (d.length > 0 && drivername.length > 0 && customer.length > 0 && price.length > 0 && trips.length > 0) {
-        // Set data to Firebase database
-        const dataRefget = ref(db, `${db1}/${drivername}/`);
-        const dataRefset = ref(db, `${db1}/${drivername}/${d}/${customer}/${day}`);
-
-        set(dataRefset, {
-            Price: price,
-            Trips: trips
-        })
-            .then(() => {
-                document.getElementById("form").reset();
-                var d = document.getElementById("done");
-                d.style.display = "block";
-                removedone()
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-                alert("An error occurred. Please try again.");
-            });
+    function sendEmail(to, subject, body) {
+        // Simulate sending an email
+        console.log(`Sending email to ${to}`);
+        console.log(`Subject: ${subject}`);
+        console.log(`Body: ${body}`);
     }
-    else {
-        alert("Please Enter All The Fields Properly");
-    }
-});
-amountdataentry.addEventListener('click', function (e) {
-    e.preventDefault();
-    const d = document.getElementById("d2").value;
-    const drivername = document.getElementById("dname3").value;
-    const amount = document.getElementById("amount").value;
-    const db2 = "Amount";
 
-    // Set data to Firebase database
-    if (d.length > 0 && drivername.length > 0 && amount.length > 0) {
-        const dataRefget = ref(db, `${db2}/${drivername}/`);
-        const dataRefset = ref(db, `${db2}/${drivername}/${d}/`);
+    registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(registerForm);
+        const newUser = {
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            email: formData.get('email'),
+            phoneNumber: formData.get('phoneNumber'),
+            password: formData.get('password'),
+            role: formData.get('role'),
+        };
+        console.log('Registered user:', newUser);
+        alert('Registration successful!');
+        registerForm.reset();
+    });
 
-        set(dataRefset, {
-            Amount: amount
-        })
-            .then(() => {
-                document.getElementById("form1").reset();
-                var d = document.getElementById("done");
-                d.style.display = "block";
-                removedone()
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-                alert("An error occurred. Please try again.");
-            });
-    }
-    else {
-        alert("Please Fill All The Fields");
-    }
-});
-getDataBtn.addEventListener('click', function () {
-    const drivername = document.getElementById("dname2").value;
-    const db1 = "Trips";
-    if (drivername!="select Driver Name") {
-        const dataRefget = ref(db, `${db1}/${drivername}/`);
-
-        get(dataRefget)
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    console.log(data);
-                    displaytripsdata(data)
-
-                } else {
-                    NoDatatrips();
-                    console.log("No data available");
-                }
-            })
-            .catch((error) => {
-                console.error("Error occurred while fetching data: ", error);
-            });
-    }
-    else {
-        alert("Please Select Driver Name");
-    }
-});
-getamount.addEventListener('click', function () {
-    const drivername = document.getElementById("dname2").value;
-    const db1 = "Amount";
-    if (drivername!="select Driver Name") {
-        const dataRefget = ref(db, `${db1}/${drivername}/`);
-        get(dataRefget)
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    displayamountdata(data)
-
-                } else {
-                    NoDataamount();
-                    console.log("No data available");
-                }
-            })
-            .catch((error) => {
-                console.error("Error occurred while fetching data: ", error);
-            });
-        }
-        else {
-            alert("Please Select Driver Name");
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(loginForm);
+        currentUser = {
+            email: formData.get('email'),
+            password: formData.get('password'),
+            role: 'buyer', // Simulating login for a buyer
+        };
+        console.log('Logged in user:', currentUser);
+        auth.classList.add('hidden');
+        if (currentUser.role === 'seller') {
+            sellerDashboard.classList.remove('hidden');
+        } else {
+            buyerDashboard.classList.remove('hidden');
+            displayProperties();
         }
     });
-getbal.addEventListener('click', function () {
-    const drivername = document.getElementById("dname2").value;
-    const db1 = "Trips";
-    const db2 = "Amount";
-    const dataRefget = ref(db, `${db1}/${drivername}/`);
-    const dataRefget1 = ref(db, `${db2}/${drivername}/`);
-    if(drivername!="select Driver Name")
-    {
-    get(dataRefget).then((snapshot1) => {
-        if (snapshot1.exists()) {
-            const data = snapshot1.val();
-            displaybal1(data, drivername)
+
+    propertyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(propertyForm);
+        const newProperty = {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            address: formData.get('address'),
+            rentAmount: formData.get('rentAmount'),
+            area: formData.get('area'),
+            numberOfBedrooms: formData.get('numberOfBedrooms'),
+            numberOfBathrooms: formData.get('numberOfBathrooms'),
+            nearbyAmenities: formData.get('nearbyAmenities').split(',').map(item => item.trim()),
+            sellerEmail: currentUser.email,
+            likes: 0,
+        };
+        properties.push(newProperty);
+        console.log('New property added:', newProperty);
+        displayProperties();
+        propertyForm.reset();
+    });
+
+    applyFilterButton.addEventListener('click', () => {
+        const filter = filterInput.value.toLowerCase();
+        displayProperties(filter);
+    });
+
+    prevPageButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayProperties();
         }
-        else {
-            NoDatabal();
-            console.log("No data available");
+    });
+
+    nextPageButton.addEventListener('click', () => {
+        if (currentPage < Math.ceil(properties.length / propertiesPerPage)) {
+            currentPage++;
+            displayProperties();
         }
-    })
-        .catch((error) => {
-            console.error("Error occurred while fetching data: ", error);
+    });
+
+    function displayProperties(filter = '') {
+        propertiesList.innerHTML = '';
+        availableProperties.innerHTML = '';
+        const start = (currentPage - 1) * propertiesPerPage;
+        const end = start + propertiesPerPage;
+        const filteredProperties = properties.filter(property => propertyMatchesFilter(property, filter));
+        const paginatedProperties = filteredProperties.slice(start, end);
+
+        paginatedProperties.forEach(property => {
+            const propertyElement = createPropertyElement(property);
+            if (currentUser.role === 'seller') {
+                propertiesList.appendChild(propertyElement);
+            } else {
+                availableProperties.appendChild(propertyElement);
+            }
         });
-    get(dataRefget1).then((snapshot1) => {
-        if (snapshot1.exists()) {
-            const data = snapshot1.val();
-            displaybal2(data)
+
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled = currentPage === Math.ceil(filteredProperties.length / propertiesPerPage);
+        currentPageSpan.textContent = currentPage;
+    }
+
+    function propertyMatchesFilter(property, filter) {
+        return Object.values(property).some(value =>
+            Array.isArray(value)
+                ? value.some(item => item.toLowerCase().includes(filter))
+                : value.toString().toLowerCase().includes(filter)
+        );
+    }
+
+    function createPropertyElement(property) {
+        const propertyDiv = document.createElement('div');
+        propertyDiv.className = 'property';
+        propertyDiv.innerHTML = `
+            <h4>${property.title}</h4>
+            <p>${property.description}</p>
+            <p><strong>Address:</strong> ${property.address}</p>
+            <p><strong>Rent:</strong> $${property.rentAmount}</p>
+            <p><strong>Area:</strong> ${property.area} sq ft</p>
+            <p><strong>Bedrooms:</strong> ${property.numberOfBedrooms}</p>
+            <p><strong>Bathrooms:</strong> ${property.numberOfBathrooms}</p>
+            <p><strong>Nearby:</strong> ${property.nearbyAmenities.join(', ')}</p>
+            <p><strong>Likes:</strong> <span id="likeCount-${property.title}">${property.likes}</span></p>
+        `;
+        if (currentUser.role === 'seller') {
+            propertyDiv.innerHTML += `
+                <button onclick="editProperty('${property.title}')">Edit</button>
+                <button onclick="deleteProperty('${property.title}')">Delete</button>
+            `;
+        } else {
+            propertyDiv.innerHTML += `
+                <button onclick="likeProperty('${property.title}')">Like</button>
+                <button onclick="interestedInProperty('${property.title}')">I'm Interested</button>
+            `;
         }
-        else {
-            NoDatabal();
-            console.log("No data available");
+        return propertyDiv;
+    }
+
+    window.editProperty = (title) => {
+        const property = properties.find(p => p.title === title);
+        if (property) {
+            Object.keys(property).forEach(key => {
+                if (propertyForm[key]) {
+                    propertyForm[key].value = Array.isArray(property[key]) ? property[key].join(', ') : property[key];
+                }
+            });
         }
-    })
-        .catch((error) => {
-            console.error("Error occurred while fetching data: ", error);
+    };
+
+    window.deleteProperty = (title) => {
+        properties = properties.filter(p => p.title !== title);
+        displayProperties();
+    };
+
+    window.likeProperty = (title) => {
+        const property = properties.find(p => p.title === title);
+        if (property) {
+            property.likes++;
+            document.getElementById(`likeCount-${title}`).textContent = property.likes;
+        }
+    };
+
+    window.interestedInProperty = (title) => {
+        const property = properties.find(p => p.title === title);
+        if (!currentUser) {
+            alert('Please log in to view seller details.');
+            return;
+        }
+
+        const buyerEmail = currentUser.email;
+        const sellerEmail = property.sellerEmail;
+
+        alert(`Seller email: ${sellerEmail}`);
+        sendEmail(buyerEmail, 'Interested in Property', `You are interested in the property titled "${property.title}". Contact the seller at: ${sellerEmail}`);
+        sendEmail(sellerEmail, 'Buyer Interested in Property', `A buyer is interested in your property titled "${property.title}". Contact the buyer at: ${buyerEmail}`);
+    };
+
+    function validateForm(form) {
+        const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                isValid = false;
+                input.classList.add('invalid');
+            } else {
+                input.classList.remove('invalid');
+            }
         });
+        return isValid;
     }
-    else
-    {
-        alert("Plesae Select Driver Name");
-    }
+
+    registerForm.addEventListener('submit', (e) => {
+        if (!validateForm(registerForm)) {
+            e.preventDefault();
+            alert('Please fill out all required fields.');
+        }
+    });
+
+    loginForm.addEventListener('submit', (e) => {
+        if (!validateForm(loginForm)) {
+            e.preventDefault();
+            alert('Please fill out all required fields.');
+        }
+    });
+
+    propertyForm.addEventListener('submit', (e) => {
+        if (!validateForm(propertyForm)) {
+            e.preventDefault();
+            alert('Please fill out all required fields.');
+        }
+    });
 });

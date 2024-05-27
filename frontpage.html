@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentify - Where Renting Meets Simplicity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Rentify - Where Renting Meets Simplicity</h1>
+    </header>
+    <div class="container">
+        <div id="auth">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+                <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone number" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <select id="role" name="role">
+                    <option value="seller">Seller</option>
+                    <option value="buyer">Buyer</option>
+                </select>
+                <button type="submit">Register</button>
+            </form>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <div id="sellerDashboard" class="dashboard hidden">
+            <h2>Seller Dashboard</h2>
+            <form id="propertyForm">
+                <input type="text" id="title" name="title" placeholder="Title" required>
+                <textarea id="description" name="description" placeholder="Description" required></textarea>
+                <input type="text" id="address" name="address" placeholder="Address" required>
+                <input type="number" id="rentAmount" name="rentAmount" placeholder="Rent Amount" required>
+                <input type="number" id="area" name="area" placeholder="Area (sq ft)" required>
+                <input type="number" id="numberOfBedrooms" name="numberOfBedrooms" placeholder="Number of Bedrooms" required>
+                <input type="number" id="numberOfBathrooms" name="numberOfBathrooms" placeholder="Number of Bathrooms" required>
+                <input type="text" id="nearbyAmenities" name="nearbyAmenities" placeholder="Nearby Amenities (comma-separated)" required>
+                <button type="submit">Add Property</button>
+            </form>
+            <h3>Your Properties</h3>
+            <div id="propertiesList"></div>
+        </div>
+
+        <div id="buyerDashboard" class="dashboard hidden">
+            <h2>Buyer Dashboard</h2>
+            <div>
+                <label for="filter">Filter properties:</label>
+                <input type="text" id="filter" placeholder="Enter search criteria">
+                <button id="applyFilter">Apply Filter</button>
+            </div>
+            <h3>Available Properties</h3>
+            <div id="availableProperties"></div>
+            <div id="pagination">
+                <button id="prevPage" disabled>Previous</button>
+                <span id="currentPage">1</span>
+                <button id="nextPage" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
