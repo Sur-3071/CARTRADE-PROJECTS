@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Work Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dailywork.css">
+</head>
+
+<body style="background-color: antiquewhite;">
+    <div id="home">
+        <div id="com">
+            <img src="company.png" style="padding-left: 20px;">
+        </div>
+        <h1 align="center">Daily Work Data</h1>
+    </div>
+    <div id="formContainer">
+        <form id="userForm">
+            <input type="date" id="dat" name="dat" placeholder="Date" required>
+            <input type="text" id="name" name="name" placeholder="Customer Name" required>
+            <input type="text" id="vil" name="vil" placeholder="Village" required>
+            <input type="tel" id="pno" name="pno" placeholder="Phone Number" required>
+            <input type="text" id="wid" name="wid" placeholder="Work Id" readonly required>
+            <select id="shift" required>
+                <option hidden>select Shift Type</option>
+                <option>Before Lunch</option>
+                <option>After Lunch</option>
+                <option>Night</option>
+            </select>
+
+            <select id="worktype" required onchange="addflow()">
+                <option hidden>select Work Type</option>
+                <option>Hours</option>
+                <option>Loading</option>
+            </select>
+            <div id="hours" style="display: none;">
+                <input type="time" id="stime" name="stime" placeholder="Starting Time" onchange="timecal()" required>
+                <input type="time" id="etime" name="etime" placeholder="Ending Time" onchange="timecal()" required>
+                <input type="text" id="ttime" name="ttime" placeholder="Total Time" readonly required>
+            </div>
+            <div id="loading" style="display: none;">
+                <input type="text" id="trips" name="trips" placeholder="Number of Trips" onkeyup="tripprice()" required>
+            </div>
+            <input type="text" id="rate" name="rate" placeholder="Price" readonly required>
+            <input type="button" value="Add Data" id="submit">
+        </form>
+    </div>
+    <img src="done1.png" id="done" style="display: none;" height="100px" width="100px">
+    <marquee behavior="scroll" direction="left" scrollamount="10">
+        <img src="jcb.png" height="500px" width="500px" id="jcb">
+    </marquee>
+
+    <!-- Load the main script as a module -->
+    <script type="module" src="dailyworkdatabase.js"></script>
+    <script type="module" src="dailyworkid_retrive.js"></script>
+    <script src="dailywork.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+    #com {
+        border-radius: 25px;
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        border-radius: 35px;
+    }
+
+    #userForm {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        width: 130px; /* Increase cell width */
+        height: 60px; /* Increase cell height */
+        border: 2px solid black; /* Add border to cells */
+        text-align: center; /* Center align text horizontally */
+        vertical-align: middle; /* Center align text vertically */
+    }
+    
+    input,select{
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 18px;
+    }
+
+    #formContainer,
+    #cardContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+
+    
+    input,select {
+        border: 1px solid #cccccc;
+    }
+
+    input:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    input[type="button"] {
+        border: none;
+        background-color: #007bff;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+        background-color: #0056b3;
+    } 

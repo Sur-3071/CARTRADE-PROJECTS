@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Work Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dailywork.css">
+</head>
+
+<body style="background-color: antiquewhite;">
+    <div id="home">
+        <div id="com">
+            <img src="company.png" style="padding-left: 20px;">
+        </div>
+        <h1 align="center">Daily Work Data</h1>
+    </div>
+    <div id="formContainer">
+        <form id="userForm">
+            <input type="date" id="dat1" name="dat1" placeholder="Date" required>
+            <input type="button" value="Add Data" id="submit1">
+        </form>
+    </div>
+    <img src="done1.png" id="done" style="display: none;" height="100px" width="100px">
+    <div id="enterdata">
+
+    </div>
+    <marquee behavior="scroll" direction="left" scrollamount="10">
+        <img src="jcb.png" height="500px" width="500px" id="jcb">
+    </marquee>
+
+    <!-- Load the main script as a module -->
+    <script type="module" src="dailyworkretrive.js"></script>
+    <script type="module" src="dailywork.js"></script>
+    
+</body>
+
+</html>
