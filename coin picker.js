@@ -10,6 +10,7 @@ function getRandomElement(array) {
     a.splice(randomIndex, 1);
     var val1 = document.getElementById('coin');
     val1.innerHTML = v;
+    speakText(v);
     var val2 = document.getElementById('result');
     if (a.length % 10 == 0) {
         val2.innerHTML += v + '===>' + `<br>`;
@@ -29,6 +30,29 @@ function getRandomElement(array) {
     }
     coin_done();
 }
+
+function speakText(v) {
+    // Check if the browser supports speech synthesis
+    if ('speechSynthesis' in window) {
+      // Get the text from the textarea
+    //   let text = document.getElementById('coin').value;
+
+      // Create a new SpeechSynthesisUtterance object
+      let speech = new SpeechSynthesisUtterance();
+
+      // Set the text to be spoken
+      speech.text = v;
+
+      // Set other properties (optional)
+      speech.volume = 1; // Volume (0 to 1)
+      speech.rate = 1; // Speed rate (0.1 to 10)
+      speech.pitch = 1; // Pitch (0 to 2)
+      window.speechSynthesis.speak(speech);
+    } else {
+      alert('Sorry, your browser does not support speech synthesis.');
+    }
+  }
+
 function coin_done() {
     c1 = document.getElementById("done");
     c1.innerHTML = "";
