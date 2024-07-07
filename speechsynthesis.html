@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech Synthesis Example</title>
+</head>
+<style>
+  body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #f0f0f0; /* Optional: Change the background color */
+}
+ #main {
+    text-align: center; /* Center text within the div */
+    background-color: #fff; /* Optional: Background color for the main div */
+    padding: 20px; /* Padding around the content */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+</style>
+<body>
+  <div id="main">
+    <h1>Text to Speech</h1>
+    <textarea id="textToSpeak" rows="5" cols="40">Hello, how are you ? please enter text in text area</textarea>
+    <br>
+    <button onclick="speakText()">Speak</button>
+  </div>
+  <script>
+
+    function speakText() {
+      // Check if the browser supports speech synthesis
+      if ('speechSynthesis' in window) {
+        // Get the text from the textarea
+        let text = document.getElementById('textToSpeak').value;
+
+        // Create a new SpeechSynthesisUtterance object
+        let speech = new SpeechSynthesisUtterance();
+
+        // Set the text to be spoken
+        speech.text = text;
+
+        // Set other properties (optional)
+        speech.volume = 1; // Volume (0 to 1)
+        speech.rate = 1; // Speed rate (0.1 to 10)
+        speech.pitch = 1; // Pitch (0 to 2)
+        window.speechSynthesis.speak(speech);
+      } else {
+        alert('Sorry, your browser does not support speech synthesis.');
+      }
+    }
+    function useralert() {
+      setTimeout(speakText(), 5000);
+    }
+
+    // Call useralert automatically when the window loads
+  </script>
+</body>
+
+</html>
