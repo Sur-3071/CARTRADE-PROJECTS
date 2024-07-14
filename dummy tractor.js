@@ -71,7 +71,7 @@ function addtrip() {
 function transalate() {
             let convert=document.getElementById("cname");
             let content = document.getElementById("cname").value;
-    console.log(content);
+    
             let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
 
             fetch(transLINK)
@@ -80,7 +80,7 @@ function transalate() {
                     // Handle the translated data here
                     convert.innerHTML="";
                     let text=data.responseData.translatedText;
-                    console.log(text);
+                    
                     convert.value=text;
                 });
         }
