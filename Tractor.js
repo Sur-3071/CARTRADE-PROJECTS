@@ -563,4 +563,18 @@ function getamountdata() {
         k3 = 0
     }
 }
+function transalate() {
+            let convert=document.getElementById("cname");
+            let content = document.getElementById("cname").value;
+            let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
+
+            fetch(transLINK)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the translated data here
+                    convert.innerHTML="";
+                    let text=data.responseData.translatedText;
+                    convert.value=text;
+                });
+        }
 //entire copy rights belongs to KONE RAM LAL SUFRRESH
