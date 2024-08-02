@@ -89,11 +89,11 @@ function add() {
         else {
             dm = parseInt(date[6])
         }
-        console.log("date for replace"+dm)
+        console.log("date for replace" + dm)
         val = parseInt(r[dm - 1])
-        r[dm-1] = val+1
-        r[12]=parseInt(r[12])+1
-        storeyear(p,q,r)
+        r[dm - 1] = val + 1
+        r[12] = parseInt(r[12]) + 1
+        storeyear(p, q, r)
         l1.push(date)
         l2.push(v2)
         clearInput1()
@@ -114,9 +114,9 @@ function addsalary() {
             dm = parseInt(date[6])
         }
         val = parseInt(q[dm - 1])
-        q[dm-1] = val + parseInt(v3)
-        q[12]=parseInt(q[12])+parseInt(v3)
-        storeyear(p,q,r)
+        q[dm - 1] = val + parseInt(v3)
+        q[12] = parseInt(q[12]) + parseInt(v3)
+        storeyear(p, q, r)
         l3.push(date)
         l4.push(v3)
         clearInput2()
@@ -136,19 +136,19 @@ function storesal(l3, l4) {
     localStorage.setItem('salary', l4);
     displaysal(l3, l4)
 }
-function storeyear(p,q,r) {
+function storeyear(p, q, r) {
     localStorage.setItem('Months', p);
     localStorage.setItem('Salary', q);
     localStorage.setItem('Leaves', r);
-    display_year(p,q,r)
+    display_year(p, q, r)
 }
 function storedef() {
     console.log("Default setting is done")
-    localStorage.setItem('Months',["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December","Total"]
+    localStorage.setItem('Months', ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Total"]
     );
-    localStorage.setItem('Salary', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]);
-    localStorage.setItem('Leaves', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0]);
-    display_year(p,q,r)
+    localStorage.setItem('Salary', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    localStorage.setItem('Leaves', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    display_year(p, q, r)
 }
 function display(l1, l2) {
     var r = document.getElementById("enter");
@@ -196,18 +196,23 @@ function displaysal(l3, l4) {
     if (l3[0] != null) {
         var out = `<table border="1px" >
             <tr>
-                <th>Date</th>
-                <th>Amount</th>
+                <th>తేదీ</th>
+                <th>జీతం</th>
                 <th>Delete</th>
             </tr>`;
-
+        var c = 0;
         for (var i = 0; i < l3.length; i++) {
+            c = c + Number(l4[i]);
             out = out + `<tr>
                 <td>`+ l3[i] + `</td>
                 <td>`+ l4[i] + `</td>
                 <td><button type='button' onclick='delsal(`+ i + `)'>Delete</button>
                 </tr>`;
         }
+        out += `<tr>
+        <td >మొత్తం తీసుకున్న జీతం: </td>
+        <td >` + c + `</td>
+        </tr>`;
         out = out + "</table>";
         r.innerHTML = out;
     }
@@ -226,7 +231,7 @@ function clearInput2() {
 }
 function del(i) {
     //alert("Leaves Record is deleting....")
-    date=l1[i]
+    date = l1[i]
     if (date[5] != '0') {
         dm = parseInt(date[5] + date[6])
     }
@@ -234,12 +239,11 @@ function del(i) {
         dm = parseInt(date[6])
     }
     val = parseInt(r[dm - 1])
-    if(val>0)
-    {
-    r[dm-1] = val-1
-    r[12]=parseInt(r[12])-1
+    if (val > 0) {
+        r[dm - 1] = val - 1
+        r[12] = parseInt(r[12]) - 1
     }
-    storeyear(p,q,r)
+    storeyear(p, q, r)
     l1.splice(i, 1)
     l2.splice(i, 1)
     store(l1, l2);
@@ -249,8 +253,8 @@ function del(i) {
 }
 function delsal(i) {
     //alert("Amount Record is deleting....")
-    date=l3[i]
-    v3=l4[i]
+    date = l3[i]
+    v3 = l4[i]
     if (date[5] != '0') {
         dm = parseInt(date[5] + date[6])
     }
@@ -258,12 +262,11 @@ function delsal(i) {
         dm = parseInt(date[6])
     }
     val = parseInt(q[dm - 1])
-    if(val>0)
-    {
-    q[dm-1] = val -parseInt(v3)
-    q[12]=parseInt(q[12])-parseInt(v3)
+    if (val > 0) {
+        q[dm - 1] = val - parseInt(v3)
+        q[12] = parseInt(q[12]) - parseInt(v3)
     }
-    storeyear(p,q,r)
+    storeyear(p, q, r)
     l3.splice(i, 1)
     l4.splice(i, 1)
     storesal(l3, l4);
