@@ -10,7 +10,14 @@ body {
         display: flex;
         justify-content: center;
     }
-
+ #am
+    {
+        font-size: 20px;
+    }
+    #col
+    {
+        font-size: 36px;
+    }
     img {
         border-radius: 35px;
     }
