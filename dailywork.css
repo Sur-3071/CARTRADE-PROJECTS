@@ -14,7 +14,11 @@ body {
     img {
         border-radius: 35px;
     }
-
+ #btn
+    {
+        display: flex;
+        gap: 20px;
+    }
     #userForm {
         background-color: #ffffff;
         padding: 20px;
