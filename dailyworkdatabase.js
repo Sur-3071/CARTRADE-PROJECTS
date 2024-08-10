@@ -44,16 +44,18 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     const db1 = "Daily Work";
     const db2 = "Work_Count";
     const w_id=ref(db,`${db2}`);
-    const dataRefset = ref(db, `${db1}/${dat}/${wid}/${shift}`);
+    const dataRefset = ref(db, `${db1}/${wid}`);
 
     try { 
         await set(w_id,{
             Work_Id:parseInt(wid)+1
         });
         await set(dataRefset, {
+            Date:dat,
             Name: name,
             Villagename: villname,
             PhoneNumber:pno,
+            Shift:shift,
             Trips:trips,
             Starting: stime,
             Ending: etime,
