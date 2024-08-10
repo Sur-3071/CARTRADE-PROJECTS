@@ -23,15 +23,15 @@ function timecal() {
 
     // Calculate the total minutes and price
     var tmin = diffHours * 60 + diffMinutes;
-    var pri = tmin * 20;
+    var pri = tmin * 16.6666667;
 
     document.getElementById("ttime").value = totalTime;
-    document.getElementById("rate").value = pri;
+    document.getElementById("rate").value = parseInt(pri);
 }
 function tripprice()
 {
     var c1=document.getElementById("trips").value;
-    var c2=parseInt(c1)*200;
+    var c2=parseInt(c1)*150;
     document.getElementById("rate").value=c2;
 }
 function removedone() {
