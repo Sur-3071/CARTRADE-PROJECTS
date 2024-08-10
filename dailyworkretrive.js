@@ -48,6 +48,7 @@ function generateTable(data) {
             <th>Customer Name</th>
             <th>Phone Number</th>
             <th>Village</th>
+            <th>shift</th>
             <th>Trips</th>
             <th>Starting Time</th>
             <th>Ending Time</th>
@@ -65,6 +66,7 @@ function generateTable(data) {
                         <td>${activity.Name}</td>
                         <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
+                        <td>${activity.Shift}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
@@ -111,6 +113,7 @@ function generateTableByDate(data,dat) {
             <th>Customer Name</th>
             <th>Phone Number</th>
             <th>Village</th>
+            <th>shift</th>
             <th>Trips</th>
             <th>Starting Time</th>
             <th>Ending Time</th>
@@ -129,6 +132,7 @@ function generateTableByDate(data,dat) {
                         <td>${activity.Name}</td>
                         <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
+                        <td>${activity.Shift}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
