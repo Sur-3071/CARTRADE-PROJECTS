@@ -19,7 +19,6 @@ document.getElementById("submit2").addEventListener("click", async function (e1)
 
     // Get the value from the input field
     var dat = document.getElementById("dat1").value.trim();
-    console.log(dat.length);
     // Validate the input (optional)
 
     try {
@@ -36,7 +35,7 @@ document.getElementById("submit2").addEventListener("click", async function (e1)
             alert("No data available for the selected date.");
         }
     } catch (error) {
-        console.error("Error occurred while fetching data: ", error);
+        alert("Error occurred while fetching data");
     }
 });
 
@@ -55,11 +54,9 @@ function generateTable(data) {
             <th>Total Time</th>
             <th>Price</th>
         </tr>`;
-
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
-            console.log(activity);
             out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
@@ -84,9 +81,9 @@ document.getElementById("submit1").addEventListener("click", async function (e1)
     e1.preventDefault(); // Prevent default form submission behavior
 
     // Get the value from the input field
-    var dat = document.getElementById("dat1").value.trim();
+    var startdate = document.getElementById("dat1").value.trim();
+    var enddate = document.getElementById("dat2").value.trim();
     // Validate the input (optional)
-
     try {
         // Access the database and retrieve data
         const db2 = getDatabase(app);
@@ -96,16 +93,17 @@ document.getElementById("submit1").addEventListener("click", async function (e1)
         // Check if data exists
         if (snapshot.exists()) {
             const data = snapshot.val();
-            generateTableByDate(data,dat);
+            generateTableByDate(data, startdate, enddate);
         } else {
             alert("No data available for the selected date.");
         }
     } catch (error) {
-        console.error("Error occurred while fetching data: ", error);
+        alert("Error occurred while fetching data");
     }
 });
 
-function generateTableByDate(data,dat) {
+function generateTableByDate(data, startdate, enddate) {
+    var collection = 0;
     let out = `<table border="1px">
         <tr>
             <th>Customer Id</th>
@@ -124,8 +122,8 @@ function generateTableByDate(data,dat) {
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
-            if (activity.Date === dat) {
-                console.log(activity);
+            if (activity.Date >= startdate && activity.Date <= enddate) {
+                collection = collection + parseInt(activity.Price);
                 out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
@@ -142,7 +140,10 @@ function generateTableByDate(data,dat) {
             }
         }
     }
-
+    out += `<tr>
+            <td colspan="10" id="col">Total Price Of work Have Done is</td>
+            <td id="am">${collection}</td>
+            </tr>`;
     out += `</table>`;
     document.getElementById("enterdata").innerHTML = out;
 }
