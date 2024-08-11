@@ -118,11 +118,25 @@ function generateTableByDate(data, startdate, enddate) {
             <th>Total Time</th>
             <th>Price</th>
         </tr>`;
+    // Define two dates
+    const date1 = new Date(startdate);
+    const date2 = new Date(enddate);
 
+    // Calculate the difference in milliseconds
+    const differenceInMilliseconds = date2 - date1;
+
+    // Convert the difference to days
+    const differenceInDays = (differenceInMilliseconds / (1000 * 60 * 60 * 24)) + 1;
+    var l = [];
+    var workday = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
             if (activity.Date >= startdate && activity.Date <= enddate) {
+                if (!l.includes(activity.Date)) {
+                    workday += 1;
+                    l.push(activity.Date);
+                }
                 collection = collection + parseInt(activity.Price);
                 out += `<tr>
                         <td>${customerPhone}</td>
@@ -141,9 +155,36 @@ function generateTableByDate(data, startdate, enddate) {
         }
     }
     out += `<tr>
-            <td colspan="10" id="col">Total Price Of work Have Done is</td>
+            <td colspan="10" id="col">Total Collection Done In This Time Period</td>
             <td id="am">${collection}</td>
             </tr>`;
     out += `</table>`;
     document.getElementById("enterdata").innerHTML = out;
+    let led = `<table border="1px">
+    <tr>
+        <th>Total Work</th>
+        <th>Total Days</th>
+        <th>Working Days</th>
+        <th>Holidays</th>
+        <th>Oil</th>
+        <th>Maintainance</th>
+        <th>JCB EMI</th>
+        <th>Salary</th>
+        <th>Profit</th>
+
+    </tr>`;
+    var pro = collection - (workday * 3500) - (differenceInDays * 734) - (differenceInDays * 335)-(differenceInDays * 1800);
+    led += `<tr>
+    <td>${collection}</td>
+    <td>${differenceInDays}</td>
+    <td>${workday}</td>
+    <td>${differenceInDays - workday}</td>
+    <td>${workday * 3500}</td>
+    <td>${workday * 335}</td>
+    <td>${differenceInDays * 1800}</td>
+    <td>${differenceInDays * 734}</td>
+    <td>${pro}</td>
+    </tr>`;
+    led += `</table>`;
+    document.getElementById("ledger").innerHTML = led;
 }
