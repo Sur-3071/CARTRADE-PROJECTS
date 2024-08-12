@@ -30,42 +30,64 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     const shift = document.getElementById("shift").value;
     var trips = document.getElementById("trips").value;
     document.getElementById("userForm").reset();
-    if(trips.length>0)
-        {
-            stime="--";
-            etime="--";
-            ttime="--";
+    if (trips.length > 0) {
+        stime = "--";
+        etime = "--";
+        ttime = "--";
+    }
+    else {
+        trips = "--";
+    }
+    if (dat.length > 0) {
+        if (name.length > 0) {
+            if (villname.length > 0) {
+                if (pno.length > 0) {
+                    const db1 = "Daily Work";
+                    const db2 = "Work_Count";
+                    const w_id = ref(db, `${db2}`);
+                    const dataRefset = ref(db, `${db1}/${wid}`);
+
+                    try {
+                        await set(w_id, {
+                            Work_Id: parseInt(wid) + 1
+                        });
+                        await set(dataRefset, {
+                            Date: dat,
+                            Name: name,
+                            Villagename: villname,
+                            PhoneNumber: pno,
+                            Shift: shift,
+                            Trips: trips,
+                            Starting: stime,
+                            Ending: etime,
+                            TotalTime: ttime,
+                            Price: rate
+                        });
+                        document.getElementById("done").style.display = "block";
+                        removedone();
+                    } catch (error) {
+                        console.error("Error adding document: ", error);
+                        alert("An error occurred. Please try again.");
+                    }
+
+                }
+                else
+                {
+                    alert("Please Enter Phone Number");
+                }
+            }
+            else
+            {
+                alert("Please Enter Village Name");
+            }
         }
         else
         {
-            trips="--";
+            alert("Please Enter Customer Name Or place Or Location Name");
         }
-
-    const db1 = "Daily Work";
-    const db2 = "Work_Count";
-    const w_id=ref(db,`${db2}`);
-    const dataRefset = ref(db, `${db1}/${wid}`);
-
-    try { 
-        await set(w_id,{
-            Work_Id:parseInt(wid)+1
-        });
-        await set(dataRefset, {
-            Date:dat,
-            Name: name,
-            Villagename: villname,
-            PhoneNumber:pno,
-            Shift:shift,
-            Trips:trips,
-            Starting: stime,
-            Ending: etime,
-            TotalTime: ttime,
-            Price: rate
-        });
-        document.getElementById("done").style.display = "block";
-        removedone();
-    } catch (error) {
-        console.error("Error adding document: ", error);
-        alert("An error occurred. Please try again.");
+    }
+    else
+    {
+        alert("Please Choose Date");
     }
 });
