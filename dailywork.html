@@ -33,6 +33,7 @@
                 <option hidden>select Work Type</option>
                 <option>Hours</option>
                 <option>Loading</option>
+                <option>Contract</option>
             </select>
             <div id="hours" style="display: none;">
                 <input type="time" id="stime" name="stime" placeholder="Starting Time" onchange="timecal()" required>
@@ -41,6 +42,9 @@
             </div>
             <div id="loading" style="display: none;">
                 <input type="text" id="trips" name="trips" placeholder="Number of Trips" onkeyup="tripprice()" required>
+            </div>
+            <div id="contract" style="display: none;">
+                <input type="text" id="con" name="con" placeholder="Contract Amount" onkeyup="conprice()" required>
             </div>
             <input type="text" id="rate" name="rate" placeholder="Price" readonly required>
             <input type="button" value="Add Data" id="submit">
