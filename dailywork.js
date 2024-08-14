@@ -34,6 +34,11 @@ function tripprice()
     var c2=parseInt(c1)*150;
     document.getElementById("rate").value=c2;
 }
+function conprice()
+{
+    var c1=document.getElementById("con").value;
+    document.getElementById("rate").value=c1;
+}
 function removedone() {
     setTimeout(function () {
         var v7 = document.getElementById("done");
@@ -47,12 +52,23 @@ function addflow()
     if(c=="Hours")
         {
             document.getElementById("loading").style.display="none";
+            document.getElementById("contract").style.display="none";
             document.getElementById("hours").style.display="block";
         }
         else
         {
-            document.getElementById("hours").style.display="none";
-            document.getElementById("loading").style.display="block";
+            if(c=="Loading")
+            {
+                document.getElementById("hours").style.display="none";
+                document.getElementById("loading").style.display="block";
+                document.getElementById("contract").style.display="none";
+            }
+            else
+            {
+                document.getElementById("hours").style.display="none";
+                document.getElementById("loading").style.display="none";
+                document.getElementById("contract").style.display="block";
+            }
         }
 
 }
