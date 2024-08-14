@@ -49,6 +49,7 @@ function generateTable(data) {
             <th>Village</th>
             <th>shift</th>
             <th>Trips</th>
+            <th>Contract</th>
             <th>Starting Time</th>
             <th>Ending Time</th>
             <th>Total Time</th>
@@ -65,6 +66,7 @@ function generateTable(data) {
                         <td>${activity.Villagename}</td>
                         <td>${activity.Shift}</td>
                         <td>${activity.Trips}</td>
+                        <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
@@ -113,6 +115,7 @@ function generateTableByDate(data, startdate, enddate) {
             <th>Village</th>
             <th>shift</th>
             <th>Trips</th>
+            <th>Contract</th>
             <th>Starting Time</th>
             <th>Ending Time</th>
             <th>Total Time</th>
@@ -146,6 +149,7 @@ function generateTableByDate(data, startdate, enddate) {
                         <td>${activity.Villagename}</td>
                         <td>${activity.Shift}</td>
                         <td>${activity.Trips}</td>
+                        <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
@@ -155,7 +159,7 @@ function generateTableByDate(data, startdate, enddate) {
         }
     }
     out += `<tr>
-            <td colspan="10" id="col">Total Collection Done In This Time Period</td>
+            <td colspan="11" id="col">Total Collection Done In This Time Period</td>
             <td id="am">${collection}</td>
             </tr>`;
     out += `</table>`;
