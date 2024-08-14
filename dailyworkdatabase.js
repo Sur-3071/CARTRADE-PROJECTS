@@ -23,6 +23,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     const name = document.getElementById("name").value;
     const villname = document.getElementById("vil").value;
     const pno = document.getElementById("pno").value;
+    var con = document.getElementById("con").value;
     var stime = document.getElementById("stime").value;
     var etime = document.getElementById("etime").value;
     var ttime = document.getElementById("ttime").value;
@@ -34,9 +35,22 @@ document.getElementById('submit').addEventListener('click', async function (e) {
         stime = "--";
         etime = "--";
         ttime = "--";
+        con   ="--";
+        
     }
     else {
-        trips = "--";
+        if(con.length>0)
+        {
+            trips = "--";
+            stime = "--";
+            etime = "--";
+            ttime = "--";
+        }
+        else
+        {
+            trips = "--";
+            con   ="--";
+        }
     }
     if (dat.length > 0) {
         if (name.length > 0) {
@@ -57,6 +71,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                             Villagename: villname,
                             PhoneNumber: pno,
                             Shift: shift,
+                            Contract:con,
                             Trips: trips,
                             Starting: stime,
                             Ending: etime,
