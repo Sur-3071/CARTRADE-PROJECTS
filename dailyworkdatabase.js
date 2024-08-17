@@ -65,6 +65,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                         await set(w_id, {
                             Work_Id: parseInt(wid) + 1
                         });
+                        var pay="UnPaid";
                         await set(dataRefset, {
                             Date: dat,
                             Name: name,
@@ -72,6 +73,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                             PhoneNumber: pno,
                             Shift: shift,
                             Contract:con,
+                            Payment:pay,
                             Trips: trips,
                             Starting: stime,
                             Ending: etime,
