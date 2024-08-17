@@ -10,26 +10,11 @@ body {
         display: flex;
         justify-content: center;
     }
- #am
-    {
-        font-size: 20px;
-    }
-#ledger
-    {
-        margin-top: 100px;
-    }
-    #col
-    {
-        font-size: 36px;
-    }
+
     img {
         border-radius: 35px;
     }
- #btn
-    {
-        display: flex;
-        gap: 20px;
-    }
+
     #userForm {
         background-color: #ffffff;
         padding: 20px;
@@ -37,16 +22,59 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 100%;
     }
+    #btn
+    {
+        display: flex;
+        gap: 20px;
+    }
+    #ledger
+    {
+        margin-top: 100px;
+    }
     table {
         width: 100%;
         border-collapse: collapse;
+        border-spacing: 10px
+    }
+    #am
+    {
+        font-size: 20px;
+    }
+    #col
+    {
+        font-size: 36px;
+    }
+    #csize
+    {
+        width: 60px;
+    }
+    #bal1
+    {
+        width: 130px;
+    }
+    #csize1
+    {
+        width: 100px;
+    }
+    #csize2
+    {
+        width: 80px;
+    }
+    #csize3
+    {
+        width: 130px;
+    }
+    button
+    {
+        border-radius: 25px;
     }
     th, td {
-        width: 130px; /* Increase cell width */
+         /* Increase cell width */
         height: 60px; /* Increase cell height */
         border: 2px solid black; /* Add border to cells */
         text-align: center; /* Center align text horizontally */
         vertical-align: middle; /* Center align text vertically */
+        border-spacing: 10px
     }
     
     input,select{
