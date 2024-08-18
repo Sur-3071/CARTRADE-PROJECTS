@@ -16,13 +16,15 @@ const db = getDatabase(app);
 // Get a reference to the database service
 document.getElementById("submit2").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
+    var d1 = document.getElementById("search");
+    d1.style.display = "block";
     RePrint();
     // Get the value from the input field
 
 });
 
 async function RePrint() {
-    var dat = document.getElementById("dat1").value.trim();
+    // var dat = document.getElementById("dat1").value.trim();
     // Validate the input (optional)
 
     try {
@@ -35,6 +37,31 @@ async function RePrint() {
         if (snapshot.exists()) {
             const data = snapshot.val();
             generateTable(data);
+        } else {
+            alert("No data available for the selected date.");
+        }
+    } catch (error) {
+        alert("Error occurred while fetching data");
+    }
+}
+document.getElementById("search").addEventListener("change", async function (e1) {
+    e1.preventDefault(); // Prevent default form submission behavior
+    RePrintSearch();
+
+});
+
+async function RePrintSearch() {
+
+    try {
+        // Access the database and retrieve data
+        const db2 = getDatabase(app);
+        const dataRefget = ref(db2, `Daily Work`);
+        const snapshot = await get(dataRefget);
+
+        // Check if data exists
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            SearchTable(data);
         } else {
             alert("No data available for the selected date.");
         }
@@ -148,6 +175,72 @@ function generateTable(data) {
     </tr>`;
     led += `</table>`;
     document.getElementById("ledger").innerHTML = led;
+}
+
+
+function SearchTable(data) {
+    // Get today's date
+    var d = document.getElementById("ledger");
+    var name = document.getElementById("search").value;
+    if (name.length > 0) {
+        d.style.display = "none";
+    }
+    else
+    {
+        d.style.display = "block";
+    }
+    var collection = 0;
+    var recovery = 0;
+    let out = `<table border="1px">
+        <tr>
+            <th id="csize">Customer Id</th>
+            <th id="csize1">Date</th>
+            <th id="csize3">Customer Name</th>
+            <th id="csize3">Phone Number</th>
+            <th id="csize3">Village</th>
+            <th id="csize1">shift</th>
+            <th id="csize">Trips</th>
+            <th id="csize2">Contract</th>
+            <th id="csize">Starting Time</th>
+            <th id="csize">Ending Time</th>
+            <th id="csize">Total Time</th>
+            <th id="csize2">Payment Status</th>
+            <th id="csize2">Price</th>
+            <th id="csize2">Recovery Amount</th>
+        </tr>`;
+    for (const customerPhone in data) {
+        if (data.hasOwnProperty(customerPhone)) {
+            const activity = data[customerPhone];
+            if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1) {
+                collection += parseInt(activity.Price);
+                var amount = activity.Payment === "Paid" ? 0 : activity.Price
+                recovery += parseInt(amount);
+                out += `<tr>
+                        <td>${customerPhone}</td>
+                        <td>${activity.Date}</td>
+                        <td>${activity.Name}</td>
+                        <td>${activity.PhoneNumber}</td>
+                        <td>${activity.Villagename}</td>
+                        <td>${activity.Shift}</td>
+                        <td>${activity.Trips}</td>
+                        <td>${activity.Contract}</td>
+                        <td>${activity.Starting}</td>
+                        <td>${activity.Ending}</td>
+                        <td>${activity.TotalTime}</td>
+                        <td><button type="button" class="pay" id=${customerPhone}>${activity.Payment}</button></td>
+                        <td>${activity.Price}</td>
+                        <td>${amount}</td>
+                    </tr>`;
+            }
+        }
+    }
+    out += `<tr>
+    <td colspan="12" id="col">Total Work In Price</td>
+    <td id="am">${collection}</td>
+    <td id="am">${recovery}</td>
+    </tr>`;
+    out += `</table>`;
+    document.getElementById("enterdata").innerHTML = out;
 }
 
 document.getElementById("submit1").addEventListener("click", async function (e1) {
@@ -289,7 +382,6 @@ document.addEventListener("click", async function (e1) {
         if (snapshot.exists()) {
             data = snapshot.val();
         }
-        console.log(data);
         let payment = data.Payment;
         if (payment === "UnPaid") {
             payment = "Paid";
@@ -327,7 +419,6 @@ document.addEventListener("click", async function (e1) {
             if (snapshot.exists()) {
                 data = snapshot.val();
             }
-            console.log(data);
             let payment = data.Payment;
             if (payment === "UnPaid") {
                 payment = "Paid";
