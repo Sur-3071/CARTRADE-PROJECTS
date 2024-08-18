@@ -64,6 +64,17 @@ body {
     {
         width: 130px;
     }
+    #search
+    {
+        display: none;
+        width: 400px;
+        height: 60px;
+        border-radius: 25px;
+        outline: 5px solid lightgreen;
+        margin-bottom: 80px;
+        margin-top: 50px;
+        font-size: 25px;
+    }
     button
     {
         border-radius: 25px;
