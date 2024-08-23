@@ -17,8 +17,8 @@ const db = getDatabase(app);
 document.getElementById("submit2").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
     var d1 = document.getElementById("search");
-    var n=document.getElementById("search");
-    n.value="";
+    var n = document.getElementById("search");
+    n.value = "";
     d1.style.display = "block";
     RePrint();
     // Get the value from the input field
@@ -184,16 +184,12 @@ function SearchTable(data) {
     // Get today's date
     var d = document.getElementById("ledger");
     var name = document.getElementById("search").value;
+    console.log(name.length);
     if (name.length > 0) {
         d.style.display = "none";
-    }
-    else
-    {
-        d.style.display = "block";
-    }
-    var collection = 0;
-    var recovery = 0;
-    let out = `<table border="1px">
+        var collection = 0;
+        var recovery = 0;
+        let out = `<table border="1px">
         <tr>
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
@@ -210,14 +206,14 @@ function SearchTable(data) {
             <th id="csize2">Price</th>
             <th id="csize2">Recovery Amount</th>
         </tr>`;
-    for (const customerPhone in data) {
-        if (data.hasOwnProperty(customerPhone)) {
-            const activity = data[customerPhone];
-            if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment===name) {
-                collection += parseInt(activity.Price);
-                var amount = activity.Payment === "Paid" ? 0 : activity.Price
-                recovery += parseInt(amount);
-                out += `<tr>
+        for (const customerPhone in data) {
+            if (data.hasOwnProperty(customerPhone)) {
+                const activity = data[customerPhone];
+                if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment === name) {
+                    collection += parseInt(activity.Price);
+                    var amount = activity.Payment === "Paid" ? 0 : activity.Price
+                    recovery += parseInt(amount);
+                    out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
                         <td>${activity.Name}</td>
@@ -233,16 +229,21 @@ function SearchTable(data) {
                         <td>${activity.Price}</td>
                         <td>${amount}</td>
                     </tr>`;
+                }
             }
         }
-    }
-    out += `<tr>
+        out += `<tr>
     <td colspan="12" id="col">Total Work In Price</td>
     <td id="am">${collection}</td>
     <td id="am">${recovery}</td>
     </tr>`;
-    out += `</table>`;
-    document.getElementById("enterdata").innerHTML = out;
+        out += `</table>`;
+        document.getElementById("enterdata").innerHTML = out;
+    }
+    else {
+        d.style.display = "block";
+        RePrint();
+    }
 }
 
 document.getElementById("submit1").addEventListener("click", async function (e1) {
