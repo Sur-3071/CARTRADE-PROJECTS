@@ -17,6 +17,8 @@ const db = getDatabase(app);
 document.getElementById("submit2").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
     var d1 = document.getElementById("search");
+    var n=document.getElementById("search");
+    n.value="";
     d1.style.display = "block";
     RePrint();
     // Get the value from the input field
@@ -211,7 +213,7 @@ function SearchTable(data) {
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
-            if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1) {
+            if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment===name) {
                 collection += parseInt(activity.Price);
                 var amount = activity.Payment === "Paid" ? 0 : activity.Price
                 recovery += parseInt(amount);
@@ -406,7 +408,7 @@ document.addEventListener("click", async function (e1) {
             Trips: data.Trips,
             Villagename: data.Villagename
         });
-        RePrint();
+        RePrintSearch();
     }
     else {
         if (e1.target && e1.target.className === "pays") {
