@@ -62,9 +62,11 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     const dataRefset = ref(db, `${db1}/${wid}`);
 
                     try {
-                        await set(w_id, {
-                            Work_Id: parseInt(wid) + 1
-                        });
+                       if (w_id === wid) {
+                            await set(w_id, {
+                                Work_Id: parseInt(wid) + 1
+                            });
+                        }
                         var pay="UnPaid";
                         await set(dataRefset, {
                             Date: dat,
