@@ -81,15 +81,6 @@ function generateTable(data) {
     const day = String(today.getDate()).padStart(2, '0'); // Ensures 2-digit day
 
     // Print today's date in YYYY-MM-DD format
-    var dat1 = "2024-08-10";
-    var dat2 = year + "-" + month + "-" + day;
-    const date1 = new Date(dat1);
-    const date2 = new Date(dat2);
-
-    // Calculate the difference in milliseconds
-    const differenceInMilliseconds = date2 - date1;
-    // Convert the difference to days
-    const differenceInDays = (differenceInMilliseconds / (1000 * 60 * 60 * 24)) + 1;
     var collection = 0;
     var recovery = 0;
     let out = `<table border="1px">
@@ -106,6 +97,7 @@ function generateTable(data) {
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
             <th id="csize2">Payment Status</th>
+            <th id="csize2">Edit Data</th>
             <th id="csize2">Price</th>
             <th id="csize2">Recovery Amount</th>
         </tr>`;
@@ -134,18 +126,29 @@ function generateTable(data) {
                         <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
                         <td><button type="button" class="pay" id=${customerPhone}>${activity.Payment}</button></td>
+                        <td><button  id=${customerPhone}+"v" class="edit">Edit</button></td>
                         <td>${activity.Price}</td>
                         <td>${amount}</td>
                     </tr>`;
         }
     }
     out += `<tr>
-    <td colspan="12" id="col">Total Work In Price</td>
+    <td colspan="13" id="col">Total Work In Price</td>
     <td id="am">${collection}</td>
     <td id="am">${recovery}</td>
     </tr>`;
     out += `</table>`;
     document.getElementById("enterdata").innerHTML = out;
+    const sortedDates = l.sort((a, b) => new Date(a) - new Date(b));
+    var dat1 = sortedDates[0];
+    var dat2 = year + "-" + month + "-" + day;
+    const date1 = new Date(dat1);
+    const date2 = new Date(dat2);
+
+    // Calculate the difference in milliseconds
+    const differenceInMilliseconds = date2 - date1;
+    // Convert the difference to days
+    const differenceInDays = (differenceInMilliseconds / (1000 * 60 * 60 * 24)) + 1;
     let led = `<table border="1px">
      <tr>
         <th id="bal1">Total Work</th>
@@ -179,6 +182,110 @@ function generateTable(data) {
     document.getElementById("ledger").innerHTML = led;
 }
 
+document.addEventListener("click", async function (e1) {
+    if (e1.target && e1.target.className === "edit") {
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btnId = e1.target.id;
+        let id = btnId.replaceAll('+"v"', '');
+
+        // Get the button element using the ID
+        var btn = document.getElementById(btnId);
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        const db2 = getDatabase(app);
+        const dataRefget = ref(db2, `Daily Work/${id}`);
+        const snapshot = await get(dataRefget);
+        var data;
+        if (snapshot.exists()) {
+            data = snapshot.val();
+        }
+        let payment = data.Payment;
+        if (payment === "UnPaid") {
+            payment = "Paid";
+        }
+        else {
+            payment = "UnPaid";
+        }
+        var Contract = data.Contract;
+        var Payment = payment;
+        var Date = data.Date;
+        var Ending = data.Ending;
+        var Name = data.Name;
+        var PhoneNumber = data.PhoneNumber;
+        var Price = data.Price;
+        var Shift = data.Shift;
+        var Starting = data.Starting;
+        var TotalTime = data.TotalTime;
+        var Trips = data.Trips;
+        var Villagename = data.Villagename
+        if (Trips === "--" && Contract === "--") {
+            var worktype = "Hours";
+        }
+        else {
+            if (Trips === "--" && Starting === "--") {
+                var worktype = "Contract";
+            }
+            else {
+                if (Starting === "--" && Contract === "--") {
+                    var worktype = "Loading";
+                }
+            }
+        }
+        // alert(worktype);
+        // var worktype="Contarct";
+        document.getElementById("dat").value = Date;
+        document.getElementById("wid").value = id;
+        document.getElementById("name").value = Name;
+        document.getElementById("vil").value = Villagename;
+        document.getElementById("pno").value = PhoneNumber;
+        document.getElementById("con").value = Contract;
+        document.getElementById("stime").value = Starting
+        document.getElementById("etime").value = Ending;
+        document.getElementById("ttime").value = TotalTime;
+        document.getElementById("rate").value = Price;
+        document.getElementById("shift").value = Shift;
+        document.getElementById("trips").value = Trips;
+        document.getElementById("worktype").value = worktype;
+        if (worktype == "Hours") {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("contract").style.display = "none";
+            document.getElementById("hours").style.display = "block";
+        }
+        else {
+            if (worktype == "Loading") {
+                document.getElementById("hours").style.display = "none";
+                document.getElementById("loading").style.display = "block";
+                document.getElementById("contract").style.display = "none";
+            }
+            else {
+                document.getElementById("hours").style.display = "none";
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("contract").style.display = "block";
+            }
+        }
+        // RePrintSearch();
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            RePrintSearch();
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+})
 
 function SearchTable(data) {
     // Get today's date
