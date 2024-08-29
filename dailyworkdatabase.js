@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+import { getDatabase, ref, set,get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
@@ -35,21 +35,19 @@ document.getElementById('submit').addEventListener('click', async function (e) {
         stime = "--";
         etime = "--";
         ttime = "--";
-        con   ="--";
-        
+        con = "--";
+
     }
     else {
-        if(con.length>0)
-        {
+        if (con.length > 0) {
             trips = "--";
             stime = "--";
             etime = "--";
             ttime = "--";
         }
-        else
-        {
+        else {
             trips = "--";
-            con   ="--";
+            con = "--";
         }
     }
     if (dat.length > 0) {
@@ -58,24 +56,27 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                 if (pno.length > 0) {
                     const db1 = "Daily Work";
                     const db2 = "Work_Count";
+                    const db3="Work_Id";
                     const w_id = ref(db, `${db2}`);
                     const dataRefset = ref(db, `${db1}/${wid}`);
-
+                    var databasecount= ref(db, `${db2}/${db3}`);
+                    const snapshot = await get(databasecount);
+                    var workid=parseInt(snapshot.val());
                     try {
-                       if (w_id === wid) {
+                        if (workid == wid) {
                             await set(w_id, {
                                 Work_Id: parseInt(wid) + 1
                             });
                         }
-                        var pay="UnPaid";
+                        var pay = "UnPaid";
                         await set(dataRefset, {
                             Date: dat,
                             Name: name,
                             Villagename: villname,
                             PhoneNumber: pno,
                             Shift: shift,
-                            Contract:con,
-                            Payment:pay,
+                            Contract: con,
+                            Payment: pay,
                             Trips: trips,
                             Starting: stime,
                             Ending: etime,
@@ -90,23 +91,19 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     }
 
                 }
-                else
-                {
+                else {
                     alert("Please Enter Phone Number");
                 }
             }
-            else
-            {
+            else {
                 alert("Please Enter Village Name");
             }
         }
-        else
-        {
+        else {
             alert("Please Enter Customer Name Or place Or Location Name");
         }
     }
-    else
-    {
+    else {
         alert("Please Choose Date");
     }
 });
