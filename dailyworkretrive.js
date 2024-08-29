@@ -282,6 +282,7 @@ document.addEventListener("click", async function (e1) {
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+                RePrintSearch();
             }
         }
     }
