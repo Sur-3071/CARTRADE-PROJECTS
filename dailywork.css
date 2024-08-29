@@ -3,128 +3,193 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
 }
-    #com {
-        border-radius: 25px;
-        display: flex;
-        justify-content: center;
-    }
 
-    img {
-        border-radius: 35px;
-    }
+#com {
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
 
-    #userForm {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 100%;
-    }
-    #btn
-    {
-        display: flex;
-        gap: 20px;
-    }
-    #ledger
-    {
-        margin-top: 100px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 10px
-    }
-    #am
-    {
-        font-size: 20px;
-    }
-    #col
-    {
-        font-size: 36px;
-    }
-    #csize
-    {
-        width: 60px;
-    }
-    #bal1
-    {
-        width: 130px;
-    }
-    #csize1
-    {
-        width: 100px;
-    }
-    #csize2
-    {
-        width: 80px;
-    }
-    #csize3
-    {
-        width: 130px;
-    }
-    #search
-    {
-        display: none;
-        width: 400px;
-        height: 60px;
-        border-radius: 25px;
-        outline: 5px solid lightgreen;
-        margin-bottom: 80px;
-        margin-top: 50px;
-        font-size: 25px;
-    }
-    button
-    {
-        border-radius: 25px;
-    }
-    th, td {
-         /* Increase cell width */
-        height: 60px; /* Increase cell height */
-        border: 2px solid black; /* Add border to cells */
-        text-align: center; /* Center align text horizontally */
-        vertical-align: middle; /* Center align text vertically */
-        border-spacing: 10px
-    }
-    
-    input,select{
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-        box-sizing: border-box;
-        font-size: 18px;
-    }
+img {
+    border-radius: 35px;
+}
 
-    #formContainer,
-    #cardContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 400px;
-        margin-bottom: 20px;
-    }
+#userForm {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
 
-    
-    input,select {
-        border: 1px solid #cccccc;
-    }
+#btn {
+    display: flex;
+    gap: 20px;
+}
 
-    input:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
+#ledger {
+    margin-top: 100px;
+}
 
-    input[type="button"] {
-        border: none;
-        background-color: #007bff;
-        color: #ffffff;
-        cursor: pointer;
-    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 10px
+}
 
-    input[type="button"]:hover {
-        background-color: #0056b3;
-    } 
+#am {
+    font-size: 20px;
+}
+
+#col {
+    font-size: 36px;
+}
+
+#csize {
+    width: 60px;
+}
+
+#bal1 {
+    width: 130px;
+}
+
+#csize1 {
+    width: 100px;
+}
+
+#csize2 {
+    width: 80px;
+}
+
+#csize3 {
+    width: 130px;
+}
+
+#search {
+    display: none;
+    width: 400px;
+    height: 60px;
+    border-radius: 25px;
+    outline: 5px solid lightgreen;
+    margin-bottom: 80px;
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+button {
+    border-radius: 25px;
+}
+
+th,
+td {
+    /* Increase cell width */
+    height: 60px;
+    /* Increase cell height */
+    border: 2px solid black;
+    /* Add border to cells */
+    text-align: center;
+    /* Center align text horizontally */
+    vertical-align: middle;
+    /* Center align text vertically */
+    border-spacing: 10px
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 30px 30px 30px 120px;
+    border: 1px solid #888;
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#formContainer,
+#cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+#popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+input,
+select {
+    border: 1px solid #cccccc;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input[type="button"] {
+    border: none;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: #0056b3;
+}
