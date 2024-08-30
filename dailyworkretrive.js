@@ -106,6 +106,7 @@ function generateTable(data) {
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
+            var editid=customerPhone+"v";
             collection += parseInt(activity.Price);
             var amount = activity.Payment === "Paid" ? 0 : activity.Price
             recovery += parseInt(amount);
@@ -126,7 +127,7 @@ function generateTable(data) {
                         <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
                         <td><button type="button" class="pay" id=${customerPhone}>${activity.Payment}</button></td>
-                        <td><button  id=${customerPhone}+"v" class="edit">Edit</button></td>
+                        <td><button type="button" id=${editid} class="edit">Edit</button></td>
                         <td>${activity.Price}</td>
                         <td>${amount}</td>
                     </tr>`;
@@ -188,7 +189,7 @@ document.addEventListener("click", async function (e1) {
 
         // Get the button that opens the modal
         var btnId = e1.target.id;
-        let id = btnId.replaceAll('+"v"', '');
+        let id = btnId.replaceAll('v', '');
 
         // Get the button element using the ID
         var btn = document.getElementById(btnId);
@@ -203,14 +204,7 @@ document.addEventListener("click", async function (e1) {
             data = snapshot.val();
         }
         let payment = data.Payment;
-        if (payment === "UnPaid") {
-            payment = "Paid";
-        }
-        else {
-            payment = "UnPaid";
-        }
         var Contract = data.Contract;
-        var Payment = payment;
         var Date = data.Date;
         var Ending = data.Ending;
         var Name = data.Name;
@@ -249,6 +243,7 @@ document.addEventListener("click", async function (e1) {
         document.getElementById("shift").value = Shift;
         document.getElementById("trips").value = Trips;
         document.getElementById("worktype").value = worktype;
+        document.getElementById("pay").value = payment;
         if (worktype == "Hours") {
             document.getElementById("loading").style.display = "none";
             document.getElementById("contract").style.display = "none";
