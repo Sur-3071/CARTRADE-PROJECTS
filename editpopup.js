@@ -30,8 +30,7 @@ document.getElementById('submit4').addEventListener('click', async function (e) 
     const rate = document.getElementById("rate").value;
     const shift = document.getElementById("shift").value;
     var trips = document.getElementById("trips").value;
-    console.log(stime.length);
-    console.log(stime.length===0);
+    var pay = document.getElementById("pay").value;
     if (stime.length===0){
         
         stime = "--";
@@ -55,7 +54,6 @@ document.getElementById('submit4').addEventListener('click', async function (e) 
                                 Work_Id: parseInt(wid) + 1
                             });
                         }
-                        var pay = "UnPaid";
                         await set(dataRefset, {
                             Date: dat,
                             Name: name,
