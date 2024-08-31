@@ -103,13 +103,30 @@ function generateTable(data) {
         </tr>`;
     var l = [];
     var workday = 0;
+    var totaltime = 0;
+    var hou = 0;
+    var mint = 0;
+    var totaltrips = 0;
+    var totalcontarct = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
-            var editid=customerPhone+"v";
+            var editid = customerPhone + "v";
             collection += parseInt(activity.Price);
             var amount = activity.Payment === "Paid" ? 0 : activity.Price
             recovery += parseInt(amount);
+            if (activity.Trips !== "--") {
+                totaltrips += parseInt(activity.Trips);
+            }
+            if (activity.Contract !== "--") {
+                totalcontarct += parseInt(activity.Contract);
+            }
+            if (activity.Starting !== "--") {
+                var timesplit = activity.TotalTime;
+                var v = timesplit.split(':');
+                hou += parseInt(v[0]);
+                mint += parseInt(v[1]);
+            }
             if (!l.includes(activity.Date)) {
                 workday += 1;
                 l.push(activity.Date);
@@ -133,8 +150,16 @@ function generateTable(data) {
                     </tr>`;
         }
     }
+    var mintohou = parseInt(mint / 60);
+    mint = mint - 60 * mintohou;
+    hou += mintohou;
+    totaltime = hou + ":" + mint;
     out += `<tr>
-    <td colspan="13" id="col">Total Work In Price</td>
+    <td colspan="6" id="col">Total Work Analaysis</td>
+    <td id="am">${totaltrips}</td>
+    <td id="am">${totalcontarct}</td>
+    <td id="am" colspan="3">${totaltime}</td>
+    <td id="am" colspan="2">Work In Price</td>
     <td id="am">${collection}</td>
     <td id="am">${recovery}</td>
     </tr>`;
@@ -292,6 +317,11 @@ function SearchTable(data) {
         d.style.display = "none";
         var collection = 0;
         var recovery = 0;
+        var totaltime = 0;
+        var hou = 0;
+        var mint = 0;
+        var totaltrips = 0;
+        var totalcontarct = 0;
         let out = `<table border="1px">
         <tr>
             <th id="csize">Customer Id</th>
@@ -306,6 +336,7 @@ function SearchTable(data) {
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
             <th id="csize2">Payment Status</th>
+            <th id="csize2">Edit Data</th>
             <th id="csize2">Price</th>
             <th id="csize2">Recovery Amount</th>
         </tr>`;
@@ -313,7 +344,20 @@ function SearchTable(data) {
             if (data.hasOwnProperty(customerPhone)) {
                 const activity = data[customerPhone];
                 if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment === name) {
+                    var editid = customerPhone + "v";
                     collection += parseInt(activity.Price);
+                    if (activity.Trips !== "--") {
+                        totaltrips += parseInt(activity.Trips);
+                    }
+                    if (activity.Contract !== "--") {
+                        totalcontarct += parseInt(activity.Contract);
+                    }
+                    if (activity.Starting !== "--") {
+                        var timesplit = activity.TotalTime;
+                        var v = timesplit.split(':');
+                        hou += parseInt(v[0]);
+                        mint += parseInt(v[1]);
+                    }
                     var amount = activity.Payment === "Paid" ? 0 : activity.Price
                     recovery += parseInt(amount);
                     out += `<tr>
@@ -329,14 +373,24 @@ function SearchTable(data) {
                         <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
                         <td><button type="button" class="pay" id=${customerPhone}>${activity.Payment}</button></td>
+                        <td><button type="button" id=${editid} class="edit">Edit</button></td>
                         <td>${activity.Price}</td>
                         <td>${amount}</td>
                     </tr>`;
                 }
             }
         }
+        var mintohou = parseInt(mint / 60);
+        mint = mint - 60 * mintohou;
+        hou += mintohou;
+        totaltime = hou + ":" + mint;
+
         out += `<tr>
-    <td colspan="12" id="col">Total Work In Price</td>
+   <td colspan="6" id="col">Total Work Analaysis</td>
+    <td id="am">${totaltrips}</td>
+    <td id="am">${totalcontarct}</td>
+    <td id="am" colspan="3">${totaltime}</td>
+    <td id="am" colspan="2">Work In Price</td>
     <td id="am">${collection}</td>
     <td id="am">${recovery}</td>
     </tr>`;
@@ -351,6 +405,7 @@ function SearchTable(data) {
 
 document.getElementById("submit1").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
+    document.getElementById("search").value="";
     RePrint1();
 });
 async function RePrint1() {
@@ -392,6 +447,7 @@ function generateTableByDate(data, startdate, enddate) {
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
             <th id="csize2">Payment Status</th>
+            <th id="csize2">Edit Data</th>
             <th id="csize2">Price</th>
             <th id="csize2">Recovery Amount</th>
         </tr>`;
@@ -408,15 +464,33 @@ function generateTableByDate(data, startdate, enddate) {
     var l = [];
     var workday = 0;
     var recovery = 0;
+    var totaltime = 0;
+    var hou = 0;
+    var mint = 0;
+    var totaltrips = 0;
+    var totalcontarct = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
             if (activity.Date >= startdate && activity.Date <= enddate) {
                 var amount = activity.Payment === "Paid" ? 0 : activity.Price
+                var editid = customerPhone + "v";
                 recovery += parseInt(amount);
                 if (!l.includes(activity.Date)) {
                     workday += 1;
                     l.push(activity.Date);
+                }
+                if (activity.Trips !== "--") {
+                    totaltrips += parseInt(activity.Trips);
+                }
+                if (activity.Contract !== "--") {
+                    totalcontarct += parseInt(activity.Contract);
+                }
+                if (activity.Starting !== "--") {
+                    var timesplit = activity.TotalTime;
+                    var v = timesplit.split(':');
+                    hou += parseInt(v[0]);
+                    mint += parseInt(v[1]);
                 }
                 collection = collection + parseInt(activity.Price);
                 out += `<tr>
@@ -432,16 +506,25 @@ function generateTableByDate(data, startdate, enddate) {
                        <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
                         <td><button type="button" class="pays" id=${customerPhone}>${activity.Payment}</button></td>
+                        <td><button type="button" id=${editid} class="edit">Edit</button></td>
                         <td>${activity.Price}</td>
                         <td>${amount}</td>
                     </tr>`;
             }
         }
     }
+    var mintohou = parseInt(mint / 60);
+    mint = mint - 60 * mintohou;
+    hou += mintohou;
+    totaltime = hou + ":" + mint;
     out += `<tr>
-            <td colspan="12" id="col">Total Collection Done In This Time Period</td>
-            <td id="am">${collection}</td>
-            <td id="am">${recovery}</td>
+           <td colspan="6" id="col">Total Work Analaysis</td>
+    <td id="am">${totaltrips}</td>
+    <td id="am">${totalcontarct}</td>
+    <td id="am" colspan="3">${totaltime}</td>
+    <td id="am" colspan="2">Work In Price</td>
+    <td id="am">${collection}</td>
+    <td id="am">${recovery}</td>
             </tr>`;
     out += `</table>`;
     document.getElementById("enterdata").innerHTML = out;
