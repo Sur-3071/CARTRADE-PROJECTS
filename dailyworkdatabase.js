@@ -57,6 +57,10 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     const db1 = "Daily Work";
                     const db2 = "Work_Count";
                     const db3="Work_Id";
+                    const db4 = "Sethu_Id";
+                    var sethu_databasecount = ref(db, `${db2}/${db4}`);
+                    const sethu_snapshot = await get(sethu_databasecount);
+                    var sethuid = parseInt(sethu_snapshot.val());
                     const w_id = ref(db, `${db2}`);
                     const dataRefset = ref(db, `${db1}/${wid}`);
                     var databasecount= ref(db, `${db2}/${db3}`);
@@ -65,6 +69,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     try {
                         if (workid == wid) {
                             await set(w_id, {
+                                Sethu_Id: parseInt(sethuid),
                                 Work_Id: parseInt(wid) + 1
                             });
                         }
