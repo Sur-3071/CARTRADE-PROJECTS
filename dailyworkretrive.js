@@ -195,7 +195,7 @@ function generateTable(data) {
         <th id="bal1">Profit</th>
 
     </tr>`;
-    var pro = collection - (workday * 3500) - (differenceInDays * 734) - (differenceInDays * 335) - (differenceInDays * 1800);
+    var pro = collection - (disel) - (differenceInDays * 734) - (workday * 335) - (differenceInDays * 1800);
     led += `<tr>
     <td class="lsize">${collection}</td>
     <td>${collection - recovery}</td>
@@ -560,7 +560,7 @@ function generateTableByDate(data, startdate, enddate) {
         <th id="bal1">Profit</th>
 
     </tr>`;
-    var pro = collection - (workday * 3500) - (differenceInDays * 734) - (differenceInDays * 335) - (differenceInDays * 1800);
+    var pro = collection - (disel) - (differenceInDays * 734) - (dworkday * 335) - (differenceInDays * 1800);
     led += `<tr>
     <td>${collection}</td>
     <td>${collection - recovery}</td>
@@ -605,6 +605,7 @@ document.addEventListener("click", async function (e1) {
             Ending: data.Ending,
             Name: data.Name,
             PhoneNumber: data.PhoneNumber,
+            Disel:data.Disel,
             Price: data.Price,
             Shift: data.Shift,
             Starting: data.Starting,
@@ -642,6 +643,7 @@ document.addEventListener("click", async function (e1) {
                 Ending: data.Ending,
                 Name: data.Name,
                 PhoneNumber: data.PhoneNumber,
+                Disel:data.Disel,
                 Price: data.Price,
                 Shift: data.Shift,
                 Starting: data.Starting,
