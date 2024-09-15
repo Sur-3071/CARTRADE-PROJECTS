@@ -23,6 +23,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     const name = document.getElementById("name").value;
     const villname = document.getElementById("vil").value;
     const pno = document.getElementById("pno").value;
+    const disel = document.getElementById("dis").value;
     var con = document.getElementById("con").value;
     var stime = document.getElementById("stime").value;
     var etime = document.getElementById("etime").value;
@@ -57,10 +58,6 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     const db1 = "Daily Work";
                     const db2 = "Work_Count";
                     const db3="Work_Id";
-                    const db4 = "Sethu_Id";
-                    var sethu_databasecount = ref(db, `${db2}/${db4}`);
-                    const sethu_snapshot = await get(sethu_databasecount);
-                    var sethuid = parseInt(sethu_snapshot.val());
                     const w_id = ref(db, `${db2}`);
                     const dataRefset = ref(db, `${db1}/${wid}`);
                     var databasecount= ref(db, `${db2}/${db3}`);
@@ -69,7 +66,6 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     try {
                         if (workid == wid) {
                             await set(w_id, {
-                                Sethu_Id: parseInt(sethuid),
                                 Work_Id: parseInt(wid) + 1
                             });
                         }
@@ -82,6 +78,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                             Shift: shift,
                             Contract: con,
                             Payment: pay,
+                            Disel:disel,
                             Trips: trips,
                             Starting: stime,
                             Ending: etime,
