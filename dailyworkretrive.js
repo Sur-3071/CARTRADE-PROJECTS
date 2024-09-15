@@ -239,6 +239,7 @@ document.addEventListener("click", async function (e1) {
         var Ending = data.Ending;
         var Name = data.Name;
         var PhoneNumber = data.PhoneNumber;
+        var Disel=data.Disel;
         var Price = data.Price;
         var Shift = data.Shift;
         var Starting = data.Starting;
@@ -265,6 +266,7 @@ document.addEventListener("click", async function (e1) {
         document.getElementById("name").value = Name;
         document.getElementById("vil").value = Villagename;
         document.getElementById("pno").value = PhoneNumber;
+        document.getElementById("dis").value = Disel;
         document.getElementById("con").value = Contract;
         document.getElementById("stime").value = Starting
         document.getElementById("etime").value = Ending;
