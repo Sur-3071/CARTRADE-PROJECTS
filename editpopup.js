@@ -23,6 +23,7 @@ document.getElementById('submit4').addEventListener('click', async function (e) 
     const name = document.getElementById("name").value;
     const villname = document.getElementById("vil").value;
     const pno = document.getElementById("pno").value;
+    const disel = document.getElementById("dis").value;
     var con = document.getElementById("con").value;
     var stime = document.getElementById("stime").value;
     var etime = document.getElementById("etime").value;
@@ -62,6 +63,7 @@ document.getElementById('submit4').addEventListener('click', async function (e) 
                             Shift: shift,
                             Contract: con,
                             Payment: pay,
+                            Disel:disel,
                             Trips: trips,
                             Starting: stime,
                             Ending: etime,
