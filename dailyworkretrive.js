@@ -91,6 +91,7 @@ function generateTable(data) {
             <th id="csize3">Phone Number</th>
             <th id="csize3">Village</th>
             <th id="csize1">shift</th>
+            <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
             <th id="csize2">Contract</th>
             <th id="csize">Starting Time</th>
@@ -108,9 +109,11 @@ function generateTable(data) {
     var mint = 0;
     var totaltrips = 0;
     var totalcontarct = 0;
+    var disel=0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
+            disel+=parseInt(activity.Disel)
             var editid = customerPhone + "v";
             collection += parseInt(activity.Price);
             var amount = activity.Payment === "Paid" ? 0 : activity.Price
@@ -138,6 +141,7 @@ function generateTable(data) {
                         <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
                         <td>${activity.Shift}</td>
+                        <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
@@ -156,6 +160,7 @@ function generateTable(data) {
     totaltime = hou + ":" + mint;
     out += `<tr>
     <td colspan="6" id="col">Total Work Analaysis</td>
+    <td id="am">${disel}</td>
     <td id="am">${totaltrips}</td>
     <td id="am">${totalcontarct}</td>
     <td id="am" colspan="3">${totaltime}</td>
@@ -198,7 +203,7 @@ function generateTable(data) {
     <td>${differenceInDays}</td>
     <td>${workday}</td>
     <td>${differenceInDays - workday}</td>
-    <td>${workday * 3500}</td>
+    <td>${disel}</td>
     <td>${workday * 335}</td>
     <td>${differenceInDays * 1800}</td>
     <td>${differenceInDays * 734}</td>
@@ -330,6 +335,7 @@ function SearchTable(data) {
             <th id="csize3">Phone Number</th>
             <th id="csize3">Village</th>
             <th id="csize1">shift</th>
+            <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
             <th id="csize2">Contract</th>
             <th id="csize">Starting Time</th>
@@ -340,10 +346,12 @@ function SearchTable(data) {
             <th id="csize2">Price</th>
             <th id="csize2">Recovery Amount</th>
         </tr>`;
+        var disel=0;
         for (const customerPhone in data) {
             if (data.hasOwnProperty(customerPhone)) {
                 const activity = data[customerPhone];
                 if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment === name) {
+                    disel+=parseInt(activity.Disel);
                     var editid = customerPhone + "v";
                     collection += parseInt(activity.Price);
                     if (activity.Trips !== "--") {
@@ -367,6 +375,7 @@ function SearchTable(data) {
                         <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
                         <td>${activity.Shift}</td>
+                        <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
@@ -387,6 +396,7 @@ function SearchTable(data) {
 
         out += `<tr>
    <td colspan="6" id="col">Total Work Analaysis</td>
+   <td id="am">${disel}</td>
     <td id="am">${totaltrips}</td>
     <td id="am">${totalcontarct}</td>
     <td id="am" colspan="3">${totaltime}</td>
@@ -441,6 +451,7 @@ function generateTableByDate(data, startdate, enddate) {
             <th id="csize3">Phone Number</th>
             <th id="csize3">Village</th>
             <th id="csize1">shift</th>
+            <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
             <th id="csize2">Contract</th>
             <th id="csize">Starting Time</th>
@@ -469,12 +480,14 @@ function generateTableByDate(data, startdate, enddate) {
     var mint = 0;
     var totaltrips = 0;
     var totalcontarct = 0;
+    var disel=0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
             if (activity.Date >= startdate && activity.Date <= enddate) {
                 var amount = activity.Payment === "Paid" ? 0 : activity.Price
                 var editid = customerPhone + "v";
+                disel+=parseInt(activity.Disel);
                 recovery += parseInt(amount);
                 if (!l.includes(activity.Date)) {
                     workday += 1;
@@ -500,10 +513,11 @@ function generateTableByDate(data, startdate, enddate) {
                         <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
                         <td>${activity.Shift}</td>
+                        <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
-                       <td>${activity.Ending}</td>
+                        <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
                         <td><button type="button" class="pays" id=${customerPhone}>${activity.Payment}</button></td>
                         <td><button type="button" id=${editid} class="edit">Edit</button></td>
@@ -519,12 +533,13 @@ function generateTableByDate(data, startdate, enddate) {
     totaltime = hou + ":" + mint;
     out += `<tr>
            <td colspan="6" id="col">Total Work Analaysis</td>
-    <td id="am">${totaltrips}</td>
-    <td id="am">${totalcontarct}</td>
-    <td id="am" colspan="3">${totaltime}</td>
-    <td id="am" colspan="2">Work In Price</td>
-    <td id="am">${collection}</td>
-    <td id="am">${recovery}</td>
+            <td id="am">${disel}</td>
+            <td id="am">${totaltrips}</td>
+            <td id="am">${totalcontarct}</td>
+            <td id="am" colspan="3">${totaltime}</td>
+            <td id="am" colspan="2">Work In Price</td>
+            <td id="am">${collection}</td>
+            <td id="am">${recovery}</td>
             </tr>`;
     out += `</table>`;
     document.getElementById("enterdata").innerHTML = out;
@@ -551,7 +566,7 @@ function generateTableByDate(data, startdate, enddate) {
     <td>${differenceInDays}</td>
     <td>${workday}</td>
     <td>${differenceInDays - workday}</td>
-    <td>${workday * 3500}</td>
+    <td>${disel}</td>
     <td>${workday * 335}</td>
     <td>${differenceInDays * 1800}</td>
     <td>${differenceInDays * 734}</td>
