@@ -55,18 +55,23 @@ document.getElementById('submit').addEventListener('click', async function (e) {
         if (name.length > 0) {
             if (villname.length > 0) {
                 if (pno.length > 0) {
-                    const db1 = "Daily Work";
+                    const db1 = "Sethu";
                     const db2 = "Work_Count";
-                    const db3="Work_Id";
+                    const db3 = "Sethu_Id";
+                    const db4 = "Work_Id";
                     const w_id = ref(db, `${db2}`);
                     const dataRefset = ref(db, `${db1}/${wid}`);
-                    var databasecount= ref(db, `${db2}/${db3}`);
-                    const snapshot = await get(databasecount);
-                    var workid=parseInt(snapshot.val());
+                    var sethu_databasecount = ref(db, `${db2}/${db3}`);
+                    const sethu_snapshot = await get(sethu_databasecount);
+                    var sethuid = parseInt(sethu_snapshot.val());
+                    var work_databasecount = ref(db, `${db2}/${db4}`);
+                    const work_snapshot = await get(work_databasecount);
+                    var workid = parseInt(work_snapshot.val());
                     try {
-                        if (workid == wid) {
+                        if ( workid== wid) {
                             await set(w_id, {
-                                Work_Id: parseInt(wid) + 1
+                                Sethu_Id: parseInt(sethuid),
+                                Work_Id:parseInt(workid)+1
                             });
                         }
                         var pay = "UnPaid";
