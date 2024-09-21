@@ -59,8 +59,9 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                     const db2 = "Work_Count";
                     const db3 = "Sethu_Id";
                     const db4 = "Work_Id";
+                    const db5="Daily Work";
                     const w_id = ref(db, `${db2}`);
-                    const dataRefset = ref(db, `${db1}/${wid}`);
+                    const dataRefset = ref(db, `${db5}/${wid}`);
                     var sethu_databasecount = ref(db, `${db2}/${db3}`);
                     const sethu_snapshot = await get(sethu_databasecount);
                     var sethuid = parseInt(sethu_snapshot.val());
