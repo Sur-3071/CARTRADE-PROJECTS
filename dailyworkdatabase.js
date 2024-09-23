@@ -54,7 +54,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     if (dat.length > 0) {
         if (name.length > 0) {
             if (villname.length > 0) {
-                if (pno.length > 0) {
+                if (disel.length > 0) {
                     const db1 = "Sethu";
                     const db2 = "Work_Count";
                     const db3 = "Sethu_Id";
@@ -100,7 +100,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
 
                 }
                 else {
-                    alert("Please Enter Phone Number");
+                    alert("Please Enter Disel Amount");
                 }
             }
             else {
