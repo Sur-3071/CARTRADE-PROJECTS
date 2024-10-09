@@ -57,7 +57,7 @@ document.getElementById('submit').addEventListener('click', async function (e) {
             if (villname.length > 0) {
                 if (disel.length > 0) {
                     if (shift !== "select Shift Type") {
-                        if ((worktype === "Loading" && isAllDigits(trips)) ||(worktype === "Contract" && isAllDigits(con))) {
+                        if (worktype==="Hours" || (worktype === "Loading" && isAllDigits(trips)) ||(worktype === "Contract" && isAllDigits(con))) {
                                 const db1 = "Sethu";
                                 const db2 = "Work_Count";
                                 const db3 = "Sethu_Id";
