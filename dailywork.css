@@ -36,7 +36,7 @@ img {
 table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 10px
+    border-spacing: 30px
 }
 
 #am {
@@ -48,7 +48,7 @@ table {
 }
 
 #csize {
-    width: 60px;
+    width: 130px;
 }
 
 #bal1 {
@@ -56,17 +56,22 @@ table {
 }
 
 #csize1 {
-    width: 100px;
+    width: 130px;
 }
 
 #csize2 {
-    width: 80px;
+    width: 130px;
 }
 
 #csize3 {
     width: 130px;
 }
 
+#tally
+{
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
 #search {
     display: none;
     width: 400px;
@@ -84,15 +89,15 @@ button {
 
 th,
 td {
-    /* Increase cell width */
+   
     height: 60px;
-    /* Increase cell height */
+    
     border: 2px solid black;
-    /* Add border to cells */
+   
     text-align: center;
-    /* Center align text horizontally */
+    
     vertical-align: middle;
-    /* Center align text vertically */
+  
     border-spacing: 10px
 }
 
@@ -104,6 +109,18 @@ select {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 18px;
+}
+
+input[type="checkbox"] {
+    /* Method 1: Using transform scale */
+    transform: scale(1.5); /* Increase to 1.5 times its original size */
+    -webkit-transform: scale(1.5); /* For Safari/older WebKit browsers */
+    margin-right: 40px;
+    height: 20px;
+    width: 20px; /* Optional: Add space between checkbox and label */
+
+    /* Method 2: Using zoom (for compatibility) */
+    /* zoom: 1.5; */
 }
 
 .modal {
@@ -134,7 +151,7 @@ select {
     /* 15% from the top and centered */
     padding: 30px 30px 30px 120px;
     border: 1px solid #888;
-    width: 40%;
+    width: 50%;
     /* Could be more or less, depending on screen size */
 }
 
@@ -161,6 +178,7 @@ select {
     width: 100%;
     max-width: 400px;
     margin-bottom: 20px;
+    padding-bottom: 150px;
 }
 
 #popup {
@@ -193,3 +211,35 @@ input[type="button"] {
 input[type="button"]:hover {
     background-color: #0056b3;
 }
+
+h1{
+    font-size: 20px;
+}
+  .container {
+    display: flex;
+    gap: 20px;
+  }
+  .box {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+  }
+  h1
+  {
+    font-size: 40px;
+  }
+  .box:hover {
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.6);
+  }
+  .box h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
