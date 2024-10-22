@@ -110,7 +110,13 @@ select {
     box-sizing: border-box;
     font-size: 18px;
 }
-
+.round-image {
+    width: 250px;           /* Set width for the image */
+    height: 200px;    
+    padding-bottom: 50px;      /* Set height for the image */
+        /* Make the image round */
+      /* Add some space to the right of the image */
+}
 input[type="checkbox"] {
     /* Method 1: Using transform scale */
     transform: scale(1.5); /* Increase to 1.5 times its original size */
