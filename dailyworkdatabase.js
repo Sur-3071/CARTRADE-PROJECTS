@@ -57,77 +57,71 @@ document.getElementById('submit').addEventListener('click', async function (e) {
             if (villname.length > 0) {
                 if (disel.length > 0) {
                     if (shift !== "select Shift Type") {
-                        if (worktype==="Hours" || (worktype === "Loading" && isAllDigits(trips)) ||(worktype === "Contract" && isAllDigits(con))) {
-                                const db1 = "Sethu";
-                                const db2 = "Work_Count";
-                                const db3 = "Sethu_Id";
-                                const db4 = "Work_Id";
-                                const db5 = "Daily Work";
-                                const w_id = ref(db, `${db2}`);
-                                const dataRefset = ref(db, `${db5}/${wid}`);
-                                var sethu_databasecount = ref(db, `${db2}/${db3}`);
-                                const sethu_snapshot = await get(sethu_databasecount);
-                                var sethuid = parseInt(sethu_snapshot.val());
-                                var work_databasecount = ref(db, `${db2}/${db4}`);
-                                const work_snapshot = await get(work_databasecount);
-                                var workid = parseInt(work_snapshot.val());
-                                try {
-                                    if (workid == wid) {
-                                        await set(w_id, {
-                                            Sethu_Id: parseInt(sethuid),
-                                            Work_Id: parseInt(workid) + 1
-                                        });
-                                    }
-                                    var pay = "UnPaid";
-                                    await set(dataRefset, {
-                                        Date: dat,
-                                        Name: name,
-                                        Villagename: villname,
-                                        PhoneNumber: pno,
-                                        Shift: shift,
-                                        Contract: con,
-                                        Payment: pay,
-                                        Disel: disel,
-                                        Trips: trips,
-                                        Starting: stime,
-                                        Ending: etime,
-                                        TotalTime: ttime,
-                                        Price: rate
-                                    });
-                                    document.getElementById("done").style.display = "block";
-                                    removedone();
-                                } catch (error) {
-                                    console.error("Error adding document: ", error);
-                                    alert("An error occurred. Please try again.");
-                                }
-                        }
-                        else {
-                            alert("Please Enter Trips or Amount in digits Only Not Include Alphabets",speakText(""));
-                            datarebuild();
+                        const db1 = "Sethu";
+                        const db2 = "Work_Count";
+                        const db3 = "Sethu_Id";
+                        const db4 = "Work_Id";
+                        const db5 = "Daily Work";
+                        const w_id = ref(db, `${db2}`);
+                        const dataRefset = ref(db, `${db5}/${wid}`);
+                        var sethu_databasecount = ref(db, `${db2}/${db3}`);
+                        const sethu_snapshot = await get(sethu_databasecount);
+                        var sethuid = parseInt(sethu_snapshot.val());
+                        var work_databasecount = ref(db, `${db2}/${db4}`);
+                        const work_snapshot = await get(work_databasecount);
+                        var workid = parseInt(work_snapshot.val());
+                        try {
+                            if (workid == wid) {
+                                await set(w_id, {
+                                    Sethu_Id: parseInt(sethuid),
+                                    Work_Id: parseInt(workid) + 1
+                                });
+                            }
+                            var pay = "UnPaid";
+                            await set(dataRefset, {
+                                Date: dat,
+                                Name: name,
+                                Villagename: villname,
+                                PhoneNumber: pno,
+                                Shift: shift,
+                                Contract: con,
+                                Payment: pay,
+                                Disel: disel,
+                                Trips: trips,
+                                Starting: stime,
+                                Ending: etime,
+                                TotalTime: ttime,
+                                Price: rate
+                            });
+                            document.getElementById("done").style.display = "block";
+                            removedone();
+                        } catch (error) {
+                            console.error("Error adding document: ", error);
+                            alert("An error occurred. Please try again.");
                         }
                     }
                     else {
-                        alert("Please select shift type",speakText("Please select shift type"));
+                        alert("Please select shift type", speakText("Please select shift type"));
                         datarebuild();
                     }
                 }
                 else {
-                    alert("Please Enter Disel Amount",speakText("Please Enter Disel Amount"));
+                    alert("Please Enter Disel Amount", speakText("Please Enter Disel Amount"));
                     datarebuild();
                 }
             }
             else {
-                alert("Please Enter Village Name",speakText("Please Enter Village Name"));
+                alert("Please Enter Village Name", speakText("Please Enter Village Name"));
                 datarebuild();
             }
         }
         else {
-            alert("Please Enter Customer Name Or place Or Location Name",speakText("Please Enter Customer Name Or place Or Location Name"));
+            alert("Please Enter Customer Name Or place Or Location Name", speakText("Please Enter Customer Name Or place Or Location Name"));
             datarebuild();
         }
     }
     else {
-        alert("Please Choose Date",speakText("Please Choose Date"));
+        alert("Please Choose Date", speakText("Please Choose Date"));
         datarebuild();
     }
     function isAllDigits(str) {
@@ -152,22 +146,22 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     function speakText(s) {
         // Check if the browser supports speech synthesis
         if ('speechSynthesis' in window) {
-          // Get the text from the textarea
-          let text = s;
-  
-          // Create a new SpeechSynthesisUtterance object
-          let speech = new SpeechSynthesisUtterance();
-  
-          // Set the text to be spoken
-          speech.text = text;
-  
-          // Set other properties (optional)
-          speech.volume = 1; // Volume (0 to 1)
-          speech.rate = 1; // Speed rate (0.1 to 10)
-          speech.pitch = 1; // Pitch (0 to 2)
-          window.speechSynthesis.speak(speech);
+            // Get the text from the textarea
+            let text = s;
+
+            // Create a new SpeechSynthesisUtterance object
+            let speech = new SpeechSynthesisUtterance();
+
+            // Set the text to be spoken
+            speech.text = text;
+
+            // Set other properties (optional)
+            speech.volume = 1; // Volume (0 to 1)
+            speech.rate = 1; // Speed rate (0.1 to 10)
+            speech.pitch = 1; // Pitch (0 to 2)
+            window.speechSynthesis.speak(speech);
         } else {
-          alert('Sorry, your browser does not support speech synthesis.');
+            alert('Sorry, your browser does not support speech synthesis.');
         }
     }
 });
