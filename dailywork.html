@@ -104,7 +104,9 @@
                 }, 2000); // 2000 milliseconds = 2 seconds
             };
             startConfetti();
-           
+            document.getElementById('clickableImage').addEventListener('click', startConfetti);
+
+
         }
 
         // Call DayCountcal when the page is loaded
@@ -156,9 +158,12 @@
         </form>
     </div>
     <img src="done1.png" id="done" style="display: none;" height="100px" width="100px">
+    <div>
+        <img src="OPERATOR CHINNA.png" align="left" alt="Sample Image" class="round-image" id="clickableImage">
+    </div>
     <div id="daycnt">
         <div class="container">
-            <div class="box">
+            <div class="box" id="box1">
                 <h2 style="color: rgb(75, 166, 236);">Total Days</h2>
                 <h1 id="tday"></h1>
             </div>
