@@ -87,18 +87,18 @@ function generateTable(data) {
         <tr>
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
-            <th id="csize3">Customer Name</th>
-            <th id="csize3">Village</th>
-            <th id="csize1">Disel</th>
+            <th id="csize1">Customer Name</th>
+            <th id="csize1">Village</th>
+            <th id="csize">Disel</th>
             <th id="csize">Trips</th>
-            <th id="csize2">Contract</th>
+            <th id="csize">Contract</th>
             <th id="csize">Starting Time</th>
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
-            <th id="csize2">Payment Status</th>
-            <th id="csize2">Edit Data</th>
-            <th id="csize2">Price</th>
-            <th id="csize2">Recovery Amount</th>
+            <th id="csize">Payment Status</th>
+            <th id="csize">Edit Data</th>
+            <th id="csize">Price</th>
+            <th id="csize">Recovery Amount</th>
         </tr>`;
     var l = [];
     var workday = 0;
@@ -329,18 +329,18 @@ function SearchTable(data) {
         <tr>
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
-            <th id="csize3">Customer Name</th>
-            <th id="csize3">Village</th>
+            <th id="csize">Customer Name</th>
+            <th id="csize">Village</th>
             <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
-            <th id="csize2">Contract</th>
+            <th id="csize">Contract</th>
             <th id="csize">Starting Time</th>
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
-            <th id="csize2">Payment Status</th>
-            <th id="csize2">Edit Data</th>
-            <th id="csize2">Price</th>
-            <th id="csize2">Recovery Amount</th>
+            <th id="csize">Payment Status</th>
+            <th id="csize">Edit Data</th>
+            <th id="csize">Price</th>
+            <th id="csize">Recovery Amount</th>
         </tr>`;
         var disel=0;
         for (const customerPhone in data) {
@@ -441,18 +441,18 @@ function generateTableByDate(data, startdate, enddate) {
        <tr>
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
-            <th id="csize3">Customer Name</th>
-            <th id="csize3">Village</th>
+            <th id="csize1">Customer Name</th>
+            <th id="csize1">Village</th>
             <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
-            <th id="csize2">Contract</th>
+            <th id="csize">Contract</th>
             <th id="csize">Starting Time</th>
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
-            <th id="csize2">Payment Status</th>
-            <th id="csize2">Edit Data</th>
-            <th id="csize2">Price</th>
-            <th id="csize2">Recovery Amount</th>
+            <th id="csize">Payment Status</th>
+            <th id="csize">Edit Data</th>
+            <th id="csize">Price</th>
+            <th id="csize">Recovery Amount</th>
         </tr>`;
 
     // Define two dates
