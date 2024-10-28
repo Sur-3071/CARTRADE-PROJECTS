@@ -155,7 +155,7 @@ function generateTable(data) {
     hou += mintohou;
     totaltime = hou + ":" + mint;
     out += `<tr>
-    <td colspan="6" id="col">Total Work Analaysis</td>
+    <td colspan="4" id="col">Total Work Analaysis</td>
     <td id="am">${disel}</td>
     <td id="am">${totaltrips}</td>
     <td id="am">${totalcontarct}</td>
