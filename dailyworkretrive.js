@@ -88,9 +88,7 @@ function generateTable(data) {
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
             <th id="csize3">Customer Name</th>
-            <th id="csize3">Phone Number</th>
             <th id="csize3">Village</th>
-            <th id="csize1">shift</th>
             <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
             <th id="csize2">Contract</th>
@@ -138,9 +136,7 @@ function generateTable(data) {
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
                         <td>${activity.Name}</td>
-                        <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
-                        <td>${activity.Shift}</td>
                         <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Contract}</td>
@@ -334,9 +330,7 @@ function SearchTable(data) {
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
             <th id="csize3">Customer Name</th>
-            <th id="csize3">Phone Number</th>
             <th id="csize3">Village</th>
-            <th id="csize1">shift</th>
             <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
             <th id="csize2">Contract</th>
@@ -374,9 +368,7 @@ function SearchTable(data) {
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
                         <td>${activity.Name}</td>
-                        <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
-                        <td>${activity.Shift}</td>
                         <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Contract}</td>
@@ -450,9 +442,7 @@ function generateTableByDate(data, startdate, enddate) {
             <th id="csize">Customer Id</th>
             <th id="csize1">Date</th>
             <th id="csize3">Customer Name</th>
-            <th id="csize3">Phone Number</th>
             <th id="csize3">Village</th>
-            <th id="csize1">shift</th>
             <th id="csize1">Disel</th>
             <th id="csize">Trips</th>
             <th id="csize2">Contract</th>
@@ -512,9 +502,7 @@ function generateTableByDate(data, startdate, enddate) {
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
                         <td>${activity.Name}</td>
-                        <td>${activity.PhoneNumber}</td>
                         <td>${activity.Villagename}</td>
-                        <td>${activity.Shift}</td>
                         <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
                         <td>${activity.Contract}</td>
