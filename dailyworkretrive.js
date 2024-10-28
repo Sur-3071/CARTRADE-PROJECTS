@@ -389,7 +389,7 @@ function SearchTable(data) {
         totaltime = hou + ":" + mint;
 
         out += `<tr>
-   <td colspan="6" id="col">Total Work Analaysis</td>
+   <td colspan="4" id="col">Total Work Analaysis</td>
    <td id="am">${disel}</td>
     <td id="am">${totaltrips}</td>
     <td id="am">${totalcontarct}</td>
@@ -435,6 +435,22 @@ async function RePrint1() {
     }
 
 }
+{/* <tr>
+<th id="csize">Customer Id</th>
+<th id="csize1">Date</th>
+<th id="csize1">Customer Name</th>
+<th id="csize1">Village</th>
+<th id="csize1">Disel</th>
+<th id="csize">Trips</th>
+<th id="csize">Contract</th>
+<th id="csize">Starting Time</th>
+<th id="csize">Ending Time</th>
+<th id="csize">Total Time</th>
+<th id="csize">Payment Status</th>
+<th id="csize">Edit Data</th>
+<th id="csize">Price</th>
+<th id="csize">Recovery Amount</th>
+</tr>`; */}
 function generateTableByDate(data, startdate, enddate) {
     var collection = 0;
     let out = `<table border="1px">
@@ -449,10 +465,8 @@ function generateTableByDate(data, startdate, enddate) {
             <th id="csize">Starting Time</th>
             <th id="csize">Ending Time</th>
             <th id="csize">Total Time</th>
-            <th id="csize">Payment Status</th>
-            <th id="csize">Edit Data</th>
             <th id="csize">Price</th>
-            <th id="csize">Recovery Amount</th>
+            <th id="csize">Recovery</th>
         </tr>`;
 
     // Define two dates
@@ -509,10 +523,9 @@ function generateTableByDate(data, startdate, enddate) {
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
                         <td>${activity.TotalTime}</td>
-                        <td><button type="button" class="pays" id=${customerPhone}>${activity.Payment}</button></td>
-                        <td><button type="button" id=${editid} class="edit">Edit</button></td>
                         <td>${activity.Price}</td>
                         <td>${amount}</td>
+
                     </tr>`;
             }
         }
@@ -522,12 +535,11 @@ function generateTableByDate(data, startdate, enddate) {
     hou += mintohou;
     totaltime = hou + ":" + mint;
     out += `<tr>
-           <td colspan="6" id="col">Total Work Analaysis</td>
+           <td colspan="4" id="col">Total Work Analaysis</td>
             <td id="am">${disel}</td>
             <td id="am">${totaltrips}</td>
             <td id="am">${totalcontarct}</td>
             <td id="am" colspan="3">${totaltime}</td>
-            <td id="am" colspan="2">Work In Price</td>
             <td id="am">${collection}</td>
             <td id="am">${recovery}</td>
             </tr>`;
