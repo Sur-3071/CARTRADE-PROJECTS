@@ -3,7 +3,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 #com {
@@ -36,7 +35,7 @@ img {
 table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 30px
+    border-spacing: 30px;
 }
 
 #am {
@@ -48,7 +47,7 @@ table {
 }
 
 #csize {
-    width: 130px;
+    width: 120px;
 }
 
 #bal1 {
@@ -59,19 +58,13 @@ table {
     width: 200px;
 }
 
-#csize2 {
-    width: 130px;
-}
 
-#csize3 {
-    width: 130px;
-}
 
-#tally
-{
+#tally {
     padding-top: 150px;
     padding-bottom: 50px;
 }
+
 #search {
     display: none;
     width: 400px;
@@ -87,22 +80,15 @@ button {
     border-radius: 25px;
 }
 
-th,
-td {
-   
+th, td {
     height: 60px;
-    
     border: 2px solid black;
-   
     text-align: center;
-    
     vertical-align: middle;
-  
-    border-spacing: 10px
+    border-spacing: 10px;
 }
 
-input,
-select {
+input, select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -110,58 +96,41 @@ select {
     box-sizing: border-box;
     font-size: 18px;
 }
+
 .round-image {
-    width: 250px;           /* Set width for the image */
-    height: 200px;    
-    padding-bottom: 50px;      /* Set height for the image */
-        /* Make the image round */
-      /* Add some space to the right of the image */
+    width: 250px;
+    height: 200px;
+    padding-bottom: 50px;
 }
+
 input[type="checkbox"] {
-    /* Method 1: Using transform scale */
-    transform: scale(1.5); /* Increase to 1.5 times its original size */
-    -webkit-transform: scale(1.5); /* For Safari/older WebKit browsers */
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
     margin-right: 40px;
     height: 20px;
-    width: 20px; /* Optional: Add space between checkbox and label */
-
-    /* Method 2: Using zoom (for compatibility) */
-    /* zoom: 1.5; */
+    width: 20px;
 }
 
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
 .modal-content {
     background-color: white;
     margin: 15% auto;
-    /* 15% from the top and centered */
     padding: 30px 30px 30px 120px;
     border: 1px solid #888;
     width: 50%;
-    /* Could be more or less, depending on screen size */
 }
 
-/* Close button */
 .close {
     color: #aaa;
     float: right;
@@ -169,15 +138,13 @@ input[type="checkbox"] {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-#formContainer,
-#cardContainer {
+#formContainer, #cardContainer, #popup {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -187,17 +154,7 @@ input[type="checkbox"] {
     padding-bottom: 150px;
 }
 
-#popup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 20px;
-}
-
-input,
-select {
+input, select {
     border: 1px solid #cccccc;
 }
 
@@ -218,14 +175,16 @@ input[type="button"]:hover {
     background-color: #0056b3;
 }
 
-h1{
+h1 {
     font-size: 20px;
 }
-  .container {
+
+.container {
     display: flex;
     gap: 20px;
-  }
-  .box {
+}
+
+.box {
     border: none;
     border-radius: 10px;
     padding: 20px;
@@ -234,18 +193,69 @@ h1{
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.5);
     transition: all 0.3s ease;
-  }
-  h1
-  {
-    font-size: 40px;
-  }
-  .box:hover {
+}
+
+.box:hover {
     transform: translateY(-10px);
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.6);
-  }
-  .box h3 {
+}
+
+.box h3 {
     margin: 0 0 10px;
     font-size: 18px;
     color: #333;
-  }
-  
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+    #ledger {
+        margin-top: 50px;
+    }
+
+    #com, #userForm, #btn, #ledger, .container {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    #csize {
+        width: 80px; /* Adjusted width for mobile */
+    }
+
+    #bal1 {
+        width: 90px; /* Adjusted width for mobile */
+    }
+
+    #csize1 {
+        width: 150px; /* Adjusted width for mobile */
+    }
+    table {
+        font-size: 14px;
+    }
+
+    #col, #am {
+        font-size: 24px;
+    }
+
+    #search {
+        width: 80%;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .box {
+        width: 100%;
+    }
+
+    #popup {
+        width: 90%;
+    }
+
+    input[type="button"] {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
