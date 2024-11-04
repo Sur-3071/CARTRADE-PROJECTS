@@ -76,6 +76,16 @@ table {
     font-size: 25px;
 }
 
+#daycnt
+{
+    margin-left: 60px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+#tday,#wday,#hday
+{
+    font-size: 80px;
+}
 button {
     border-radius: 25px;
 }
@@ -98,8 +108,8 @@ input, select {
 }
 
 .round-image {
-    width: 250px;
-    height: 200px;
+    width: 200px;
+    height: 130px;
     padding-bottom: 50px;
 }
 
@@ -187,7 +197,6 @@ h1 {
 .box {
     border: none;
     border-radius: 10px;
-    padding: 20px;
     width: 200px;
     text-align: center;
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
@@ -218,7 +227,7 @@ h1 {
         align-items: center;
     }
     #csize {
-        width: 70px; /* Adjusted width for mobile */
+        width: 80px; /* Adjusted width for mobile */
     }
 
     #bal1 {
