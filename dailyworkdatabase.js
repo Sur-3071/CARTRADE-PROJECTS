@@ -21,14 +21,14 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     const wid = document.getElementById("wid").value;
     const name = document.getElementById("name").value;
     const villname = document.getElementById("vil").value;
-    const pno = document.getElementById("pno").value;
+    const pno = "**";
     const disel = document.getElementById("dis").value;
     var con = document.getElementById("con").value;
     var stime = document.getElementById("stime").value;
     var etime = document.getElementById("etime").value;
     var ttime = document.getElementById("ttime").value;
     const rate = document.getElementById("rate").value;
-    const shift = document.getElementById("shift").value;
+    const shift = "**";
     const worktype = document.getElementById("worktype").value;
     var trips = document.getElementById("trips").value;
 
