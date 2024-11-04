@@ -71,7 +71,7 @@
                     }
                 }
             }
-            const sortedDates = l.sort((a, b) => new Date(a) - new Date(b)) ;
+            const sortedDates = l.sort((a, b) => new Date(a) - new Date(b));
             var dat1 = sortedDates[0];
             var dat2 = year + "-" + month + "-" + day;
             const date1 = new Date(dat1);
@@ -86,7 +86,7 @@
             for (let i = 1; i <= differenceInDays; i++) {
                 setTimeout(function () {
                     document.getElementById("tday").innerText = i;
-                     document.getElementById("tday").style.color = "red";
+                        document.getElementById("tday").style.color = "red";
                         document.getElementById("hday").style.color = "green";
                     // Update workday and holiday values if the current day is less than or equal to their respective counts
                     document.getElementById("wday").innerText = (i <= workday) ? i : workday;
@@ -120,7 +120,28 @@
         <div id="com">
             <img src="company.png" style="padding-left: 20px;">
         </div>
-        <h2 align="center" style="font-size: 35px;">Daily Work Data</h2>
+        <div id="daycnt">
+            <div class="container">
+                <div class="box" id="box1">
+                    <h2 style="color: rgb(75, 166, 236);">JCB Operator</h2>
+                    <img src="OPERATOR CHINNA.png" align="left" alt="Sample Image" class="round-image" id="clickableImage">
+                </div>
+                <div class="box" id="box1">
+                    <h2 style="color: rgb(75, 166, 236);">Total Days</h2>
+                    <h1 id="tday"></h1>
+                </div>
+                <div class="box">
+                    <h2 style="color: rgb(75, 166, 236);">Working Days</h2>
+                    <h1 id="wday"></h1>
+                </div>
+                <div class="box">
+                    <h2 style="color: rgb(75, 166, 236);">Holidays</h2>
+                    <h1 id="hday"></h1>
+                </div>
+            </div>
+        </div>
+    
+        <h2 align="center" style="font-size: 35px;" id="heading">Daily Work Data</h2>
     </div>
     <div id="formContainer">
         <form id="userForm">
@@ -159,26 +180,7 @@
         </form>
     </div>
     <img src="done1.png" id="done" style="display: none;" height="100px" width="100px">
-    <div>
-        <img src="OPERATOR CHINNA.png" align="left" alt="Sample Image" class="round-image" id="clickableImage">
-    </div>
-    <div id="daycnt">
-        <div class="container">
-            <div class="box" id="box1">
-                <h2 style="color: rgb(75, 166, 236);">Total Days</h2>
-                <h1 id="tday"></h1>
-            </div>
-            <div class="box">
-                <h2 style="color: rgb(75, 166, 236);">Working Days</h2>
-                <h1 id="wday"></h1>
-            </div>
-            <div class="box">
-                <h2 style="color: rgb(75, 166, 236);">Holidays</h2>
-                <h1 id="hday"></h1>
-            </div>
-        </div>
-    </div>
-
+    
 
     <marquee behavior="scroll" direction="left" scrollamount="10">
         <img src="jcb.png" height="500px" width="500px" id="jcb">
