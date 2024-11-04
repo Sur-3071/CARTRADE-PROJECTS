@@ -86,7 +86,8 @@
             for (let i = 1; i <= differenceInDays; i++) {
                 setTimeout(function () {
                     document.getElementById("tday").innerText = i;
-
+                     document.getElementById("tday").style.color = "red";
+                        document.getElementById("hday").style.color = "green";
                     // Update workday and holiday values if the current day is less than or equal to their respective counts
                     document.getElementById("wday").innerText = (i <= workday) ? i : workday;
                     document.getElementById("hday").innerText = (i <= holidays) ? i : holidays;
