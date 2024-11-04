@@ -15,6 +15,11 @@ img {
     border-radius: 35px;
 }
 
+h2 {
+    font-size: 15px;
+    font-weight: 1900;
+}
+
 #userForm {
     background-color: #ffffff;
     padding: 20px;
@@ -76,21 +81,24 @@ table {
     font-size: 25px;
 }
 
-#daycnt
-{
+#daycnt {
     margin-left: 60px;
     margin-top: 100px;
     margin-bottom: 50px;
 }
-#tday,#wday,#hday
-{
-    font-size: 80px;
+
+#tday,
+#wday,
+#hday {
+    font-size: 50px;
 }
+
 button {
     border-radius: 25px;
 }
 
-th, td {
+th,
+td {
     height: 60px;
     border: 2px solid black;
     text-align: center;
@@ -98,7 +106,8 @@ th, td {
     border-spacing: 10px;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -108,8 +117,9 @@ input, select {
 }
 
 .round-image {
-    width: 200px;
-    height: 130px;
+    margin-left: 15px;
+    width: 100px;
+    height: 100px;
     padding-bottom: 50px;
 }
 
@@ -148,13 +158,16 @@ input[type="checkbox"] {
     font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-#formContainer, #cardContainer, #popup {
+#formContainer,
+#cardContainer,
+#popup {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,7 +177,8 @@ input[type="checkbox"] {
     padding-bottom: 150px;
 }
 
-input, select {
+input,
+select {
     border: 1px solid #cccccc;
 }
 
@@ -190,6 +204,7 @@ h1 {
 }
 
 .container {
+    margin-left: 110px;
     display: flex;
     gap: 20px;
 }
@@ -197,7 +212,8 @@ h1 {
 .box {
     border: none;
     border-radius: 10px;
-    width: 200px;
+    width: 140px;
+    height: 140px;
     text-align: center;
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.5);
@@ -221,27 +237,37 @@ h1 {
         margin-top: 50px;
     }
 
-    #com, #userForm, #btn, #ledger, .container {
+    #com,
+    #userForm,
+    #btn,
+    #ledger,
+    .container {
         width: 100%;
         flex-direction: column;
         align-items: center;
     }
+
     #csize {
-        width: 80px; /* Adjusted width for mobile */
+        width: 80px;
+        /* Adjusted width for mobile */
     }
 
     #bal1 {
-        width: 90px; /* Adjusted width for mobile */
+        width: 90px;
+        /* Adjusted width for mobile */
     }
 
     #csize1 {
-        width: 150px; /* Adjusted width for mobile */
+        width: 150px;
+        /* Adjusted width for mobile */
     }
+
     table {
         font-size: 14px;
     }
 
-    #col, #am {
+    #col,
+    #am {
         font-size: 24px;
     }
 
@@ -266,5 +292,11 @@ h1 {
 
     h1 {
         font-size: 24px;
+    }
+
+    #tday,
+    #wday,
+    #hday {
+        font-size: 35px;
     }
 }
