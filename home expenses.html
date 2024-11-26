@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Work Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dailywork.css">
+    <link rel="icon" type="image/x-icon" href="">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti/dist/confetti.browser.min.js"></script>
+    <!-- Include confetti library -->
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "tractor-driver-data.firebaseapp.com",
+            projectId: "tractor-driver-data",
+            storageBucket: "tractor-driver-data.appspot.com",
+            messagingSenderId: "688935767962",
+            appId: "1:688935767962:web:d3d8d7569fd2470dfef423"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        
+    </script>
+</head>
+
+<body style="background-color: antiquewhite;">
+    <div id="home">
+        <div id="com">
+            <img src="company.png" style="padding-left: 20px;">
+        </div>
+        <h2 align="center" style="font-size: 35px;" id="heading">Daily Home Expenses</h2>
+    </div>
+    <div id="formContainer">
+        <form id="userForm">
+            <input type="date" id="dat" name="dat" placeholder="Date" required>
+            <input type="text" id="name" name="name" placeholder="Purpose" required>
+            <input type="tel" id="dis" name="dis" placeholder="Enter Amount" required>
+            <input type="text" id="wid" name="wid" placeholder="Work Id" readonly required>
+            <input type="button" value="Add Data" id="submit">
+        </form>
+    </div>
+    <img src="done1.png" id="done" style="display: none;" height="100px" width="100px">
+    
+
+    <marquee behavior="scroll" direction="left" scrollamount="10">
+        <img src="jcb.png" height="500px" width="500px" id="jcb">
+    </marquee>
+    <!-- Load the main script as a module -->
+    <script type="module" src="homedatabase.js"></script>
+    <script type="module" src="homeworkid.js"></script>
+</body>
+
+</html>
