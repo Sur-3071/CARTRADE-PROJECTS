@@ -690,28 +690,57 @@ async function RePrintHome() {
 function generateHomeTable(data) {
     let out = `<table border="1px">
         <tr>
-            <th id="csize">Customer Id</th>
+            <th id="csize">Purpose Id</th>
             <th id="csize1">Date</th>
+            <th id="csize1">Purpose Type</th>
             <th id="csize1">Purpose</th>
+            <th id="csize1">Home Expenses</th>
+            <th id="csize1">Farming</th>
+            <th id="csize1">Jcb</th>
             <th id="csize1">Amount</th>
         </tr>`;
     var amt = 0;
+    var f1=0;
+    var j1=0;
+    var h1=0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
             if (customerPhone !== "Home") {
+                if(activity.Type === "Farming")
+                {
+                    f1+=parseInt(activity.Price);
+                }
+                else
+                {
+                    if(activity.Type === "Jcb")
+                    {
+                    j1+=parseInt(activity.Price);
+                    }
+                    else
+                    {
+                        h1+=parseInt(activity.Price);
+                    }
+                }
                 amt += parseInt(activity.Price);
                 out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
+                        <td>${activity.Type}</td>
                         <td>${activity.Name}</td>
+                        <td>${activity.Home}</td>
+                        <td>${activity.Farming}</td>
+                        <td>${activity.Jcb}</td>
                         <td>${activity.Price}</td>
                     </tr>`;
             }
         }
     }
     out += `<tr>
-    <td colspan="3" id="col">Total Expenses</td>
+    <td colspan="4" id="col">Total Expenses</td>
+    <td id="am">${h1}</td>
+    <td id="am">${f1}</td>
+    <td id="am">${j1}</td>
     <td id="am">${amt}</td>
     </tr>`;
     out += `</table>`;
