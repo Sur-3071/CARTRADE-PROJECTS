@@ -107,11 +107,11 @@ function generateTable(data) {
     var mint = 0;
     var totaltrips = 0;
     var totalcontarct = 0;
-    var disel=0;
+    var disel = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
-            disel+=parseInt(activity.Disel)
+            disel += parseInt(activity.Disel)
             var editid = customerPhone + "v";
             collection += parseInt(activity.Price);
             var amount = activity.Payment === "Paid" ? 0 : activity.Price
@@ -235,7 +235,7 @@ document.addEventListener("click", async function (e1) {
         var Ending = data.Ending;
         var Name = data.Name;
         var PhoneNumber = data.PhoneNumber;
-        var Disel=data.Disel;
+        var Disel = data.Disel;
         var Price = data.Price;
         var Shift = data.Shift;
         var Starting = data.Starting;
@@ -342,12 +342,12 @@ function SearchTable(data) {
             <th id="csize">Price</th>
             <th id="csize">Recovery Amount</th>
         </tr>`;
-        var disel=0;
+        var disel = 0;
         for (const customerPhone in data) {
             if (data.hasOwnProperty(customerPhone)) {
                 const activity = data[customerPhone];
                 if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment === name) {
-                    disel+=parseInt(activity.Disel);
+                    disel += parseInt(activity.Disel);
                     var editid = customerPhone + "v";
                     collection += parseInt(activity.Price);
                     if (activity.Trips !== "--") {
@@ -409,7 +409,7 @@ function SearchTable(data) {
 
 document.getElementById("submit1").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
-    document.getElementById("search").value="";
+    document.getElementById("search").value = "";
     RePrint1();
 });
 async function RePrint1() {
@@ -421,12 +421,17 @@ async function RePrint1() {
         // Access the database and retrieve data
         const db2 = getDatabase(app);
         const dataRefget = ref(db2, `Daily Work`);
+        const dataRefget1 = ref(db2, `Homeexp`);
         const snapshot = await get(dataRefget);
+        const snapshot1 = await get(dataRefget1);
+
 
         // Check if data exists
         if (snapshot.exists()) {
             const data = snapshot.val();
-            generateTableByDate(data, startdate, enddate);
+            const data1 = snapshot1.val();
+            generateTableByDate(data, startdate, enddate,data1);
+            
         } else {
             alert("No data available for the selected date.");
         }
@@ -435,23 +440,7 @@ async function RePrint1() {
     }
 
 }
-{/* <tr>
-<th id="csize">Customer Id</th>
-<th id="csize1">Date</th>
-<th id="csize1">Customer Name</th>
-<th id="csize1">Village</th>
-<th id="csize1">Disel</th>
-<th id="csize">Trips</th>
-<th id="csize">Contract</th>
-<th id="csize">Starting Time</th>
-<th id="csize">Ending Time</th>
-<th id="csize">Total Time</th>
-<th id="csize">Payment Status</th>
-<th id="csize">Edit Data</th>
-<th id="csize">Price</th>
-<th id="csize">Recovery Amount</th>
-</tr>`; */}
-function generateTableByDate(data, startdate, enddate) {
+function generateTableByDate(data, startdate, enddate,data1) {
     var collection = 0;
     let out = `<table border="1px">
        <tr>
@@ -486,14 +475,14 @@ function generateTableByDate(data, startdate, enddate) {
     var mint = 0;
     var totaltrips = 0;
     var totalcontarct = 0;
-    var disel=0;
+    var disel = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
             if (activity.Date >= startdate && activity.Date <= enddate) {
                 var amount = activity.Payment === "Paid" ? 0 : activity.Price
                 var editid = customerPhone + "v";
-                disel+=parseInt(activity.Disel);
+                disel += parseInt(activity.Disel);
                 recovery += parseInt(amount);
                 if (!l.includes(activity.Date)) {
                     workday += 1;
@@ -576,6 +565,7 @@ function generateTableByDate(data, startdate, enddate) {
     </tr>`;
     led += `</table>`;
     document.getElementById("ledger").innerHTML = led;
+    generateHomeTablebydate(data1, startdate, enddate);
 }
 document.addEventListener("click", async function (e1) {
     if (e1.target && e1.target.className === "pay") {
@@ -605,7 +595,7 @@ document.addEventListener("click", async function (e1) {
             Ending: data.Ending,
             Name: data.Name,
             PhoneNumber: data.PhoneNumber,
-            Disel:data.Disel,
+            Disel: data.Disel,
             Price: data.Price,
             Shift: data.Shift,
             Starting: data.Starting,
@@ -643,7 +633,7 @@ document.addEventListener("click", async function (e1) {
                 Ending: data.Ending,
                 Name: data.Name,
                 PhoneNumber: data.PhoneNumber,
-                Disel:data.Disel,
+                Disel: data.Disel,
                 Price: data.Price,
                 Shift: data.Shift,
                 Starting: data.Starting,
@@ -686,6 +676,68 @@ async function RePrintHome() {
         alert("Error occurred while fetching data");
     }
 }
+function generateHomeTablebydate(data, startdate, enddate) {
+   
+    console.log(data);
+    
+    let out1 = `<table border="1px">
+        <tr>
+            <th id="csize">Purpose Id</th>
+            <th id="csize1">Date</th>
+            <th id="csize1">Purpose Type</th>
+            <th id="csize1">Purpose</th>
+            <th id="csize1">Home Expenses</th>
+            <th id="csize1">Farming</th>
+            <th id="csize1">Jcb</th>
+            <th id="csize1">Amount
+            </th>
+        </tr>`;
+    var amt = 0;
+    var f1 = 0;
+    var j1 = 0;
+    var h1 = 0;
+    for (const customerPhone in data) {
+        if (data.hasOwnProperty(customerPhone)) {
+            const activity = data[customerPhone];
+            if (customerPhone !== "Home") {
+                if (activity.Date >= startdate && activity.Date <= enddate) {
+
+                    if (activity.Type === "Farming") {
+                        f1 += parseInt(activity.Price);
+                    }
+                    else {
+                        if (activity.Type === "Jcb") {
+                            j1 += parseInt(activity.Price);
+                        }
+                        else {
+                            h1 += parseInt(activity.Price);
+                        }
+                    }
+                    amt += parseInt(activity.Price);
+                    out1 += `<tr>
+                        <td>${customerPhone}</td>
+                        <td>${activity.Date}</td>
+                        <td>${activity.Type}</td>
+                        <td>${activity.Name}</td>
+                        <td>${activity.Home}</td>
+                        <td>${activity.Farming}</td>
+                        <td>${activity.Jcb}</td>
+                        <td>${activity.Price}</td>
+                    </tr>`;
+                }
+            }
+        }
+    }
+    out1 += `<tr>
+    <td colspan="4" id="col">Total Expenses</td>
+    <td id="am">${h1}</td>
+    <td id="am">${f1}</td>
+    <td id="am">${j1}</td>
+    <td id="am">${amt}</td>
+    </tr>`;
+    out1 += `</table>`;
+    document.getElementById("homeexp").innerHTML = out1;
+}
 
 function generateHomeTable(data) {
     let out = `<table border="1px">
@@ -700,26 +752,22 @@ function generateHomeTable(data) {
             <th id="csize1">Amount</th>
         </tr>`;
     var amt = 0;
-    var f1=0;
-    var j1=0;
-    var h1=0;
+    var f1 = 0;
+    var j1 = 0;
+    var h1 = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
             if (customerPhone !== "Home") {
-                if(activity.Type === "Farming")
-                {
-                    f1+=parseInt(activity.Price);
+                if (activity.Type === "Farming") {
+                    f1 += parseInt(activity.Price);
                 }
-                else
-                {
-                    if(activity.Type === "Jcb")
-                    {
-                    j1+=parseInt(activity.Price);
+                else {
+                    if (activity.Type === "Jcb") {
+                        j1 += parseInt(activity.Price);
                     }
-                    else
-                    {
-                        h1+=parseInt(activity.Price);
+                    else {
+                        h1 += parseInt(activity.Price);
                     }
                 }
                 amt += parseInt(activity.Price);
