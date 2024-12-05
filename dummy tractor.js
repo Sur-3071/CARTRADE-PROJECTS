@@ -112,7 +112,7 @@ function addamount() {
 }
 
 function transalate() {
-    let convert=document.getElementById("pur");
+    let convert = document.getElementById("pur");
     let content = document.getElementById("pur").value;
 
     let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
@@ -121,10 +121,10 @@ function transalate() {
         .then(response => response.json())
         .then(data => {
             // Handle the translated data here
-            convert.innerHTML="";
-            let text=data.responseData.translatedText;
-            
-            convert.value=text;
+            convert.innerHTML = "";
+            let text = data.responseData.translatedText;
+
+            convert.value = text;
         });
 }
 function box2() {
@@ -246,23 +246,21 @@ function displayamountdata(data) {
     var s = 0;
     // Iterate over the dates in the data object
     for (const date in data) {
+        console.log(date[0]);
         if (data.hasOwnProperty(date)) {
             // Iterate over the names within each date
-            for (const name in data[date]) {
-                if (data[date].hasOwnProperty(name)) {
-                    var amount = parseInt(data[date]['Amount'])
-                    s += amount
-                    out += `<tr>
+            var amount = parseInt(data[date]['Amount'])
+            s += amount
+            out += `<tr>
                     <td>` + sno + `</td>
                     <td>` + date + `</td>
                     <td>` + data[date]['Purpose'] + `</td>
                     <td>` + data[date]['Amount'] + `</td>
                 </tr>`;
 
-                    // Increment the Sno counter
-                    sno++;
-                }
-            }
+            // Increment the Sno counter
+            sno++;
+
         }
     }
     out += `<tr>
@@ -301,7 +299,7 @@ function displaybal1(data, n) {
                             totalamount += (trips * amount);
                             totaltrips += trips;
                             drivername = data[date][name];
-                }
+                        }
                     }
                 }
             }
@@ -317,12 +315,8 @@ function displaybal2(data) {
     for (const date in data) {
         if (data.hasOwnProperty(date)) {
             // Iterate over the names within each date
-            for (const name in data[date]) {
-                if (data[date].hasOwnProperty(name)) {
-                    var amount = parseInt(data[date]['Amount'])
-                    amounttaken += amount
-                }
-            }
+            var amount = parseInt(data[date]['Amount'])
+            amounttaken += amount
         }
     }
     done();
