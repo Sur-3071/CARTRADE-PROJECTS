@@ -53,6 +53,7 @@ amountdataentry.addEventListener('click', function (e) {
     e.preventDefault();
     const d = document.getElementById("d2").value;
     const drivername = document.getElementById("dname3").value;
+    const pur = document.getElementById("pur").value;
     const amount = document.getElementById("amount").value;
     const db2 = "Amount";
 
@@ -62,7 +63,8 @@ amountdataentry.addEventListener('click', function (e) {
         const dataRefset = ref(db, `${db2}/${drivername}/${d}/`);
 
         set(dataRefset, {
-            Amount: amount
+            Amount: amount,
+            Purpose:pur
         })
             .then(() => {
                 document.getElementById("form1").reset();
