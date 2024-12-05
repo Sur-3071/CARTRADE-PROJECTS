@@ -12,13 +12,19 @@ var totalamount = 0;
 var totaltrips = 0;
 var name1 = "";
 var balance = totalamount - amounttaken;
-window.onload = function () {
-    const session = localStorage.getItem('session');
-    if (session === '0') {
-        window.location.href = 'TractorLogin.html'
-    }
-    localStorage.setItem('session', 1);
-}
+// window.onload = function () {
+//     const session = localStorage.getItem('session');
+//     if (session === '0') {
+//         window.location.href = 'TractorLogin.html'
+//     }
+//     localStorage.setItem('session', 1);
+// }
+// document.addEventListener("visibilitychange", function () {
+//     if (document.visibilityState === 'hidden') {
+//         localStorage.setItem('session', 0);
+//         window.location.href = 'TractorLogin.html';
+//     }
+// });
 var list = {
     "Def": "def",
     "Sai": "sai",
@@ -68,22 +74,6 @@ function addtrip() {
         x1 = 0;
     }
 }
-function transalate() {
-            let convert=document.getElementById("cname");
-            let content = document.getElementById("cname").value;
-    
-            let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
-
-            fetch(transLINK)
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the translated data here
-                    convert.innerHTML="";
-                    let text=data.responseData.translatedText;
-                    
-                    convert.value=text;
-                });
-        }
 function showdriver() {
     var p1 = document.getElementById("tripsdata");
     var p2 = document.getElementById("amountdata");
@@ -120,9 +110,22 @@ function addamount() {
         x3 = 0
     }
 }
-function logout() {
-    localStorage.setItem('session', 0);
-    window.location.href = 'TractorLogin.html';
+
+function transalate() {
+    let convert=document.getElementById("pur");
+    let content = document.getElementById("pur").value;
+
+    let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
+
+    fetch(transLINK)
+        .then(response => response.json())
+        .then(data => {
+            // Handle the translated data here
+            convert.innerHTML="";
+            let text=data.responseData.translatedText;
+            
+            convert.value=text;
+        });
 }
 function box2() {
     var p1 = document.getElementById("tripsdata");
@@ -234,6 +237,7 @@ function displayamountdata(data) {
     <tr>
     <th>తోలకం</th>
     <th>తేదీ</th>
+    <th>కారణం</th>
     <th>డబ్బులు తీసుకున్నవి</th>
 </tr>`;
 
@@ -251,6 +255,7 @@ function displayamountdata(data) {
                     out += `<tr>
                     <td>` + sno + `</td>
                     <td>` + date + `</td>
+                    <td>` + data[date]['Purpose'] + `</td>
                     <td>` + data[date]['Amount'] + `</td>
                 </tr>`;
 
@@ -261,7 +266,7 @@ function displayamountdata(data) {
         }
     }
     out += `<tr>
-          <td colspan="2">మొత్తాO డబ్బులు తీసుకున్నవి</td>
+          <td colspan="3">మొత్తాO డబ్బులు తీసుకున్నవి</td>
           <td colspan="1">`+ s + `</td>
         </tr>`
     // Close the table structure
