@@ -112,8 +112,8 @@ function addamount() {
 }
 
 function transalate() {
-    let convert = document.getElementById("pur");
-    let content = document.getElementById("pur").value;
+    let convert = document.getElementById("cname");
+    let content = document.getElementById("cname").value;
 
     let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
 
