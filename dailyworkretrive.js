@@ -91,6 +91,7 @@ function generateTable(data) {
             <th id="csize1">Village</th>
             <th id="csize">Disel</th>
             <th id="csize">Trips</th>
+            <th id="csize2">Drivers Names</th>
             <th id="csize">Contract</th>
             <th id="csize">Starting Time</th>
             <th id="csize">Ending Time</th>
@@ -132,6 +133,11 @@ function generateTable(data) {
                 workday += 1;
                 l.push(activity.Date);
             }
+            // if(customerPhone==="206")
+            // {
+            //     alert(activity.Drivers);
+            // }
+
             out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
@@ -139,6 +145,7 @@ function generateTable(data) {
                         <td>${activity.Villagename}</td>
                         <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
+                        <td>${activity.Drivers}</td>
                         <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
@@ -157,7 +164,7 @@ function generateTable(data) {
     out += `<tr>
     <td colspan="4" id="col">Total Work Analaysis</td>
     <td id="am">${disel}</td>
-    <td id="am">${totaltrips}</td>
+    <td colspan="2" id="am">${totaltrips}</td>
     <td id="am">${totalcontarct}</td>
     <td id="am" colspan="3">${totaltime}</td>
     <td id="am" colspan="2">Work In Price</td>
@@ -238,6 +245,7 @@ document.addEventListener("click", async function (e1) {
         var Disel = data.Disel;
         var Price = data.Price;
         var Shift = data.Shift;
+        var output = data.Drivers;
         var Starting = data.Starting;
         var TotalTime = data.TotalTime;
         var Trips = data.Trips;
@@ -270,6 +278,7 @@ document.addEventListener("click", async function (e1) {
         document.getElementById("rate").value = Price;
         document.getElementById("shift").value = Shift;
         document.getElementById("trips").value = Trips;
+        document.getElementById("output").value = output;
         document.getElementById("worktype").value = worktype;
         document.getElementById("pay").value = payment;
         if (worktype == "Hours") {
@@ -430,8 +439,8 @@ async function RePrint1() {
         if (snapshot.exists()) {
             const data = snapshot.val();
             const data1 = snapshot1.val();
-            generateTableByDate(data, startdate, enddate,data1);
-            
+            generateTableByDate(data, startdate, enddate, data1);
+
         } else {
             alert("No data available for the selected date.");
         }
@@ -440,7 +449,7 @@ async function RePrint1() {
     }
 
 }
-function generateTableByDate(data, startdate, enddate,data1) {
+function generateTableByDate(data, startdate, enddate, data1) {
     var collection = 0;
     let out = `<table border="1px">
        <tr>
@@ -648,6 +657,16 @@ document.addEventListener("click", async function (e1) {
 
 document.getElementById("submit3").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
+    var d1 = document.getElementById("typech");
+    var n = document.getElementById("typech");
+    n.value = "";
+    d1.style.display = "block";
+    RePrintHome();
+    // Get the value from the input field
+
+});
+document.getElementById("typech").addEventListener("change", async function (e1) {
+    e1.preventDefault(); // Prevent default form submission behavior
     RePrintHome();
     // Get the value from the input field
 
@@ -668,7 +687,13 @@ async function RePrintHome() {
         if (snapshot.exists()) {
             const data = snapshot.val();
             console.log(data);
-            generateHomeTable(data);
+            var v1 = document.getElementById("typech").value;
+            if (v1.length > 0) {
+                generateHomeTableSearch(data, v1)
+            }
+            else {
+                generateHomeTable(data);
+            }
         } else {
             alert("No data available for the selected date.");
         }
@@ -677,9 +702,9 @@ async function RePrintHome() {
     }
 }
 function generateHomeTablebydate(data, startdate, enddate) {
-   
+
     console.log(data);
-    
+
     let out1 = `<table border="1px">
         <tr>
             <th id="csize">Purpose Id</th>
@@ -739,6 +764,77 @@ function generateHomeTablebydate(data, startdate, enddate) {
     document.getElementById("homeexp").innerHTML = out1;
 }
 
+function generateHomeTableSearch(data, v1) {
+    let out = `<table border="1px">
+        <tr>
+            <th id="csize">Purpose Id</th>
+            <th id="csize1">Date</th>
+            <th id="csize1">Purpose Type</th>
+            <th id="csize1">Purpose</th>
+            <th id="csize1">Home Expenses</th>
+            <th id="csize1">Farming</th>
+            <th id="csize1">Jcb</th>
+            <th id="csize1">Amount</th>
+        </tr>`;
+    var amt = 0;
+    var f1 = 0;
+    var j1 = 0;
+    var h1 = 0;
+    var c = 0;
+    for (const customerPhone in data) {
+        if (data.hasOwnProperty(customerPhone)) {
+            const activity = data[customerPhone];
+            if (customerPhone !== "Home") {
+                if (activity.Type === v1) {
+                    c += parseInt(activity.Price);
+                    amt += parseInt(activity.Price);
+                    out += `<tr>
+                        <td>${customerPhone}</td>
+                        <td>${activity.Date}</td>
+                        <td>${activity.Type}</td>
+                        <td>${activity.Name}</td>
+                        <td>${activity.Home}</td>
+                        <td>${activity.Farming}</td>
+                        <td>${activity.Jcb}</td>
+                        <td>${activity.Price}</td>
+                    </tr>`;
+                }
+            }
+        }
+    }
+    if(v1==="Farming")
+    {
+        j1=0;
+        h1=0;
+        f1=c;
+    }
+    else
+    {
+        if(v1==="Jcb")
+        {
+            h1=0;
+            f1=0;
+            j1=c;
+        }
+        else
+        {
+            f1=0;
+            j1=0;
+            h1=c;
+        }
+    }
+    out += `<tr>
+    <td colspan="4" id="col">Total Expenses</td>
+    <td id="am">${h1}</td>
+    <td id="am">${f1}</td>
+    <td id="am">${j1}</td>
+    <td id="am">${amt}</td>
+    </tr>`;
+    out += `</table>`;
+    document.getElementById("homeexp").innerHTML = out;
+}
+
+
 function generateHomeTable(data) {
     let out = `<table border="1px">
         <tr>
@@ -794,4 +890,3 @@ function generateHomeTable(data) {
     out += `</table>`;
     document.getElementById("homeexp").innerHTML = out;
 }
-
