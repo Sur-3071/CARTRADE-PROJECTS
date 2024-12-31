@@ -14,7 +14,13 @@ body {
 img {
     border-radius: 35px;
 }
-
+#typech
+{
+  width: 350px; /* Set the desired width */
+  height: 50px; /* Set the desired height */
+  font-size: 24px; /* Adjust font size for better readability */
+  padding: 5px;
+}
 h2 {
     font-size: 15px;
     font-weight: 1900;
