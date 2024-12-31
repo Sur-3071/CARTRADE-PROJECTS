@@ -127,6 +127,21 @@ function transalate() {
             convert.value = text;
         });
 }
+function transalatepur() {
+    let convert = document.getElementById("pur");
+    let content = document.getElementById("pur").value;
+    let transLINK = `https://api.mymemory.translated.net/get?q=${content}&langpair=en-GB|te-IN`;
+
+    fetch(transLINK)
+        .then(response => response.json())
+        .then(data => {
+            // Handle the translated data here
+            convert.innerHTML = "";
+            let text = data.responseData.translatedText;
+            // alert(text);
+            convert.value = text;
+        });
+}
 function box2() {
     var p1 = document.getElementById("tripsdata");
     var p2 = document.getElementById("amountdata");
