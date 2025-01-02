@@ -91,7 +91,6 @@ function generateTable(data) {
             <th id="csize1">Village</th>
             <th id="csize">Disel</th>
             <th id="csize">Trips</th>
-            <th id="csize2">Drivers Names</th>
             <th id="csize">Contract</th>
             <th id="csize">Starting Time</th>
             <th id="csize">Ending Time</th>
@@ -145,7 +144,6 @@ function generateTable(data) {
                         <td>${activity.Villagename}</td>
                         <td>${activity.Disel}</td>
                         <td>${activity.Trips}</td>
-                        <td>${activity.Drivers}</td>
                         <td>${activity.Contract}</td>
                         <td>${activity.Starting}</td>
                         <td>${activity.Ending}</td>
