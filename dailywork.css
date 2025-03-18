@@ -10,11 +10,11 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    width:30px;
+    width:150px;
     heigth:10px;
 }
 
-but1:hover {
+#but1:hover {
     background-color: #0056b3;
 }
 #com {
