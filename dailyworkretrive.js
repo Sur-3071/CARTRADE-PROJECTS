@@ -319,10 +319,10 @@ document.addEventListener("click", async function (e1) {
 })
 
 function SearchTable(data) {
-    // Get today's date
     var d = document.getElementById("ledger");
     var name = document.getElementById("search").value;
     console.log(name.length);
+
     if (name.length > 0) {
         d.style.display = "none";
         var collection = 0;
@@ -349,70 +349,98 @@ function SearchTable(data) {
             <th id="csize">Price</th>
             <th id="csize">Recovery Amount</th>
         </tr>`;
+
         var disel = 0;
+
+        // 1. Collect filtered entries in array
+        let matchedEntries = [];
         for (const customerPhone in data) {
             if (data.hasOwnProperty(customerPhone)) {
                 const activity = data[customerPhone];
-                if (activity.Name.indexOf(name) !== -1 || activity.Villagename.indexOf(name) !== -1 || activity.Payment === name) {
-                    disel += parseInt(activity.Disel);
-                    var editid = customerPhone + "v";
-                    collection += parseInt(activity.Price);
-                    if (activity.Trips !== "--") {
-                        totaltrips += parseInt(activity.Trips);
-                    }
-                    if (activity.Contract !== "--") {
-                        totalcontarct += parseInt(activity.Contract);
-                    }
-                    if (activity.Starting !== "--") {
-                        var timesplit = activity.TotalTime;
-                        var v = timesplit.split(':');
-                        hou += parseInt(v[0]);
-                        mint += parseInt(v[1]);
-                    }
-                    var amount = activity.Payment === "Paid" ? 0 : activity.Price
-                    recovery += parseInt(amount);
-                    out += `<tr>
-                        <td>${customerPhone}</td>
-                        <td>${activity.Date}</td>
-                        <td>${activity.Name}</td>
-                        <td>${activity.Villagename}</td>
-                        <td>${activity.Disel}</td>
-                        <td>${activity.Trips}</td>
-                        <td>${activity.Contract}</td>
-                        <td>${activity.Starting}</td>
-                        <td>${activity.Ending}</td>
-                        <td>${activity.TotalTime}</td>
-                        <td><button type="button" class="pay" id=${customerPhone}>${activity.Payment}</button></td>
-                        <td><button type="button" id=${editid} class="edit">Edit</button></td>
-                        <td>${activity.Price}</td>
-                        <td>${amount}</td>
-                    </tr>`;
+                if (
+                    activity.Name.indexOf(name) !== -1 ||
+                    activity.Villagename.indexOf(name) !== -1 ||
+                    activity.Payment === name
+                ) {
+                    matchedEntries.push({ id: customerPhone, activity });
                 }
             }
         }
+
+        // 2. Sort matched entries by Name
+        matchedEntries.sort((a, b) =>
+            a.activity.Name.localeCompare(b.activity.Name)
+        );
+
+        // 3. Loop through sorted entries
+        matchedEntries.forEach(entry => {
+            const customerPhone = entry.id;
+            const activity = entry.activity;
+
+            disel += parseInt(activity.Disel);
+            var editid = customerPhone + "v";
+            collection += parseInt(activity.Price);
+
+            if (activity.Trips !== "--") {
+                totaltrips += parseInt(activity.Trips);
+            }
+
+            if (activity.Contract !== "--") {
+                totalcontarct += parseInt(activity.Contract);
+            }
+
+            if (activity.Starting !== "--") {
+                var timesplit = activity.TotalTime;
+                var v = timesplit.split(':');
+                hou += parseInt(v[0]);
+                mint += parseInt(v[1]);
+            }
+
+            var amount = activity.Payment === "Paid" ? 0 : activity.Price;
+            recovery += parseInt(amount);
+
+            out += `<tr>
+                <td>${customerPhone}</td>
+                <td>${activity.Date}</td>
+                <td>${activity.Name}</td>
+                <td>${activity.Villagename}</td>
+                <td>${activity.Disel}</td>
+                <td>${activity.Trips}</td>
+                <td>${activity.Contract}</td>
+                <td>${activity.Starting}</td>
+                <td>${activity.Ending}</td>
+                <td>${activity.TotalTime}</td>
+                <td><button type="button" class="pay" id=${customerPhone}>${activity.Payment}</button></td>
+                <td><button type="button" id=${editid} class="edit">Edit</button></td>
+                <td>${activity.Price}</td>
+                <td>${amount}</td>
+            </tr>`;
+        });
+
         var mintohou = parseInt(mint / 60);
         mint = mint - 60 * mintohou;
         hou += mintohou;
         totaltime = hou + ":" + mint;
 
         out += `<tr>
-   <td colspan="4" id="col">Total Work Analaysis</td>
-   <td id="am">${disel}</td>
-    <td id="am">${totaltrips}</td>
-    <td id="am">${totalcontarct}</td>
-    <td id="am" colspan="3">${totaltime}</td>
-    <td id="am" colspan="2">Work In Price</td>
-    <td id="am">${collection}</td>
-    <td id="am">${recovery}</td>
-    </tr>`;
+            <td colspan="4" id="col">Total Work Analysis</td>
+            <td id="am">${disel}</td>
+            <td id="am">${totaltrips}</td>
+            <td id="am">${totalcontarct}</td>
+            <td id="am" colspan="3">${totaltime}</td>
+            <td id="am" colspan="2">Work In Price</td>
+            <td id="am">${collection}</td>
+            <td id="am">${recovery}</td>
+        </tr>`;
         out += `</table>`;
+
         document.getElementById("enterdata").innerHTML = out;
-    }
-    else {
+    } else {
         d.style.display = "block";
         RePrint();
     }
 }
+
 
 document.getElementById("submit1").addEventListener("click", async function (e1) {
     e1.preventDefault(); // Prevent default form submission behavior
