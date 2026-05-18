@@ -3,1032 +3,1350 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>Tambola Coin Picker</title>
+<title>Suresh Tambola Coin Picker</title>
 
-    <style>
+<style>
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        body{
+body{
 
-            min-height:100vh;
+    min-height:100vh;
 
-            background:
-            linear-gradient(rgba(0,0,0,0.7),
-            rgba(0,0,0,0.7)),
-            url("https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920&auto=format&fit=crop");
+    background:
+    linear-gradient(rgba(0,0,0,0.7),
+    rgba(0,0,0,0.7)),
+    url("https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920&auto=format&fit=crop");
 
-            background-size:cover;
-            background-position:center;
+    background-size:cover;
+    background-position:center;
 
-            color:white;
+    color:white;
 
-            overflow-x:hidden;
-        }
+    overflow-x:hidden;
+}
 
-        h1{
+/* TITLE */
 
-            text-align:center;
+h1{
 
-            padding-top:20px;
+    text-align:center;
 
-            font-size:48px;
+    padding-top:20px;
 
-            color:gold;
+    font-size:48px;
 
-            text-shadow:
-            0px 0px 10px gold,
-            0px 0px 20px orange;
-        }
+    color:gold;
 
-        /* RESTART BUTTON */
+    text-shadow:
+    0px 0px 10px gold,
+    0px 0px 20px orange;
+}
 
-        #restartBtn{
+/* RESTART BUTTON */
 
-            position:fixed;
+#restartBtn{
 
-            top:20px;
-            right:20px;
+    position:fixed;
 
-            z-index:999;
+    top:20px;
+    right:20px;
 
-            padding:14px 28px;
+    z-index:999;
 
-            border:none;
+    padding:14px 28px;
 
-            border-radius:50px;
+    border:none;
 
-            cursor:pointer;
+    border-radius:50px;
 
-            font-size:18px;
+    cursor:pointer;
 
-            font-weight:bold;
+    font-size:18px;
 
-            color:white;
+    font-weight:bold;
 
-            background:
-            linear-gradient(135deg,
-            #ff416c,
-            #ff4b2b);
+    color:white;
 
-            box-shadow:
-            0px 0px 15px #ff416c,
-            0px 0px 30px #ff4b2b;
+    background:
+    linear-gradient(135deg,
+    #ff416c,
+    #ff4b2b);
 
-            transition:0.3s;
-        }
+    box-shadow:
+    0px 0px 15px #ff416c,
+    0px 0px 30px #ff4b2b;
 
-        #restartBtn:hover{
+    transition:0.3s;
+}
 
-            transform:scale(1.08);
-        }
+#restartBtn:hover{
 
-        #main{
+    transform:scale(1.08);
+}
 
-            width:95%;
+/* MAIN */
 
-            margin:auto;
+#main{
 
-            display:flex;
+    width:95%;
 
-            flex-direction:column;
+    margin:auto;
 
-            align-items:center;
-        }
+    display:flex;
 
-        /* SETTINGS */
+    flex-direction:column;
 
-        #tog{
+    align-items:center;
+}
 
-            margin-top:25px;
+/* SETTINGS */
 
-            padding:20px 30px;
+#tog{
 
-            border-radius:20px;
+    margin-top:25px;
 
-            background:rgba(255,255,255,0.08);
+    padding:20px 30px;
 
-            backdrop-filter:blur(10px);
-        }
+    border-radius:20px;
 
-        table{
+    background:rgba(255,255,255,0.08);
 
-            color:white;
-        }
+    backdrop-filter:blur(10px);
+}
 
-        th,
-        td{
+table{
 
-            padding:10px 20px;
+    color:white;
+}
 
-            text-align:center;
-        }
+th,
+td{
 
-        #auto{
+    padding:10px 20px;
 
-            width:28px;
-            height:28px;
+    text-align:center;
+}
 
-            cursor:pointer;
-        }
+#auto{
 
-        select{
+    width:28px;
+    height:28px;
 
-            padding:10px;
+    cursor:pointer;
+}
 
-            border-radius:10px;
+select{
 
-            border:none;
+    padding:10px;
 
-            outline:none;
+    border-radius:10px;
 
-            font-size:16px;
-        }
+    border:none;
 
-        /* BIG COIN */
+    outline:none;
 
-        #coin{
+    font-size:16px;
+}
 
-            margin-top:35px;
+/* CONTROLS */
 
-            width:220px;
-            height:220px;
+#extraControls{
 
-            border-radius:50%;
+    display:flex;
 
-            background:
-            radial-gradient(circle at top,
-            #fff7b1,
-            gold,
-            orange);
+    gap:15px;
 
-            display:flex;
+    margin-top:25px;
+}
 
-            justify-content:center;
+#extraControls button{
 
-            align-items:center;
+    padding:12px 22px;
 
-            font-size:95px;
+    border:none;
 
-            font-weight:bold;
+    border-radius:50px;
 
-            color:white;
+    cursor:pointer;
 
-            border:8px solid #ffd700;
+    font-size:16px;
 
-            position:relative;
+    color:white;
 
-            overflow:hidden;
+    background:
+    linear-gradient(135deg,
+    #00c6ff,
+    #0072ff);
 
-            cursor:pointer;
+    box-shadow:
+    0px 0px 15px #00c6ff;
 
-            user-select:none;
+    transition:0.3s;
+}
 
-            box-shadow:
-            0px 0px 30px gold,
-            0px 0px 60px orange,
-            inset 0px 0px 20px white;
+#extraControls button:hover{
 
-            transform-style:preserve-3d;
+    transform:scale(1.08);
+}
 
-            perspective:1000px;
+/* BIG COIN */
 
-            transition:0.3s;
-        }
+#coin{
 
-        #coin:hover{
+    margin-top:35px;
 
-            transform:scale(1.05);
-        }
+    width:220px;
+    height:220px;
 
-        #coin::before{
+    border-radius:50%;
 
-            content:"";
+    background:
+    radial-gradient(circle at top,
+    #fff7b1,
+    gold,
+    orange);
 
-            position:absolute;
+    display:flex;
 
-            width:120%;
-            height:120%;
+    justify-content:center;
 
-            background:
-            linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,0.9),
-            transparent
-            );
+    align-items:center;
 
-            top:-10%;
-            left:-120%;
+    font-size:95px;
 
-            transform:rotate(25deg);
-        }
+    font-weight:bold;
 
-        .animateCoin{
+    color:white;
 
-            animation:
-            ultraFastRotate 0.25s linear infinite;
-        }
+    border:8px solid #ffd700;
 
-        .animateCoin::before{
+    position:relative;
 
-            animation:
-            shineMove 0.5s linear infinite;
-        }
+    overflow:hidden;
 
-        @keyframes ultraFastRotate{
+    cursor:pointer;
 
-            0%{
+    user-select:none;
 
-                transform:
-                rotateY(0deg);
-            }
+    box-shadow:
+    0px 0px 30px gold,
+    0px 0px 60px orange,
+    inset 0px 0px 20px white;
 
-            100%{
+    transform-style:preserve-3d;
 
-                transform:
-                rotateY(-360deg);
-            }
-        }
+    perspective:1000px;
+}
 
-        @keyframes shineMove{
+#coin::before{
 
-            0%{
+    content:"";
 
-                left:-120%;
-            }
+    position:absolute;
 
-            100%{
+    width:120%;
+    height:120%;
 
-                left:120%;
-            }
-        }
+    background:
+    linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.9),
+    transparent
+    );
 
-        /* TRACK BOARD */
+    top:-10%;
+    left:-120%;
 
-        #done{
+    transform:rotate(25deg);
+}
 
-            margin-top:35px;
+.animateCoin{
 
-            padding:25px;
+    animation:
+    ultraFastRotate 0.25s linear infinite;
+}
 
-            border-radius:20px;
+.animateCoin::before{
 
-            background:
-            rgba(255,255,255,0.08);
+    animation:
+    shineMove 0.5s linear infinite;
+}
 
-            backdrop-filter:blur(10px);
+@keyframes ultraFastRotate{
 
-            box-shadow:
-            0px 0px 25px rgba(255,255,255,0.15);
-        }
+    0%{
 
-        .row{
+        transform:
+        rotateY(0deg);
+    }
 
-            display:flex;
-        }
+    100%{
 
-        .col,
-        .col1{
+        transform:
+        rotateY(-360deg);
+    }
+}
 
-            width:72px;
-            height:72px;
+@keyframes shineMove{
 
-            margin:5px;
+    0%{
 
-            display:flex;
+        left:-120%;
+    }
 
-            justify-content:center;
+    100%{
 
-            align-items:center;
+        left:120%;
+    }
+}
 
-            border-radius:15px;
+/* STATS */
 
-            font-size:22px;
+#statsBox{
 
-            font-weight:bold;
-        }
+    display:flex;
 
-        .col{
+    gap:25px;
 
-            background:
-            linear-gradient(135deg,
-            #00ff87,
-            #60efff);
+    flex-wrap:wrap;
 
-            color:black;
+    justify-content:center;
 
-            box-shadow:
-            0px 0px 15px #00ff87;
-        }
+    margin-top:30px;
+}
 
-        .col1{
+.statCard{
 
-            background:
-            rgba(255,255,255,0.15);
+    min-width:280px;
 
-            color:white;
-        }
+    padding:25px;
 
-        /* HISTORY */
+    text-align:center;
 
-        #historyTitle{
+    border-radius:20px;
 
-            margin-top:35px;
+    background:
+    rgba(255,255,255,0.08);
 
-            font-size:32px;
+    backdrop-filter:blur(10px);
 
-            color:#00ffff;
+    box-shadow:
+    0px 0px 20px rgba(255,255,255,0.15);
+}
 
-            text-shadow:
-            0px 0px 10px #00ffff;
-        }
+.statTitle{
 
-        #result{
+    font-size:22px;
 
-            margin-top:20px;
+    margin-bottom:18px;
+}
 
-            width:95%;
+.statValue{
 
-            padding:20px;
+    font-size:48px;
 
-            border-radius:20px;
+    font-weight:bold;
 
-            background:
-            rgba(255,255,255,0.08);
+    color:#00ffff;
+}
 
-            backdrop-filter:blur(10px);
+/* LAST FIVE */
 
-            margin-bottom:40px;
-        }
+#lastFiveContainer{
 
-        .historyRow{
+    display:flex;
 
-            display:flex;
+    justify-content:center;
 
-            align-items:center;
+    align-items:center;
 
-            flex-wrap:wrap;
+    gap:12px;
 
-            margin-bottom:15px;
-        }
+    flex-wrap:wrap;
+}
 
-        .historyCoin{
+.lastCoin{
 
-            width:58px;
-            height:58px;
+    width:58px;
+    height:58px;
 
-            border-radius:50%;
+    border-radius:50%;
 
-            display:flex;
+    display:flex;
 
-            justify-content:center;
+    justify-content:center;
 
-            align-items:center;
+    align-items:center;
 
-            font-size:22px;
+    font-size:22px;
 
-            font-weight:bold;
+    font-weight:bold;
 
-            background:
-            linear-gradient(135deg,
-            #ffcc00,
-            #ff6600);
+    color:white;
 
-            color:white;
+    background:
+    linear-gradient(135deg,
+    #ffcc00,
+    #ff6600);
 
-            box-shadow:
-            0px 0px 15px orange,
-            inset 0px 0px 10px white;
-        }
+    box-shadow:
+    0px 0px 15px orange;
+}
 
-        .arrowLink{
+/* PROGRESS */
 
-            font-size:34px;
+#progressContainer{
 
-            margin:0px 10px;
+    width:90%;
 
-            color:#00ffff;
+    height:24px;
 
-            text-shadow:
-            0px 0px 10px #00ffff;
-        }
+    background:
+    rgba(255,255,255,0.15);
 
-        /* POPUPS */
+    border-radius:50px;
 
-        #gameOverPopup,
-        #restartConfirmPopup{
+    overflow:hidden;
 
-            position:fixed;
+    margin-top:30px;
+}
 
-            top:0;
-            left:0;
+#progressBar{
 
-            width:100%;
-            height:100%;
+    width:0%;
 
-            background:
-            rgba(0,0,0,0.85);
+    height:100%;
 
-            display:flex;
+    border-radius:50px;
 
-            justify-content:center;
+    background:
+    linear-gradient(90deg,
+    #00ff87,
+    #60efff);
 
-            align-items:center;
+    transition:0.5s;
+}
 
-            z-index:9999;
+/* TRACK */
 
-            animation:
-            fadeIn 0.5s ease;
-        }
+#done{
 
-        #gameOverBox,
-        #restartConfirmBox{
+    margin-top:35px;
 
-            width:420px;
+    padding:25px;
 
-            padding:40px;
+    border-radius:20px;
 
-            border-radius:30px;
+    background:
+    rgba(255,255,255,0.08);
 
-            text-align:center;
+    backdrop-filter:blur(10px);
+}
 
-            color:white;
+.row{
 
-            animation:
-            popupZoom 0.5s ease;
-        }
+    display:flex;
+}
 
-        #gameOverBox{
+.col,
+.col1{
 
-            background:
-            linear-gradient(135deg,
-            #ffcc00,
-            #ff6600);
+    width:72px;
+    height:72px;
 
-            box-shadow:
-            0px 0px 30px gold,
-            0px 0px 60px orange;
-        }
+    margin:5px;
 
-        #restartConfirmBox{
+    display:flex;
 
-            background:
-            linear-gradient(135deg,
-            #141e30,
-            #243b55);
+    justify-content:center;
 
-            box-shadow:
-            0px 0px 30px #00ffff,
-            0px 0px 60px #0072ff;
-        }
+    align-items:center;
 
-        #gameOverBox h1,
-        #restartConfirmBox h1{
+    border-radius:15px;
 
-            font-size:40px;
+    font-size:22px;
 
-            margin-bottom:20px;
-        }
+    font-weight:bold;
+}
 
-        #gameOverBox p,
-        #restartConfirmBox p{
+.col{
 
-            font-size:22px;
+    background:
+    linear-gradient(135deg,
+    #00ff87,
+    #60efff);
 
-            margin-bottom:30px;
+    color:black;
 
-            line-height:35px;
-        }
+    box-shadow:
+    0px 0px 15px #00ff87;
+}
 
-        #gameOverBox button,
-        #restartBtns button{
+.col1{
 
-            padding:15px 30px;
+    background:
+    rgba(255,255,255,0.15);
 
-            border:none;
+    color:white;
+}
 
-            border-radius:50px;
+.latestNumber{
 
-            font-size:18px;
+    border:3px solid white;
 
-            cursor:pointer;
+    animation:
+    latestGlow 1s infinite alternate;
+}
 
-            color:white;
+@keyframes latestGlow{
 
-            margin:10px;
+    from{
 
-            transition:0.3s;
-        }
+        transform:scale(1);
+    }
 
-        #gameOverBox button,
-        #continueBtn{
+    to{
 
-            background:
-            linear-gradient(135deg,
-            #00c6ff,
-            #0072ff);
-        }
+        transform:scale(1.12);
+    }
+}
 
-        #endGameBtn{
+/* HISTORY */
 
-            background:
-            linear-gradient(135deg,
-            #ff416c,
-            #ff4b2b);
-        }
+#historyTitle{
 
-        #gameOverBox button:hover,
-        #restartBtns button:hover{
+    margin-top:35px;
 
-            transform:scale(1.08);
-        }
+    font-size:32px;
 
-        @keyframes popupZoom{
+    color:#00ffff;
+}
 
-            0%{
+#result{
 
-                transform:
-                scale(0.3)
-                rotate(-15deg);
+    margin-top:20px;
 
-                opacity:0;
-            }
+    width:95%;
 
-            100%{
+    padding:20px;
 
-                transform:
-                scale(1)
-                rotate(0deg);
+    border-radius:20px;
 
-                opacity:1;
-            }
-        }
+    background:
+    rgba(255,255,255,0.08);
 
-        @keyframes fadeIn{
+    margin-bottom:40px;
+}
 
-            from{
+.historyRow{
 
-                opacity:0;
-            }
+    display:flex;
 
-            to{
+    align-items:center;
 
-                opacity:1;
-            }
-        }
+    flex-wrap:wrap;
 
-    </style>
+    margin-bottom:15px;
+}
+
+.historyCoin{
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    background:
+    linear-gradient(135deg,
+    #ffcc00,
+    #ff6600);
+
+    color:white;
+}
+
+.arrowLink{
+
+    font-size:34px;
+
+    margin:0px 10px;
+
+    color:#00ffff;
+}
+
+/* POPUPS */
+
+#restartConfirmPopup,
+#gameOverPopup{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:
+    rgba(0,0,0,0.85);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+}
+
+#restartConfirmBox,
+#gameOverBox{
+
+    width:420px;
+
+    padding:40px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    color:white;
+}
+
+#restartConfirmBox{
+
+    background:
+    linear-gradient(135deg,
+    #141e30,
+    #243b55);
+}
+
+#gameOverBox{
+
+    background:
+    linear-gradient(135deg,
+    #ffcc00,
+    #ff6600);
+
+    animation:
+    zoomGame 0.8s ease;
+}
+
+@keyframes zoomGame{
+
+    0%{
+
+        transform:
+        scale(0.4)
+        rotate(-15deg);
+
+        opacity:0;
+    }
+
+    100%{
+
+        transform:
+        scale(1)
+        rotate(0deg);
+
+        opacity:1;
+    }
+}
+
+#restartBtns{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+}
+
+#restartBtns button{
+
+    padding:15px 28px;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    color:white;
+}
+
+#continueBtn{
+
+    background:
+    linear-gradient(135deg,
+    #00c6ff,
+    #0072ff);
+}
+
+#endGameBtn{
+
+    background:
+    linear-gradient(135deg,
+    #ff416c,
+    #ff4b2b);
+}
+
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+    h1{
+
+        font-size:28px;
+
+        padding-top:80px;
+    }
+
+    #coin{
+
+        width:150px;
+        height:150px;
+
+        font-size:55px;
+    }
+
+    .col,
+    .col1{
+
+        width:32px;
+        height:32px;
+
+        margin:2px;
+
+        font-size:11px;
+    }
+
+    .historyCoin{
+
+        width:40px;
+        height:40px;
+
+        font-size:14px;
+    }
+
+    .arrowLink{
+
+        font-size:18px;
+    }
+
+    .lastCoin{
+
+        width:42px;
+        height:42px;
+
+        font-size:15px;
+    }
+
+    #restartConfirmBox,
+    #gameOverBox{
+
+        width:92%;
+
+        padding:25px;
+    }
+
+    #restartBtns{
+
+        flex-direction:column;
+    }
+}
+
+</style>
 
 </head>
 
 <body>
 
-    <h1>TAMBOLA COIN PICKER</h1>
+<h1>TAMBOLA COIN PICKER</h1>
 
-    <button id="restartBtn"
-    onclick="restartGame()">
+<button id="restartBtn"
+onclick="restartGame()">
 
-        🔄 Restart
+🔄 Restart
 
-    </button>
+</button>
 
-    <div id="main">
+<div id="main">
 
-        <!-- SETTINGS -->
+<div id="tog">
 
-        <div id="tog">
+<table>
 
-            <table>
+<tr>
 
-                <tr>
+<th>Automatic</th>
 
-                    <th>Automatic</th>
+<th>Speed</th>
 
-                    <th>Speed</th>
+</tr>
 
-                </tr>
+<tr>
 
-                <tr>
+<td>
 
-                    <td>
+<input type="checkbox"
+id="auto"
+onchange="Auto()">
 
-                        <input type="checkbox"
-                        id="auto"
-                        onchange="Auto()">
+</td>
 
-                    </td>
+<td>
 
-                    <td>
+<select id="speed">
 
-                        <select id="speed">
+<option value="2000">2 Second</option>
+<option value="3000">3 Second</option>
+<option value="4000">4 Second</option>
+<option value="5000">5 Second</option>
+<option value="6000">6 Second</option>
+<option value="7000">7 Second</option>
+<option value="8000">8 Second</option>
+<option value="9000">9 Second</option>
+<option value="10000">10 Second</option>
 
-                            <option value="1000">1 Second</option>
-                            <option value="2000">2 Second</option>
-                            <option value="3000">3 Second</option>
-                            <option value="4000">4 Second</option>
-                            <option value="5000">5 Second</option>
-                            <option value="6000">6 Second</option>
-                            <option value="7000">7 Second</option>
-                            <option value="8000">8 Second</option>
-                            <option value="9000">9 Second</option>
-                            <option value="10000">10 Second</option>
+</select>
 
-                        </select>
+</td>
 
-                    </td>
+</tr>
 
-                </tr>
+</table>
 
-            </table>
+</div>
 
-        </div>
+<div id="extraControls">
 
-        <!-- BIG COIN -->
+<button onclick="pauseAuto()">
+⏸ Pause
+</button>
 
-        <div id="coin"
-        onclick="coin()">
+<button onclick="resumeAuto()">
+▶ Resume
+</button>
 
-            🎲
+</div>
 
-        </div>
+<div id="coin"
+onclick="coin()">
 
-        <!-- TRACK -->
+🎲
 
-        <div id="done"></div>
+</div>
 
-        <!-- HISTORY -->
+<div id="statsBox">
 
-        <h2 id="historyTitle">
+<div class="statCard">
 
-            Coins Arranged Left To Right
+<div class="statTitle">
+Remaining Coins
+</div>
 
-        </h2>
+<div class="statValue"
+id="remainingCoins">
 
-        <div id="result"></div>
+90
 
-    </div>
+</div>
 
-    <script>
+</div>
 
-        var a = [];
-        var b = [];
-        var p = [];
+<div class="statCard">
 
-        let isRunning = false;
+<div class="statTitle">
+Last 5 Numbers
+</div>
 
-        let autoInterval = null;
+<div id="lastFiveContainer">
 
-        for(let i=1;i<=90;i++){
+<div class="lastCoin">-</div>
 
-            a.push(i);
+</div>
 
-            b.push(i);
-        }
+</div>
 
-        function coin(){
+</div>
 
-            if(isRunning || a.length<=0){
+<div id="progressContainer">
 
-                return;
-            }
+<div id="progressBar"></div>
 
-            isRunning=true;
+</div>
 
-            const randomIndex=
-            Math.floor(Math.random()*a.length);
+<div id="done"></div>
 
-            const finalValue=
-            a[randomIndex];
+<h2 id="historyTitle">
 
-            const val1=
-            document.getElementById('coin');
+Coins Arranged Left To Right
 
-            val1.classList.add("animateCoin");
+</h2>
 
-            let spinAnimation=
-            setInterval(()=>{
+<div id="result"></div>
 
-                let randomTemp=
-                Math.floor(Math.random()*90)+1;
+</div>
 
-                val1.innerHTML=randomTemp;
+<script>
 
-            },40);
+var a = [];
+var b = [];
+var p = [];
 
-            setTimeout(()=>{
+let isRunning = false;
+let autoInterval = null;
+let latestCoin = null;
 
-                clearInterval(spinAnimation);
+for(let i=1;i<=90;i++){
 
-                val1.classList.remove("animateCoin");
+    a.push(i);
+    b.push(i);
+}
 
-                val1.innerHTML=finalValue;
+function coin(){
 
-                speakText(finalValue);
+    if(isRunning || a.length<=0){
 
-                a.splice(randomIndex,1);
+        return;
+    }
 
-                p.push(finalValue);
+    isRunning=true;
 
-                updateHistory();
+    const randomIndex=
+    Math.floor(Math.random()*a.length);
 
-                coin_done();
+    const finalValue=
+    a[randomIndex];
 
-                isRunning=false;
+    const val1=
+    document.getElementById('coin');
 
-                if(a.length==0){
+    val1.classList.add("animateCoin");
 
-                    clearInterval(autoInterval);
+    let spinAnimation=
+    setInterval(()=>{
 
-                    setTimeout(()=>{
+        let randomTemp=
+        Math.floor(Math.random()*90)+1;
 
-                        showGameOver();
+        val1.innerHTML=randomTemp;
 
-                    },1000);
-                }
+    },40);
 
-            },800);
-        }
+    setTimeout(()=>{
 
-        /* HISTORY */
+        clearInterval(spinAnimation);
 
-        function updateHistory(){
+        val1.classList.remove("animateCoin");
 
-            const result=
-            document.getElementById("result");
+        val1.innerHTML=finalValue;
 
-            result.innerHTML="";
+        speakText(finalValue);
 
-            let row=
-            document.createElement("div");
+        a.splice(randomIndex,1);
 
-            row.className="historyRow";
+        p.push(finalValue);
 
-            for(let i=0;i<p.length;i++){
+        latestCoin = finalValue;
 
-                let coin=
-                document.createElement("div");
+        updateHistory();
+        updateLastFive();
+        coin_done();
 
-                coin.className="historyCoin";
+        document.getElementById(
+        "remainingCoins"
+        ).innerHTML = a.length;
 
-                coin.innerHTML=p[i];
+        let completed =
+        90 - a.length;
 
-                row.appendChild(coin);
+        let percent =
+        (completed/90)*100;
 
-                if(i<p.length-1){
+        document.getElementById(
+        "progressBar"
+        ).style.width =
+        percent + "%";
 
-                    let arrow=
-                    document.createElement("div");
+        isRunning=false;
 
-                    arrow.className="arrowLink";
-
-                    arrow.innerHTML="➜";
-
-                    row.appendChild(arrow);
-                }
-
-                if((i+1)%10==0){
-
-                    result.appendChild(row);
-
-                    row=
-                    document.createElement("div");
-
-                    row.className="historyRow";
-                }
-            }
-
-            result.appendChild(row);
-        }
-
-        /* SPEAK */
-
-        function speakText(v){
-
-            if('speechSynthesis' in window){
-
-                let speech=
-                new SpeechSynthesisUtterance();
-
-                speech.text=v;
-
-                speech.volume=1;
-
-                speech.rate=1;
-
-                speech.pitch=1;
-
-                window.speechSynthesis.speak(speech);
-            }
-        }
-
-        /* TRACK */
-
-        function coin_done(){
-
-            let c1=
-            document.getElementById("done");
-
-            let c=0;
-
-            let c2="";
-
-            for(var i=0;i<9;i++){
-
-                c2+=`<div class='row'>`;
-
-                for(var j=0;j<10;j++){
-
-                    if(p.includes(b[c])){
-
-                        c2+=
-                        `<div class='col'>${b[c]}</div>`;
-                    }
-
-                    else{
-
-                        c2+=
-                        `<div class='col1'>${b[c]}</div>`;
-                    }
-
-                    c++;
-                }
-
-                c2+=`</div>`;
-            }
-
-            c1.innerHTML=c2;
-        }
-
-        /* AUTO */
-
-        function Auto(){
-
-            const checkBox =
-            document.getElementById("auto");
-
-            const speed =
-            document.getElementById("speed");
+        if(a.length==0){
 
             clearInterval(autoInterval);
 
-            if(checkBox.checked){
+            setTimeout(()=>{
 
-                autoInterval =
-                setInterval(()=>{
+                showGameOver();
 
-                    if(!isRunning){
-
-                        coin();
-                    }
-
-                }, Number(speed.value));
-            }
+            },1000);
         }
 
-        /* SPEED CHANGE */
+    },800);
+}
 
-        document
-        .getElementById("speed")
-        .addEventListener("change", ()=>{
+function speakText(v){
 
-            const checkBox =
-            document.getElementById("auto");
+    if('speechSynthesis' in window){
 
-            if(checkBox.checked){
+        window.speechSynthesis.cancel();
 
-                Auto();
-            }
-        });
+        let speech =
+        new SpeechSynthesisUtterance();
 
-        /* GAME OVER */
+        speech.text = v;
 
-        function showGameOver(){
+        speech.lang = "en-US";
 
-            let popup =
+        speech.rate = 0.9;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+    }
+}
+
+function updateHistory(){
+
+    const result=
+    document.getElementById("result");
+
+    result.innerHTML="";
+
+    let row=
+    document.createElement("div");
+
+    row.className="historyRow";
+
+    for(let i=0;i<p.length;i++){
+
+        let coin=
+        document.createElement("div");
+
+        coin.className="historyCoin";
+
+        coin.innerHTML=p[i];
+
+        row.appendChild(coin);
+
+        if(i<p.length-1){
+
+            let arrow=
             document.createElement("div");
 
-            popup.id =
-            "gameOverPopup";
+            arrow.className="arrowLink";
 
-            popup.innerHTML = `
+            arrow.innerHTML="➜";
 
-                <div id="gameOverBox">
-
-                    <h1>
-                        🏆 GAME OVER 🏆
-                    </h1>
-
-                    <p>
-                        All 90 Coins Completed
-                    </p>
-
-                    <button onclick="restartGame()">
-
-                        🔄 Restart Game
-
-                    </button>
-
-                </div>
-
-            `;
-
-            document.body.appendChild(popup);
+            row.appendChild(arrow);
         }
 
-        /* RESTART CONFIRM */
+        if((i+1)%10==0){
 
-        function restartGame(){
+            result.appendChild(row);
 
-            const oldPopup =
-            document.getElementById(
-            "restartConfirmPopup"
-            );
-
-            if(oldPopup){
-
-                oldPopup.remove();
-            }
-
-            let popup =
+            row=
             document.createElement("div");
 
-            popup.id =
-            "restartConfirmPopup";
-
-            popup.innerHTML = `
-
-                <div id="restartConfirmBox">
-
-                    <h1>
-                        ⚠ Restart Game?
-                    </h1>
-
-                    <p>
-                        Do you want to end
-                        the game or continue?
-                    </p>
-
-                    <div id="restartBtns">
-
-                        <button id="endGameBtn"
-                        onclick="finalRestart()">
-
-                            ❌ End Game
-
-                        </button>
-
-                        <button id="continueBtn"
-                        onclick="closeRestartPopup()">
-
-                            ▶ Continue Game
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-            document.body.appendChild(popup);
+            row.className="historyRow";
         }
+    }
 
-        /* FINAL RESTART */
+    result.appendChild(row);
+}
 
-        function finalRestart(){
+function updateLastFive(){
 
-            location.reload();
-        }
+    let container =
+    document.getElementById(
+    "lastFiveContainer"
+    );
 
-        /* CLOSE POPUP */
+    container.innerHTML = "";
 
-        function closeRestartPopup(){
+    let lastFive =
+    p.slice(-5);
 
-            const popup =
-            document.getElementById(
-            "restartConfirmPopup"
-            );
+    if(lastFive.length==0){
 
-            if(popup){
+        container.innerHTML =
+        `<div class="lastCoin">-</div>`;
 
-                popup.remove();
+        return;
+    }
+
+    lastFive.forEach(num=>{
+
+        container.innerHTML +=
+        `<div class="lastCoin">
+            ${num}
+        </div>`;
+    });
+}
+
+function coin_done(){
+
+    let c1 =
+    document.getElementById("done");
+
+    let c = 0;
+
+    let c2 = "";
+
+    for(let i=0;i<9;i++){
+
+        c2 += `<div class='row'>`;
+
+        for(let j=0;j<10;j++){
+
+            let extraClass = "";
+
+            if(b[c] == latestCoin){
+
+                extraClass =
+                "latestNumber";
             }
+
+            if(p.includes(b[c])){
+
+                c2 +=
+                `<div class='col ${extraClass}'>
+                ${b[c]}
+                </div>`;
+            }
+
+            else{
+
+                c2 +=
+                `<div class='col1'>
+                ${b[c]}
+                </div>`;
+            }
+
+            c++;
         }
 
-        coin_done();
+        c2 += `</div>`;
+    }
 
-    </script>
+    c1.innerHTML = c2;
+}
+
+function Auto(){
+
+    const checkBox =
+    document.getElementById("auto");
+
+    const speed =
+    document.getElementById("speed");
+
+    clearInterval(autoInterval);
+
+    if(checkBox.checked){
+
+        autoInterval =
+        setInterval(()=>{
+
+            if(!isRunning){
+
+                coin();
+            }
+
+        }, Number(speed.value));
+    }
+}
+
+document
+.getElementById("speed")
+.addEventListener("change", ()=>{
+
+    const checkBox =
+    document.getElementById("auto");
+
+    if(checkBox.checked){
+
+        Auto();
+    }
+});
+
+function pauseAuto(){
+
+    clearInterval(autoInterval);
+
+    document.getElementById(
+    "auto"
+    ).checked = false;
+}
+
+function resumeAuto(){
+
+    document.getElementById(
+    "auto"
+    ).checked = true;
+
+    Auto();
+}
+
+/* RESTART POPUP */
+
+function restartGame(){
+
+    const oldPopup =
+    document.getElementById(
+    "restartConfirmPopup"
+    );
+
+    if(oldPopup){
+
+        oldPopup.remove();
+    }
+
+    let popup =
+    document.createElement("div");
+
+    popup.id =
+    "restartConfirmPopup";
+
+    popup.innerHTML = `
+
+        <div id="restartConfirmBox">
+
+            <h1>
+                ⚠ Restart Game?
+            </h1>
+
+            <p style="
+            font-size:22px;
+            margin-top:20px;
+            margin-bottom:30px;
+            ">
+
+                Do you want to restart
+                the current game?
+
+            </p>
+
+            <div id="restartBtns">
+
+                <button id="endGameBtn"
+                onclick="finalRestart()">
+
+                    ❌ Restart
+
+                </button>
+
+                <button id="continueBtn"
+                onclick="closeRestartPopup()">
+
+                    ▶ Continue
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(popup);
+}
+
+function finalRestart(){
+
+    location.reload();
+}
+
+function closeRestartPopup(){
+
+    const popup =
+    document.getElementById(
+    "restartConfirmPopup"
+    );
+
+    if(popup){
+
+        popup.remove();
+    }
+}
+
+/* GAME OVER POPUP */
+
+function showGameOver(){
+
+    let popup =
+    document.createElement("div");
+
+    popup.id =
+    "gameOverPopup";
+
+    popup.innerHTML = `
+
+        <div id="gameOverBox">
+
+            <h1 style="
+            font-size:45px;
+            margin-bottom:20px;
+            ">
+
+                🏆 GAME OVER 🏆
+
+            </h1>
+
+            <p style="
+            font-size:24px;
+            line-height:40px;
+            ">
+
+                All 90 Coins Completed 🎉
+                <br><br>
+
+                New Game Starting In
+                5 Seconds...
+
+            </p>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(popup);
+
+    setTimeout(()=>{
+
+        location.reload();
+
+    },5000);
+}
+
+coin_done();
+
+</script>
 
 </body>
 
