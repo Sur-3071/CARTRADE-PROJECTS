@@ -51,6 +51,48 @@
             0px 0px 20px orange;
         }
 
+        /* RESTART BUTTON */
+
+        #restartBtn{
+
+            position:fixed;
+
+            top:20px;
+            right:20px;
+
+            z-index:999;
+
+            padding:14px 28px;
+
+            border:none;
+
+            border-radius:50px;
+
+            cursor:pointer;
+
+            font-size:18px;
+
+            font-weight:bold;
+
+            color:white;
+
+            background:
+            linear-gradient(135deg,
+            #ff416c,
+            #ff4b2b);
+
+            box-shadow:
+            0px 0px 15px #ff416c,
+            0px 0px 30px #ff4b2b;
+
+            transition:0.3s;
+        }
+
+        #restartBtn:hover{
+
+            transform:scale(1.08);
+        }
+
         #main{
 
             width:95%;
@@ -113,7 +155,7 @@
             font-size:16px;
         }
 
-        /* BIG COIN BUTTON */
+        /* BIG COIN */
 
         #coin{
 
@@ -298,7 +340,7 @@
             color:white;
         }
 
-        /* HISTORY TITLE */
+        /* HISTORY */
 
         #historyTitle{
 
@@ -311,8 +353,6 @@
             text-shadow:
             0px 0px 10px #00ffff;
         }
-
-        /* HISTORY */
 
         #result{
 
@@ -338,17 +378,14 @@
 
             align-items:center;
 
-            flex-wrap:nowrap;
+            flex-wrap:wrap;
 
-            margin-bottom:18px;
-
-            overflow-x:auto;
+            margin-bottom:15px;
         }
 
         .historyCoin{
 
-            min-width:58px;
-
+            width:58px;
             height:58px;
 
             border-radius:50%;
@@ -373,8 +410,6 @@
             box-shadow:
             0px 0px 15px orange,
             inset 0px 0px 10px white;
-
-            animation:coinPop 0.5s ease;
         }
 
         .arrowLink{
@@ -389,13 +424,143 @@
             0px 0px 10px #00ffff;
         }
 
-        @keyframes coinPop{
+        /* POPUPS */
+
+        #gameOverPopup,
+        #restartConfirmPopup{
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+
+            background:
+            rgba(0,0,0,0.85);
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            z-index:9999;
+
+            animation:
+            fadeIn 0.5s ease;
+        }
+
+        #gameOverBox,
+        #restartConfirmBox{
+
+            width:420px;
+
+            padding:40px;
+
+            border-radius:30px;
+
+            text-align:center;
+
+            color:white;
+
+            animation:
+            popupZoom 0.5s ease;
+        }
+
+        #gameOverBox{
+
+            background:
+            linear-gradient(135deg,
+            #ffcc00,
+            #ff6600);
+
+            box-shadow:
+            0px 0px 30px gold,
+            0px 0px 60px orange;
+        }
+
+        #restartConfirmBox{
+
+            background:
+            linear-gradient(135deg,
+            #141e30,
+            #243b55);
+
+            box-shadow:
+            0px 0px 30px #00ffff,
+            0px 0px 60px #0072ff;
+        }
+
+        #gameOverBox h1,
+        #restartConfirmBox h1{
+
+            font-size:40px;
+
+            margin-bottom:20px;
+        }
+
+        #gameOverBox p,
+        #restartConfirmBox p{
+
+            font-size:22px;
+
+            margin-bottom:30px;
+
+            line-height:35px;
+        }
+
+        #gameOverBox button,
+        #restartBtns button{
+
+            padding:15px 30px;
+
+            border:none;
+
+            border-radius:50px;
+
+            font-size:18px;
+
+            cursor:pointer;
+
+            color:white;
+
+            margin:10px;
+
+            transition:0.3s;
+        }
+
+        #gameOverBox button,
+        #continueBtn{
+
+            background:
+            linear-gradient(135deg,
+            #00c6ff,
+            #0072ff);
+        }
+
+        #endGameBtn{
+
+            background:
+            linear-gradient(135deg,
+            #ff416c,
+            #ff4b2b);
+        }
+
+        #gameOverBox button:hover,
+        #restartBtns button:hover{
+
+            transform:scale(1.08);
+        }
+
+        @keyframes popupZoom{
 
             0%{
 
                 transform:
-                scale(0)
-                rotate(0deg);
+                scale(0.3)
+                rotate(-15deg);
 
                 opacity:0;
             }
@@ -404,59 +569,22 @@
 
                 transform:
                 scale(1)
-                rotate(360deg);
+                rotate(0deg);
 
                 opacity:1;
             }
         }
 
-        /* MOBILE */
+        @keyframes fadeIn{
 
-        @media(max-width:768px){
+            from{
 
-            h1{
-
-                font-size:30px;
+                opacity:0;
             }
 
-            #coin{
+            to{
 
-                width:160px;
-                height:160px;
-
-                font-size:60px;
-            }
-
-            .col,
-            .col1{
-
-                width:38px;
-                height:38px;
-
-                font-size:12px;
-
-                margin:2px;
-            }
-
-            .historyCoin{
-
-                min-width:42px;
-
-                height:42px;
-
-                font-size:16px;
-            }
-
-            .arrowLink{
-
-                font-size:20px;
-
-                margin:0px 5px;
-            }
-
-            #historyTitle{
-
-                font-size:24px;
+                opacity:1;
             }
         }
 
@@ -466,7 +594,14 @@
 
 <body>
 
-    <h1>SURESH TAMBOLA COIN PICKER</h1>
+    <h1>TAMBOLA COIN PICKER</h1>
+
+    <button id="restartBtn"
+    onclick="restartGame()">
+
+        🔄 Restart
+
+    </button>
 
     <div id="main">
 
@@ -490,7 +625,7 @@
 
                         <input type="checkbox"
                         id="auto"
-                        onclick="Auto()">
+                        onchange="Auto()">
 
                     </td>
 
@@ -519,7 +654,7 @@
 
         </div>
 
-        <!-- BIG COIN CLICK BUTTON -->
+        <!-- BIG COIN -->
 
         <div id="coin"
         onclick="coin()">
@@ -528,19 +663,17 @@
 
         </div>
 
-        <!-- TRACK BOARD -->
+        <!-- TRACK -->
 
         <div id="done"></div>
 
-        <!-- TITLE -->
+        <!-- HISTORY -->
 
         <h2 id="historyTitle">
 
             Coins Arranged Left To Right
 
         </h2>
-
-        <!-- HISTORY -->
 
         <div id="result"></div>
 
@@ -553,6 +686,8 @@
         var p = [];
 
         let isRunning = false;
+
+        let autoInterval = null;
 
         for(let i=1;i<=90;i++){
 
@@ -579,8 +714,6 @@
             const val1=
             document.getElementById('coin');
 
-            /* START SPIN */
-
             val1.classList.add("animateCoin");
 
             let spinAnimation=
@@ -592,8 +725,6 @@
                 val1.innerHTML=randomTemp;
 
             },40);
-
-            /* STOP AFTER 0.8 SEC */
 
             setTimeout(()=>{
 
@@ -617,11 +748,11 @@
 
                 if(a.length==0){
 
+                    clearInterval(autoInterval);
+
                     setTimeout(()=>{
 
-                        alert("Game Over");
-
-                        location.reload();
+                        showGameOver();
 
                     },1000);
                 }
@@ -666,8 +797,6 @@
                     row.appendChild(arrow);
                 }
 
-                /* NEXT ROW AFTER 10 */
-
                 if((i+1)%10==0){
 
                     result.appendChild(row);
@@ -681,6 +810,8 @@
 
             result.appendChild(row);
         }
+
+        /* SPEAK */
 
         function speakText(v){
 
@@ -700,6 +831,8 @@
                 window.speechSynthesis.speak(speech);
             }
         }
+
+        /* TRACK */
 
         function coin_done(){
 
@@ -737,32 +870,159 @@
             c1.innerHTML=c2;
         }
 
+        /* AUTO */
+
         function Auto(){
 
-            var v=
-            document.getElementById('auto');
+            const checkBox =
+            document.getElementById("auto");
 
-            var sec=
-            document.getElementById('speed').value;
+            const speed =
+            document.getElementById("speed");
 
-            if(v.checked){
+            clearInterval(autoInterval);
 
-                let autoRun=
+            if(checkBox.checked){
+
+                autoInterval =
                 setInterval(()=>{
-
-                    if(!v.checked || a.length<=0){
-
-                        clearInterval(autoRun);
-
-                        return;
-                    }
 
                     if(!isRunning){
 
                         coin();
                     }
 
-                },Number(sec));
+                }, Number(speed.value));
+            }
+        }
+
+        /* SPEED CHANGE */
+
+        document
+        .getElementById("speed")
+        .addEventListener("change", ()=>{
+
+            const checkBox =
+            document.getElementById("auto");
+
+            if(checkBox.checked){
+
+                Auto();
+            }
+        });
+
+        /* GAME OVER */
+
+        function showGameOver(){
+
+            let popup =
+            document.createElement("div");
+
+            popup.id =
+            "gameOverPopup";
+
+            popup.innerHTML = `
+
+                <div id="gameOverBox">
+
+                    <h1>
+                        🏆 GAME OVER 🏆
+                    </h1>
+
+                    <p>
+                        All 90 Coins Completed
+                    </p>
+
+                    <button onclick="restartGame()">
+
+                        🔄 Restart Game
+
+                    </button>
+
+                </div>
+
+            `;
+
+            document.body.appendChild(popup);
+        }
+
+        /* RESTART CONFIRM */
+
+        function restartGame(){
+
+            const oldPopup =
+            document.getElementById(
+            "restartConfirmPopup"
+            );
+
+            if(oldPopup){
+
+                oldPopup.remove();
+            }
+
+            let popup =
+            document.createElement("div");
+
+            popup.id =
+            "restartConfirmPopup";
+
+            popup.innerHTML = `
+
+                <div id="restartConfirmBox">
+
+                    <h1>
+                        ⚠ Restart Game?
+                    </h1>
+
+                    <p>
+                        Do you want to end
+                        the game or continue?
+                    </p>
+
+                    <div id="restartBtns">
+
+                        <button id="endGameBtn"
+                        onclick="finalRestart()">
+
+                            ❌ End Game
+
+                        </button>
+
+                        <button id="continueBtn"
+                        onclick="closeRestartPopup()">
+
+                            ▶ Continue Game
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            document.body.appendChild(popup);
+        }
+
+        /* FINAL RESTART */
+
+        function finalRestart(){
+
+            location.reload();
+        }
+
+        /* CLOSE POPUP */
+
+        function closeRestartPopup(){
+
+            const popup =
+            document.getElementById(
+            "restartConfirmPopup"
+            );
+
+            if(popup){
+
+                popup.remove();
             }
         }
 
