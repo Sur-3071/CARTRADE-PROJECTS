@@ -36,8 +36,6 @@ body{
     overflow-x:hidden;
 }
 
-/* TITLE */
-
 h1{
 
     text-align:center;
@@ -53,7 +51,7 @@ h1{
     0px 0px 20px orange;
 }
 
-/* RESTART BUTTON */
+/* RESTART */
 
 #restartBtn{
 
@@ -95,8 +93,6 @@ h1{
     transform:scale(1.08);
 }
 
-/* MAIN */
-
 #main{
 
     width:95%;
@@ -110,56 +106,7 @@ h1{
     align-items:center;
 }
 
-/* SETTINGS */
-
-#tog{
-
-    margin-top:25px;
-
-    padding:20px 30px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(10px);
-}
-
-table{
-
-    color:white;
-}
-
-th,
-td{
-
-    padding:10px 20px;
-
-    text-align:center;
-}
-
-#auto{
-
-    width:28px;
-    height:28px;
-
-    cursor:pointer;
-}
-
-select{
-
-    padding:10px;
-
-    border-radius:10px;
-
-    border:none;
-
-    outline:none;
-
-    font-size:16px;
-}
-
-/* CONTROLS */
+/* BUTTONS */
 
 #extraControls{
 
@@ -204,7 +151,8 @@ select{
 
 #coin{
 
-    margin-top:35px;
+    margin-top:100px;
+    margin-bottom:100px;
 
     width:220px;
     height:220px;
@@ -243,33 +191,6 @@ select{
     0px 0px 30px gold,
     0px 0px 60px orange,
     inset 0px 0px 20px white;
-
-    transform-style:preserve-3d;
-
-    perspective:1000px;
-}
-
-#coin::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:120%;
-    height:120%;
-
-    background:
-    linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.9),
-    transparent
-    );
-
-    top:-10%;
-    left:-120%;
-
-    transform:rotate(25deg);
 }
 
 .animateCoin{
@@ -278,49 +199,22 @@ select{
     ultraFastRotate 0.25s linear infinite;
 }
 
-.animateCoin::before{
-
-    animation:
-    shineMove 0.5s linear infinite;
-}
-
 @keyframes ultraFastRotate{
 
     0%{
-
-        transform:
-        rotateY(0deg);
+        transform:rotateY(0deg);
     }
 
     100%{
-
-        transform:
-        rotateY(-360deg);
+        transform:rotateY(-360deg);
     }
 }
 
-@keyframes shineMove{
-
-    0%{
-
-        left:-120%;
-    }
-
-    100%{
-
-        left:120%;
-    }
-}
-
-/* STATS */
+/* LAST FIVE */
 
 #statsBox{
 
     display:flex;
-
-    gap:25px;
-
-    flex-wrap:wrap;
 
     justify-content:center;
 
@@ -329,7 +223,7 @@ select{
 
 .statCard{
 
-    min-width:280px;
+    min-width:320px;
 
     padding:25px;
 
@@ -352,17 +246,6 @@ select{
 
     margin-bottom:18px;
 }
-
-.statValue{
-
-    font-size:48px;
-
-    font-weight:bold;
-
-    color:#00ffff;
-}
-
-/* LAST FIVE */
 
 #lastFiveContainer{
 
@@ -414,13 +297,15 @@ select{
     height:24px;
 
     background:
-    rgba(255,255,255,0.15);
+    rgba(255,255,255,0.12);
 
     border-radius:50px;
 
     overflow:hidden;
 
     margin-top:30px;
+
+    position:relative;
 }
 
 #progressBar{
@@ -432,14 +317,42 @@ select{
     border-radius:50px;
 
     background:
-    linear-gradient(90deg,
+    linear-gradient(
+    90deg,
     #00ff87,
-    #60efff);
+    #00e5ff
+    );
 
     transition:0.5s;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding-right:8px;
 }
 
-/* TRACK */
+#progressText{
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    color:#003b2f;
+
+    background:
+    rgba(255,255,255,0.25);
+
+    padding:2px 7px;
+
+    border-radius:20px;
+
+    backdrop-filter:blur(4px);
+}
+
+/* DONE TABLE */
 
 #done{
 
@@ -458,15 +371,17 @@ select{
 .row{
 
     display:flex;
+
+    justify-content:center;
 }
 
 .col,
 .col1{
 
-    width:72px;
-    height:72px;
+    width:60px;
+    height:60px;
 
-    margin:5px;
+    margin:4px;
 
     display:flex;
 
@@ -474,9 +389,9 @@ select{
 
     align-items:center;
 
-    border-radius:15px;
+    border-radius:12px;
 
-    font-size:22px;
+    font-size:20px;
 
     font-weight:bold;
 }
@@ -489,9 +404,6 @@ select{
     #60efff);
 
     color:black;
-
-    box-shadow:
-    0px 0px 15px #00ff87;
 }
 
 .col1{
@@ -505,22 +417,6 @@ select{
 .latestNumber{
 
     border:3px solid white;
-
-    animation:
-    latestGlow 1s infinite alternate;
-}
-
-@keyframes latestGlow{
-
-    from{
-
-        transform:scale(1);
-    }
-
-    to{
-
-        transform:scale(1.12);
-    }
 }
 
 /* HISTORY */
@@ -548,11 +444,19 @@ select{
     rgba(255,255,255,0.08);
 
     margin-bottom:40px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
 }
 
 .historyRow{
 
     display:flex;
+
+    justify-content:center;
 
     align-items:center;
 
@@ -563,8 +467,8 @@ select{
 
 .historyCoin{
 
-    width:58px;
-    height:58px;
+    width:50px;
+    height:50px;
 
     border-radius:50%;
 
@@ -574,7 +478,7 @@ select{
 
     align-items:center;
 
-    font-size:22px;
+    font-size:18px;
 
     font-weight:bold;
 
@@ -588,9 +492,9 @@ select{
 
 .arrowLink{
 
-    font-size:34px;
+    font-size:24px;
 
-    margin:0px 10px;
+    margin:0px 8px;
 
     color:#00ffff;
 }
@@ -648,30 +552,6 @@ select{
     linear-gradient(135deg,
     #ffcc00,
     #ff6600);
-
-    animation:
-    zoomGame 0.8s ease;
-}
-
-@keyframes zoomGame{
-
-    0%{
-
-        transform:
-        scale(0.4)
-        rotate(-15deg);
-
-        opacity:0;
-    }
-
-    100%{
-
-        transform:
-        scale(1)
-        rotate(0deg);
-
-        opacity:1;
-    }
 }
 
 #restartBtns{
@@ -736,12 +616,10 @@ select{
     .col,
     .col1{
 
-        width:32px;
-        height:32px;
+        width:48px;
+        height:48px;
 
-        margin:2px;
-
-        font-size:11px;
+        font-size:15px;
     }
 
     .historyCoin{
@@ -752,30 +630,12 @@ select{
         font-size:14px;
     }
 
-    .arrowLink{
-
-        font-size:18px;
-    }
-
     .lastCoin{
 
         width:42px;
         height:42px;
 
         font-size:15px;
-    }
-
-    #restartConfirmBox,
-    #gameOverBox{
-
-        width:92%;
-
-        padding:25px;
-    }
-
-    #restartBtns{
-
-        flex-direction:column;
     }
 }
 
@@ -785,7 +645,7 @@ select{
 
 <body>
 
-<h1>TAMBOLA COIN PICKER</h1>
+<h1>SURESH TAMBOLA COIN PICKER</h1>
 
 <button id="restartBtn"
 onclick="restartGame()">
@@ -795,52 +655,6 @@ onclick="restartGame()">
 </button>
 
 <div id="main">
-
-<div id="tog">
-
-<table>
-
-<tr>
-
-<th>Automatic</th>
-
-<th>Speed</th>
-
-</tr>
-
-<tr>
-
-<td>
-
-<input type="checkbox"
-id="auto"
-onchange="Auto()">
-
-</td>
-
-<td>
-
-<select id="speed">
-
-<option value="2000">2 Second</option>
-<option value="3000">3 Second</option>
-<option value="4000">4 Second</option>
-<option value="5000">5 Second</option>
-<option value="6000">6 Second</option>
-<option value="7000">7 Second</option>
-<option value="8000">8 Second</option>
-<option value="9000">9 Second</option>
-<option value="10000">10 Second</option>
-
-</select>
-
-</td>
-
-</tr>
-
-</table>
-
-</div>
 
 <div id="extraControls">
 
@@ -863,21 +677,6 @@ onclick="coin()">
 
 <div id="statsBox">
 
-<!--<div class="statCard">
-
-<div class="statTitle">
-Remaining Coins
-</div>
-
-<div class="statValue"
-id="remainingCoins">
-
-90
-
-</div>
-
-</div>-->
-
 <div class="statCard">
 
 <div class="statTitle">
@@ -896,7 +695,13 @@ Last 5 Numbers
 
 <div id="progressContainer">
 
-<div id="progressBar"></div>
+<div id="progressBar">
+
+<div id="progressText">
+0
+</div>
+
+</div>
 
 </div>
 
@@ -927,6 +732,8 @@ for(let i=1;i<=90;i++){
     a.push(i);
     b.push(i);
 }
+
+/* COIN */
 
 function coin(){
 
@@ -975,12 +782,10 @@ function coin(){
         latestCoin = finalValue;
 
         updateHistory();
-        updateLastFive();
-        coin_done();
 
-       /* document.getElementById(
-        "remainingCoins"
-        ).innerHTML = a.length;*/
+        updateLastFive();
+
+        coin_done();
 
         let completed =
         90 - a.length;
@@ -992,6 +797,11 @@ function coin(){
         "progressBar"
         ).style.width =
         percent + "%";
+
+        document.getElementById(
+        "progressText"
+        ).innerHTML =
+        completed + "";
 
         isRunning=false;
 
@@ -1008,6 +818,8 @@ function coin(){
 
     },800);
 }
+
+/* SPEAK */
 
 function speakText(v){
 
@@ -1032,54 +844,58 @@ function speakText(v){
     }
 }
 
+/* HISTORY */
+
 function updateHistory(){
 
-    const result=
+    const result =
     document.getElementById("result");
 
-    result.innerHTML="";
+    result.innerHTML = "";
 
-    let row=
-    document.createElement("div");
+    let totalPerRow = 6;
 
-    row.className="historyRow";
+    for(let i = 0; i < p.length; i += totalPerRow){
 
-    for(let i=0;i<p.length;i++){
-
-        let coin=
+        let row =
         document.createElement("div");
 
-        coin.className="historyCoin";
+        row.className = "historyRow";
 
-        coin.innerHTML=p[i];
+        let rowData =
+        p.slice(i, i + totalPerRow);
 
-        row.appendChild(coin);
+        rowData.forEach((num, index)=>{
 
-        if(i<p.length-1){
-
-            let arrow=
+            let coin =
             document.createElement("div");
 
-            arrow.className="arrowLink";
+            coin.className =
+            "historyCoin";
 
-            arrow.innerHTML="➜";
+            coin.innerHTML = num;
 
-            row.appendChild(arrow);
-        }
+            row.appendChild(coin);
 
-        if((i+1)%10==0){
+            if(index < rowData.length - 1){
 
-            result.appendChild(row);
+                let arrow =
+                document.createElement("div");
 
-            row=
-            document.createElement("div");
+                arrow.className =
+                "arrowLink";
 
-            row.className="historyRow";
-        }
+                arrow.innerHTML = "➜";
+
+                row.appendChild(arrow);
+            }
+        });
+
+        result.appendChild(row);
     }
-
-    result.appendChild(row);
 }
+
+/* LAST FIVE */
 
 function updateLastFive(){
 
@@ -1110,6 +926,8 @@ function updateLastFive(){
     });
 }
 
+/* DONE TABLE */
+
 function coin_done(){
 
     let c1 =
@@ -1119,11 +937,11 @@ function coin_done(){
 
     let c2 = "";
 
-    for(let i=0;i<9;i++){
+    for(let i=0;i<10;i++){
 
         c2 += `<div class='row'>`;
 
-        for(let j=0;j<10;j++){
+        for(let j=0;j<9;j++){
 
             let extraClass = "";
 
@@ -1158,74 +976,31 @@ function coin_done(){
     c1.innerHTML = c2;
 }
 
-function Auto(){
+/* AUTO */
 
-    const checkBox =
-    document.getElementById("auto");
-
-    const speed =
-    document.getElementById("speed");
+function resumeAuto(){
 
     clearInterval(autoInterval);
 
-    if(checkBox.checked){
+    autoInterval =
+    setInterval(()=>{
 
-        autoInterval =
-        setInterval(()=>{
+        if(!isRunning){
 
-            if(!isRunning){
+            coin();
+        }
 
-                coin();
-            }
-
-        }, Number(speed.value));
-    }
+    },2500);
 }
-
-document
-.getElementById("speed")
-.addEventListener("change", ()=>{
-
-    const checkBox =
-    document.getElementById("auto");
-
-    if(checkBox.checked){
-
-        Auto();
-    }
-});
 
 function pauseAuto(){
 
     clearInterval(autoInterval);
-
-    document.getElementById(
-    "auto"
-    ).checked = false;
 }
 
-function resumeAuto(){
-
-    document.getElementById(
-    "auto"
-    ).checked = true;
-
-    Auto();
-}
-
-/* RESTART POPUP */
+/* RESTART */
 
 function restartGame(){
-
-    const oldPopup =
-    document.getElementById(
-    "restartConfirmPopup"
-    );
-
-    if(oldPopup){
-
-        oldPopup.remove();
-    }
 
     let popup =
     document.createElement("div");
@@ -1241,28 +1016,19 @@ function restartGame(){
                 ⚠ Restart Game?
             </h1>
 
-            <p style="
-            font-size:22px;
-            margin-top:20px;
-            margin-bottom:30px;
-            ">
-
-                Do you want to restart
-                the current game?
-
-            </p>
+            <br>
 
             <div id="restartBtns">
 
                 <button id="endGameBtn"
-                onclick="finalRestart()">
+                onclick="location.reload()">
 
                     ❌ Restart
 
                 </button>
 
                 <button id="continueBtn"
-                onclick="closeRestartPopup()">
+                onclick="this.closest('#restartConfirmPopup').remove()">
 
                     ▶ Continue
 
@@ -1277,25 +1043,7 @@ function restartGame(){
     document.body.appendChild(popup);
 }
 
-function finalRestart(){
-
-    location.reload();
-}
-
-function closeRestartPopup(){
-
-    const popup =
-    document.getElementById(
-    "restartConfirmPopup"
-    );
-
-    if(popup){
-
-        popup.remove();
-    }
-}
-
-/* GAME OVER POPUP */
+/* GAME OVER */
 
 function showGameOver(){
 
@@ -1309,14 +1057,13 @@ function showGameOver(){
 
         <div id="gameOverBox">
 
-            <h1 style="
-            font-size:45px;
-            margin-bottom:20px;
-            ">
+            <h1>
 
                 🏆 GAME OVER 🏆
 
             </h1>
+
+            <br>
 
             <p style="
             font-size:24px;
@@ -1324,10 +1071,11 @@ function showGameOver(){
             ">
 
                 All 90 Coins Completed 🎉
+
                 <br><br>
 
-                New Game Starting In
-                5 Seconds...
+                New Game Starting
+                In 5 Seconds...
 
             </p>
 
