@@ -1,13 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Ward Wise Voter Directory</title>
 
-  <link rel="stylesheet" href="voterstyle.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,92 +17,104 @@
 
     <!-- HEADER -->
     <header class="header">
-      <h1>Ward Wise Voter Directory</h1>
-      <p>Search and view voter records across all wards</p>
+      <div>
+        <h1>Ward Wise Voter Directory</h1>
+        <p>Search and manage ward-wise voter records</p>
+      </div>
     </header>
 
 
     <!-- FILTER SECTION -->
     <section class="filters">
 
-      <!-- WARD FILTER -->
       <div class="filter-group">
-
-        <label for="wardSelect">
-          Select Ward
-        </label>
+        <label for="wardSelect">Select Ward</label>
 
         <select id="wardSelect">
           <option value="ALL">All Wards</option>
         </select>
-
       </div>
 
-
-      <!-- NAME SEARCH -->
-      <div class="filter-group">
-
-        <label for="searchInput">
-          Search Voter Details
-        </label>
+      <div class="filter-group search-group">
+        <label for="searchInput">Search Voter Details</label>
 
         <input
           type="search"
           id="searchInput"
-          placeholder="Search name, voter number, voter ID..."
+          placeholder="Search name, voter number, voter ID, relation..."
           autocomplete="off"
         >
-
       </div>
 
-
-      <!-- CLEAR BUTTON -->
-      <button
-        type="button"
-        id="clearBtn"
-      >
+      <button type="button" id="clearBtn" class="clear-btn">
         Clear Search
       </button>
 
     </section>
 
 
-    <!-- RECORDS SECTION -->
+    <!-- STATISTICS -->
+    <section class="statistics">
+
+      <div class="stat-card total-card">
+        <div class="stat-icon">👥</div>
+
+        <div>
+          <span>Total Voters</span>
+          <h2 id="totalVoters">0</h2>
+        </div>
+      </div>
+
+
+      <div class="stat-card male-card">
+        <div class="stat-icon">👨</div>
+
+        <div>
+          <span>Male Voters</span>
+          <h2 id="maleCount">0</h2>
+        </div>
+      </div>
+
+
+      <div class="stat-card female-card">
+        <div class="stat-icon">👩</div>
+
+        <div>
+          <span>Female Voters</span>
+          <h2 id="femaleCount">0</h2>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- TABLE SECTION -->
     <section class="table-section">
 
-      <!-- TABLE HEADER -->
       <div class="table-heading">
 
         <div>
           <h2>Voter Records</h2>
-
-          <p>
-            All voter details are displayed below
-          </p>
+          <p>Complete voter details</p>
         </div>
 
-        <div class="record-count">
-          <span id="count">0 Records</span>
+        <div class="record-count" id="count">
+          0 Records
         </div>
 
       </div>
 
 
-      <!-- STATUS MESSAGE -->
-      <div
-        id="status"
-        class="status"
-        hidden
-      ></div>
+      <!-- STATUS -->
+      <div id="status" class="status" hidden></div>
 
 
-      <!-- TABLE -->
+      <!-- VOTER TABLE -->
       <div class="table-wrapper">
 
         <table>
 
           <thead>
-
             <tr>
               <th>S.No</th>
               <th>Ward Number</th>
@@ -114,14 +127,10 @@
               <th>Gender</th>
               <th>House No</th>
             </tr>
-
           </thead>
 
-
           <tbody id="voterTable">
-
-            <!-- JavaScript loads records here -->
-
+            <!-- JavaScript inserts records here -->
           </tbody>
 
         </table>
@@ -129,13 +138,19 @@
       </div>
 
 
-      <!-- NO RECORDS MESSAGE -->
-      <div
-        id="emptyMessage"
-        class="empty-message"
-        hidden
-      >
+      <!-- EMPTY MESSAGE -->
+      <div id="emptyMessage" class="empty-message" hidden>
         No matching voter records found.
+      </div>
+
+
+      <!-- GRAND TOTAL -->
+      <div class="grand-total">
+
+        <span>Grand Total Records</span>
+
+        <strong id="grandTotal">0</strong>
+
       </div>
 
     </section>
@@ -143,18 +158,13 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-
-      <p>
-        Ward Wise Voter Directory
-      </p>
-
+      Ward Wise Voter Directory
     </footer>
 
   </div>
 
 
-  <!-- JAVASCRIPT -->
-  <script src="voterscript.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
