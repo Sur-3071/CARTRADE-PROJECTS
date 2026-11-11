@@ -1,7 +1,7 @@
 
 const JSON_FILE = "data/voters.json";
 
-// HTML elements
+// HTML Elements
 const wardSelect = document.getElementById("wardSelect");
 const searchInput = document.getElementById("searchInput");
 const clearBtn = document.getElementById("clearBtn");
@@ -10,23 +10,26 @@ const count = document.getElementById("count");
 const emptyMessage = document.getElementById("emptyMessage");
 const status = document.getElementById("status");
 
+// Store data
 let allWards = {};
 let allVoters = [];
 let voters = [];
 
 // =====================================
-// LOAD COMPLETE JSON DATABASE
+// LOAD JSON
 // =====================================
 
 async function loadVoters() {
+
   try {
+
     status.hidden = true;
     count.textContent = "Loading...";
 
     const response = await fetch(JSON_FILE);
 
     if (!response.ok) {
-      throw new Error("Cannot load voters.json");
+      throw new Error("Unable to load voters.json");
     }
 
     const data = await response.json();
@@ -36,13 +39,13 @@ async function loadVoters() {
       typeof data !== "object" ||
       Array.isArray(data)
     ) {
-      throw new Error("Expected ward-keyed JSON object");
+      throw new Error("Invalid JSON structure");
     }
 
     allWards = data;
     allVoters = [];
 
-    // Convert ward-keyed object into one searchable list
+    // Convert ward object into one voter array
     Object.entries(allWards).forEach(([wardKey, records]) => {
 
       if (!Array.isArray(records)) {
@@ -60,17 +63,22 @@ async function loadVoters() {
         });
 
       });
+
     });
 
+    // Generate ward dropdown
     createWardOptions();
 
-    // SHOW ALL RECORDS INITIALLY
+    // Show all wards initially
     wardSelect.value = "ALL";
+
     filterRecords();
 
   } catch (error) {
+
     console.error(error);
 
+    allWards = {};
     allVoters = [];
     voters = [];
 
@@ -79,15 +87,21 @@ async function loadVoters() {
 
     status.hidden = false;
     status.textContent =
-      "Unable to load JSON. Check data/voters.json.";
+      "Unable to load voter data. Check data/voters.json.";
 
     emptyMessage.hidden = false;
-    emptyMessage.textContent = "Unable to load voter records.";
+    emptyMessage.textContent =
+      "Unable to load voter records.";
+
+    updateStatistics([]);
+    document.getElementById("grandTotal").textContent = "0";
+
   }
+
 }
 
 // =====================================
-// WARD DROPDOWN
+// CREATE WARD DROPDOWN
 // =====================================
 
 function createWardOptions() {
@@ -96,12 +110,13 @@ function createWardOptions() {
 
   // All wards option
   const allOption = document.createElement("option");
+
   allOption.value = "ALL";
   allOption.textContent = "All Wards";
 
   wardSelect.appendChild(allOption);
 
-  // Automatically get ward numbers from JSON
+  // Get ward keys from JSON
   const wards = Object.keys(allWards)
     .sort((a, b) => Number(a) - Number(b));
 
@@ -115,17 +130,17 @@ function createWardOptions() {
     wardSelect.appendChild(option);
 
   });
+
 }
 
 // =====================================
-// FILTER BY WARD AND SEARCH
+// FILTER BY WARD
 // =====================================
 
 function filterRecords() {
 
   const selectedWard = wardSelect.value;
 
-  // All wards or selected ward
   if (selectedWard === "ALL") {
 
     voters = [...allVoters];
@@ -138,11 +153,55 @@ function filterRecords() {
 
   }
 
+  // Update statistics for selected ward
+  updateStatistics(voters);
+
+  // Update table
   displayVoters();
+
 }
 
 // =====================================
-// SEARCH AND SORT
+// UPDATE STATISTICS
+// =====================================
+
+function updateStatistics(records) {
+
+  const total = records.length;
+
+  const male = records.filter(voter => {
+
+    const gender = String(voter.gender || "")
+      .trim()
+      .toLowerCase();
+
+    return gender === "male" || gender === "m";
+
+  }).length;
+
+  const female = records.filter(voter => {
+
+    const gender = String(voter.gender || "")
+      .trim()
+      .toLowerCase();
+
+    return gender === "female" || gender === "f";
+
+  }).length;
+
+  document.getElementById("totalVoters").textContent =
+    total.toLocaleString("en-IN");
+
+  document.getElementById("maleCount").textContent =
+    male.toLocaleString("en-IN");
+
+  document.getElementById("femaleCount").textContent =
+    female.toLocaleString("en-IN");
+
+}
+
+// =====================================
+// SEARCH AND DISPLAY TABLE
 // =====================================
 
 function displayVoters() {
@@ -151,35 +210,45 @@ function displayVoters() {
     .trim()
     .toLowerCase();
 
+  // Search across voter fields
   const filteredVoters = voters
     .filter(voter => {
 
       const searchableFields = [
+
         voter.voter_name,
         voter.voter_no,
         voter.voter_id_no,
-        voter.relation_name,
         voter.relation_type,
-        voter.house_no
+        voter.relation_name,
+        voter.house_no,
+        voter.gender,
+        voter.age,
+        voter.ward_number
+
       ];
 
       return searchableFields.some(value =>
-        String(value ?? "").toLowerCase().includes(search)
+        String(value ?? "")
+          .toLowerCase()
+          .includes(search)
       );
 
     })
 
+    // Alphabetical sorting
     .sort((a, b) => {
 
-      return String(a.voter_name ?? "").localeCompare(
-        String(b.voter_name ?? ""),
-        undefined,
-        { sensitivity: "base" }
-      );
+      return String(a.voter_name || "")
+        .localeCompare(
+          String(b.voter_name || ""),
+          undefined,
+          { sensitivity: "base" }
+        );
 
     });
 
-  // Clear old rows
+  // Clear previous rows
   voterTable.innerHTML = "";
 
   // Generate table rows
@@ -187,8 +256,8 @@ function displayVoters() {
 
     const row = document.createElement("tr");
 
-    // Exact field names from your JSON
     const values = [
+
       index + 1,
       voter.ward_number,
       voter.voter_no,
@@ -199,13 +268,13 @@ function displayVoters() {
       voter.age,
       voter.gender,
       voter.house_no
+
     ];
 
     values.forEach(value => {
 
       const cell = document.createElement("td");
 
-      // Preserve numbers and strings correctly
       cell.textContent =
         value === null ||
         value === undefined ||
@@ -221,11 +290,16 @@ function displayVoters() {
 
   });
 
-  // Update total count
+  // Update filtered result count
   count.textContent =
-    filteredVoters.length + " Records";
+    filteredVoters.length.toLocaleString("en-IN") +
+    " Records";
 
-  // Empty results
+  // Grand total of currently displayed records
+  document.getElementById("grandTotal").textContent =
+    filteredVoters.length.toLocaleString("en-IN");
+
+  // Empty results message
   emptyMessage.hidden =
     filteredVoters.length !== 0;
 
@@ -236,12 +310,22 @@ function displayVoters() {
 // =====================================
 
 // Ward selection
-wardSelect.addEventListener("change", filterRecords);
+wardSelect.addEventListener("change", () => {
 
-// Live search across selected ward or all wards
-searchInput.addEventListener("input", displayVoters);
+  searchInput.value = "";
 
-// Clear search and show all records in selected ward
+  filterRecords();
+
+});
+
+// Live search
+searchInput.addEventListener("input", () => {
+
+  displayVoters();
+
+});
+
+// Clear search
 clearBtn.addEventListener("click", () => {
 
   searchInput.value = "";
@@ -253,7 +337,7 @@ clearBtn.addEventListener("click", () => {
 });
 
 // =====================================
-// START WEBSITE
+// INITIALIZE WEBSITE
 // =====================================
 
 loadVoters();
