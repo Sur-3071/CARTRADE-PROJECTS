@@ -1,7 +1,7 @@
 
 const JSON_FILE = "data/voters.json";
 
-// HTML Elements
+// HTML elements
 const wardSelect = document.getElementById("wardSelect");
 const searchInput = document.getElementById("searchInput");
 const clearBtn = document.getElementById("clearBtn");
@@ -10,13 +10,13 @@ const count = document.getElementById("count");
 const emptyMessage = document.getElementById("emptyMessage");
 const status = document.getElementById("status");
 
-// Store all ward data
 let allWards = {};
+let allVoters = [];
 let voters = [];
 
-// ===================================
-// LOAD JSON FILE
-// ===================================
+// =====================================
+// LOAD COMPLETE JSON DATABASE
+// =====================================
 
 async function loadVoters() {
   try {
@@ -26,7 +26,7 @@ async function loadVoters() {
     const response = await fetch(JSON_FILE);
 
     if (!response.ok) {
-      throw new Error("Unable to load voters.json");
+      throw new Error("Cannot load voters.json");
     }
 
     const data = await response.json();
@@ -36,25 +36,42 @@ async function loadVoters() {
       typeof data !== "object" ||
       Array.isArray(data)
     ) {
-      throw new Error("Invalid JSON format. Expected ward-keyed object.");
+      throw new Error("Expected ward-keyed JSON object");
     }
 
     allWards = data;
+    allVoters = [];
+
+    // Convert ward-keyed object into one searchable list
+    Object.entries(allWards).forEach(([wardKey, records]) => {
+
+      if (!Array.isArray(records)) {
+        console.warn("Invalid ward data:", wardKey);
+        return;
+      }
+
+      records.forEach(voter => {
+
+        if (!voter || typeof voter !== "object") return;
+
+        allVoters.push({
+          ...voter,
+          ward_number: voter.ward_number ?? Number(wardKey)
+        });
+
+      });
+    });
 
     createWardOptions();
 
-    if (wardSelect.options.length > 0) {
-      wardSelect.selectedIndex = 0;
-      filterWard();
-    } else {
-      voters = [];
-      displayVoters();
-    }
+    // SHOW ALL RECORDS INITIALLY
+    wardSelect.value = "ALL";
+    filterRecords();
 
   } catch (error) {
     console.error(error);
 
-    allWards = {};
+    allVoters = [];
     voters = [];
 
     voterTable.innerHTML = "";
@@ -62,82 +79,71 @@ async function loadVoters() {
 
     status.hidden = false;
     status.textContent =
-      "Error loading voter data. Check data/voters.json.";
+      "Unable to load JSON. Check data/voters.json.";
 
     emptyMessage.hidden = false;
     emptyMessage.textContent = "Unable to load voter records.";
   }
 }
 
-// ===================================
-// CREATE WARD DROPDOWN
-// ===================================
+// =====================================
+// WARD DROPDOWN
+// =====================================
 
 function createWardOptions() {
+
   wardSelect.innerHTML = "";
 
+  // All wards option
+  const allOption = document.createElement("option");
+  allOption.value = "ALL";
+  allOption.textContent = "All Wards";
+
+  wardSelect.appendChild(allOption);
+
+  // Automatically get ward numbers from JSON
   const wards = Object.keys(allWards)
     .sort((a, b) => Number(a) - Number(b));
 
   wards.forEach(ward => {
+
     const option = document.createElement("option");
 
     option.value = ward;
     option.textContent = "Ward " + ward;
 
     wardSelect.appendChild(option);
+
   });
 }
 
-// ===================================
-// FILTER SELECTED WARD
-// ===================================
+// =====================================
+// FILTER BY WARD AND SEARCH
+// =====================================
 
-function filterWard() {
+function filterRecords() {
+
   const selectedWard = wardSelect.value;
 
-  const wardData = allWards[selectedWard];
+  // All wards or selected ward
+  if (selectedWard === "ALL") {
 
-  voters = Array.isArray(wardData)
-    ? wardData.filter(voter =>
-        voter && typeof voter === "object"
-      )
-    : [];
+    voters = [...allVoters];
 
-  searchInput.value = "";
+  } else {
 
-  updateWardDetails(selectedWard);
+    voters = allVoters.filter(voter =>
+      String(voter.ward_number) === selectedWard
+    );
+
+  }
 
   displayVoters();
 }
 
-// ===================================
-// UPDATE WARD DETAILS
-// ===================================
-
-function updateWardDetails(ward) {
-  const wardNumber = document.getElementById("wardNumber");
-  const panchayat = document.getElementById("panchayat");
-  const mandal = document.getElementById("mandal");
-  const district = document.getElementById("district");
-  const constituency = document.getElementById("constituency");
-
-  if (wardNumber) {
-    wardNumber.textContent = ward || "-";
-  }
-
-  // These details are not present in the
-  // current ward-keyed JSON structure.
-
-  if (panchayat) panchayat.textContent = "-";
-  if (mandal) mandal.textContent = "-";
-  if (district) district.textContent = "-";
-  if (constituency) constituency.textContent = "-";
-}
-
-// ===================================
-// DISPLAY VOTER TABLE
-// ===================================
+// =====================================
+// SEARCH AND SORT
+// =====================================
 
 function displayVoters() {
 
@@ -145,90 +151,97 @@ function displayVoters() {
     .trim()
     .toLowerCase();
 
-  // Search by voter name and sort A-Z
   const filteredVoters = voters
     .filter(voter => {
-      const name = String(voter.voter_name || "")
-        .toLowerCase();
 
-      return name.includes(search);
+      const searchableFields = [
+        voter.voter_name,
+        voter.voter_no,
+        voter.voter_id_no,
+        voter.relation_name,
+        voter.relation_type,
+        voter.house_no
+      ];
+
+      return searchableFields.some(value =>
+        String(value ?? "").toLowerCase().includes(search)
+      );
+
     })
+
     .sort((a, b) => {
-      return String(a.voter_name || "").localeCompare(
-        String(b.voter_name || ""),
+
+      return String(a.voter_name ?? "").localeCompare(
+        String(b.voter_name ?? ""),
         undefined,
         { sensitivity: "base" }
       );
+
     });
 
-  // Clear previous table
+  // Clear old rows
   voterTable.innerHTML = "";
 
-  // Create table rows
+  // Generate table rows
   filteredVoters.forEach((voter, index) => {
 
     const row = document.createElement("tr");
 
-    // Exact JSON field names
+    // Exact field names from your JSON
     const values = [
-      index + 1,              // S.No
-      voter.voter_no,         // Voter No
-      voter.voter_id_no,      // Voter ID No
-      voter.voter_name,       // Voter Name
-      voter.relation_type,    // Relation Type
-      voter.relation_name,   // Relation Name
-      voter.age,              // Age
-      voter.gender,           // Gender
-      voter.house_no          // House No
+      index + 1,
+      voter.ward_number,
+      voter.voter_no,
+      voter.voter_id_no,
+      voter.voter_name,
+      voter.relation_type,
+      voter.relation_name,
+      voter.age,
+      voter.gender,
+      voter.house_no
     ];
 
     values.forEach(value => {
 
       const cell = document.createElement("td");
 
+      // Preserve numbers and strings correctly
       cell.textContent =
         value === null ||
         value === undefined ||
         value === ""
           ? "-"
-          : value;
+          : String(value);
 
       row.appendChild(cell);
 
     });
 
     voterTable.appendChild(row);
+
   });
 
-  // Update total records
+  // Update total count
   count.textContent =
     filteredVoters.length + " Records";
 
-  // Show empty message
+  // Empty results
   emptyMessage.hidden =
     filteredVoters.length !== 0;
+
 }
 
-// ===================================
-// WARD CHANGE EVENT
-// ===================================
+// =====================================
+// EVENT LISTENERS
+// =====================================
 
-wardSelect.addEventListener("change", () => {
-  filterWard();
-});
+// Ward selection
+wardSelect.addEventListener("change", filterRecords);
 
-// ===================================
-// LIVE NAME SEARCH
-// ===================================
+// Live search across selected ward or all wards
+searchInput.addEventListener("input", displayVoters);
 
-searchInput.addEventListener("input", () => {
-  displayVoters();
-});
-
-// ===================================
-// CLEAR SEARCH
-// ===================================
-
+// Clear search and show all records in selected ward
 clearBtn.addEventListener("click", () => {
 
   searchInput.value = "";
@@ -239,8 +252,8 @@ clearBtn.addEventListener("click", () => {
 
 });
 
-// ===================================
+// =====================================
 // START WEBSITE
-// ===================================
+// =====================================
 
 loadVoters();
