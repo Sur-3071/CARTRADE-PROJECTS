@@ -4,78 +4,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Ward Wise Voter Directory</title>
+
   <link rel="stylesheet" href="voterstyle.css">
 </head>
+
 <body>
 
   <div class="container">
 
-    <header>
+    <!-- HEADER -->
+    <header class="header">
       <h1>Ward Wise Voter Directory</h1>
-      <p>Search and view voter records ward-wise</p>
+      <p>Search and view voter records across all wards</p>
     </header>
 
-    <!-- Ward Details -->
-    <section class="ward-details">
-      <div>
-        <span>Ward Number</span>
-        <strong id="wardNumber">-</strong>
-      </div>
-      <div>
-        <span>Panchayat</span>
-        <strong id="panchayat">-</strong>
-      </div>
-      <div>
-        <span>Mandal</span>
-        <strong id="mandal">-</strong>
-      </div>
-      <div>
-        <span>District</span>
-        <strong id="district">-</strong>
-      </div>
-      <div>
-        <span>Assembly Constituency</span>
-        <strong id="constituency">-</strong>
-      </div>
-    </section>
 
-    <!-- Filters -->
+    <!-- FILTER SECTION -->
     <section class="filters">
 
+      <!-- WARD FILTER -->
       <div class="filter-group">
-        <label for="wardSelect">Select Ward</label>
-        <select id="wardSelect"></select>
+
+        <label for="wardSelect">
+          Select Ward
+        </label>
+
+        <select id="wardSelect">
+          <option value="ALL">All Wards</option>
+        </select>
+
       </div>
 
+
+      <!-- NAME SEARCH -->
       <div class="filter-group">
-        <label for="searchInput">Search Voter Name</label>
+
+        <label for="searchInput">
+          Search Voter Details
+        </label>
+
         <input
           type="search"
           id="searchInput"
-          placeholder="Enter voter name..."
+          placeholder="Search name, voter number, voter ID..."
           autocomplete="off"
         >
+
       </div>
 
-      <button id="clearBtn" type="button">Clear</button>
+
+      <!-- CLEAR BUTTON -->
+      <button
+        type="button"
+        id="clearBtn"
+      >
+        Clear Search
+      </button>
 
     </section>
 
-    <!-- Table Heading -->
+
+    <!-- RECORDS SECTION -->
     <section class="table-section">
 
+      <!-- TABLE HEADER -->
       <div class="table-heading">
-        <h2>Voter Records</h2>
-        <span id="count">0 Records</span>
+
+        <div>
+          <h2>Voter Records</h2>
+
+          <p>
+            All voter details are displayed below
+          </p>
+        </div>
+
+        <div class="record-count">
+          <span id="count">0 Records</span>
+        </div>
+
       </div>
 
-      <div id="status" class="status" hidden></div>
 
+      <!-- STATUS MESSAGE -->
+      <div
+        id="status"
+        class="status"
+        hidden
+      ></div>
+
+
+      <!-- TABLE -->
       <div class="table-wrapper">
+
         <table>
-          
+
           <thead>
+
             <tr>
               <th>S.No</th>
               <th>Ward Number</th>
@@ -88,21 +114,47 @@
               <th>Gender</th>
               <th>House No</th>
             </tr>
+
           </thead>
 
 
-          <tbody id="voterTable"></tbody>
+          <tbody id="voterTable">
+
+            <!-- JavaScript loads records here -->
+
+          </tbody>
+
         </table>
+
       </div>
 
-      <div id="emptyMessage" hidden>
+
+      <!-- NO RECORDS MESSAGE -->
+      <div
+        id="emptyMessage"
+        class="empty-message"
+        hidden
+      >
         No matching voter records found.
       </div>
 
     </section>
 
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+      <p>
+        Ward Wise Voter Directory
+      </p>
+
+    </footer>
+
   </div>
 
+
+  <!-- JAVASCRIPT -->
   <script src="voterscript.js"></script>
+
 </body>
 </html>
