@@ -204,18 +204,39 @@ function updateStatistics(records) {
 // SEARCH AND DISPLAY TABLE
 // =====================================
 
+function updateStatistics(records) {
+
+  const total = records.length;
+
+  const male = records.filter(voter => {
+    const gender = String(voter.gender || "")
+      .trim().toLowerCase();
+
+    return gender === "male" || gender === "m";
+  }).length;
+
+  const female = records.filter(voter => {
+    const gender = String(voter.gender || "")
+      .trim().toLowerCase();
+
+    return gender === "female" || gender === "f";
+  }).length;
+
+  document.getElementById("totalVoters").textContent = total;
+  document.getElementById("maleCount").textContent = male;
+  document.getElementById("femaleCount").textContent = female;
+}
+
 function displayVoters() {
 
   const search = searchInput.value
     .trim()
     .toLowerCase();
 
-  // Search across voter fields
   const filteredVoters = voters
     .filter(voter => {
 
       const searchableFields = [
-
         voter.voter_name,
         voter.voter_no,
         voter.voter_id_no,
@@ -225,7 +246,6 @@ function displayVoters() {
         voter.gender,
         voter.age,
         voter.ward_number
-
       ];
 
       return searchableFields.some(value =>
@@ -236,7 +256,6 @@ function displayVoters() {
 
     })
 
-    // Alphabetical sorting
     .sort((a, b) => {
 
       return String(a.voter_name || "")
@@ -257,7 +276,6 @@ function displayVoters() {
     const row = document.createElement("tr");
 
     const values = [
-
       index + 1,
       voter.ward_number,
       voter.voter_no,
@@ -268,7 +286,6 @@ function displayVoters() {
       voter.age,
       voter.gender,
       voter.house_no
-
     ];
 
     values.forEach(value => {
@@ -290,12 +307,15 @@ function displayVoters() {
 
   });
 
-  // Update filtered result count
+  // UPDATE MALE, FEMALE AND TOTAL COUNTS
+  updateStatistics(filteredVoters);
+
+  // Update record count
   count.textContent =
     filteredVoters.length.toLocaleString("en-IN") +
     " Records";
 
-  // Grand total of currently displayed records
+  // Update grand total
   document.getElementById("grandTotal").textContent =
     filteredVoters.length.toLocaleString("en-IN");
 
