@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +21,6 @@
         <p>Search and manage ward-wise voter records</p>
       </div>
     </header>
-
 
     <!-- FILTER SECTION -->
     <section class="filters">
@@ -52,7 +50,6 @@
 
     </section>
 
-
     <!-- STATISTICS -->
     <section class="statistics">
 
@@ -65,7 +62,6 @@
         </div>
       </div>
 
-
       <div class="stat-card male-card">
         <div class="stat-icon">👨</div>
 
@@ -74,7 +70,6 @@
           <h2 id="maleCount">0</h2>
         </div>
       </div>
-
 
       <div class="stat-card female-card">
         <div class="stat-icon">👩</div>
@@ -87,6 +82,27 @@
 
     </section>
 
+    <!-- FAMILY GROUPS SECTION -->
+    <section class="family-section">
+
+      <div class="table-heading">
+
+        <div>
+          <h2>Family Groups</h2>
+          <p>Surname-wise voter statistics</p>
+        </div>
+
+        <div class="record-count" id="familyCount">
+          0 Families
+        </div>
+
+      </div>
+
+      <div id="familyContainer" class="family-container">
+        <!-- Dynamic Family Cards -->
+      </div>
+
+    </section>
 
     <!-- TABLE SECTION -->
     <section class="table-section">
@@ -104,10 +120,8 @@
 
       </div>
 
-
       <!-- STATUS -->
       <div id="status" class="status" hidden></div>
-
 
       <!-- VOTER TABLE -->
       <div class="table-wrapper">
@@ -137,12 +151,10 @@
 
       </div>
 
-
       <!-- EMPTY MESSAGE -->
       <div id="emptyMessage" class="empty-message" hidden>
         No matching voter records found.
       </div>
-
 
       <!-- GRAND TOTAL -->
       <div class="grand-total">
@@ -155,7 +167,6 @@
 
     </section>
 
-
     <!-- FOOTER -->
     <footer class="footer">
       Ward Wise Voter Directory
@@ -163,8 +174,8 @@
 
   </div>
 
-
   <script src="voterscript.js"></script>
 
 </body>
+
 </html>
