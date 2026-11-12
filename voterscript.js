@@ -1,7 +1,9 @@
-
 const JSON_FILE = "data/voters.json";
 
-// HTML Elements
+// =====================================
+// HTML ELEMENTS
+// =====================================
+
 const wardSelect = document.getElementById("wardSelect");
 const searchInput = document.getElementById("searchInput");
 const clearBtn = document.getElementById("clearBtn");
@@ -10,7 +12,16 @@ const count = document.getElementById("count");
 const emptyMessage = document.getElementById("emptyMessage");
 const status = document.getElementById("status");
 
-// Store data
+const familyContainer =
+  document.getElementById("familyContainer");
+
+const familyCount =
+  document.getElementById("familyCount");
+
+// =====================================
+// STORE DATA
+// =====================================
+
 let allWards = {};
 let allVoters = [];
 let voters = [];
@@ -24,6 +35,7 @@ async function loadVoters() {
   try {
 
     status.hidden = true;
+
     count.textContent = "Loading...";
 
     const response = await fetch(JSON_FILE);
@@ -45,31 +57,40 @@ async function loadVoters() {
     allWards = data;
     allVoters = [];
 
-    // Convert ward object into one voter array
-    Object.entries(allWards).forEach(([wardKey, records]) => {
+    Object.entries(allWards).forEach(
+      ([wardKey, records]) => {
 
-      if (!Array.isArray(records)) {
-        console.warn("Invalid ward data:", wardKey);
-        return;
-      }
+        if (!Array.isArray(records)) {
+          console.warn(
+            "Invalid ward data:",
+            wardKey
+          );
+          return;
+        }
 
-      records.forEach(voter => {
+        records.forEach(voter => {
 
-        if (!voter || typeof voter !== "object") return;
+          if (
+            !voter ||
+            typeof voter !== "object"
+          ) {
+            return;
+          }
 
-        allVoters.push({
-          ...voter,
-          ward_number: voter.ward_number ?? Number(wardKey)
+          allVoters.push({
+            ...voter,
+            ward_number:
+              voter.ward_number ??
+              Number(wardKey)
+          });
+
         });
 
-      });
+      }
+    );
 
-    });
-
-    // Generate ward dropdown
     createWardOptions();
 
-    // Show all wards initially
     wardSelect.value = "ALL";
 
     filterRecords();
@@ -83,21 +104,34 @@ async function loadVoters() {
     voters = [];
 
     voterTable.innerHTML = "";
+
     count.textContent = "0 Records";
 
     status.hidden = false;
+
     status.textContent =
       "Unable to load voter data. Check data/voters.json.";
 
     emptyMessage.hidden = false;
+
     emptyMessage.textContent =
       "Unable to load voter records.";
 
     updateStatistics([]);
-    document.getElementById("grandTotal").textContent = "0";
 
+    document.getElementById(
+      "grandTotal"
+    ).textContent = "0";
+
+    if (familyContainer) {
+      familyContainer.innerHTML = "";
+    }
+
+    if (familyCount) {
+      familyCount.textContent =
+        "0 Families";
+    }
   }
-
 }
 
 // =====================================
@@ -108,38 +142,42 @@ function createWardOptions() {
 
   wardSelect.innerHTML = "";
 
-  // All wards option
-  const allOption = document.createElement("option");
+  const allOption =
+    document.createElement("option");
 
   allOption.value = "ALL";
   allOption.textContent = "All Wards";
 
   wardSelect.appendChild(allOption);
 
-  // Get ward keys from JSON
   const wards = Object.keys(allWards)
-    .sort((a, b) => Number(a) - Number(b));
+    .sort(
+      (a, b) =>
+        Number(a) - Number(b)
+    );
 
   wards.forEach(ward => {
 
-    const option = document.createElement("option");
+    const option =
+      document.createElement("option");
 
     option.value = ward;
-    option.textContent = "Ward " + ward;
+
+    option.textContent =
+      "Ward " + ward;
 
     wardSelect.appendChild(option);
-
   });
-
 }
 
 // =====================================
-// FILTER BY WARD
+// FILTER RECORDS
 // =====================================
 
 function filterRecords() {
 
-  const selectedWard = wardSelect.value;
+  const selectedWard =
+    wardSelect.value;
 
   if (selectedWard === "ALL") {
 
@@ -147,18 +185,15 @@ function filterRecords() {
 
   } else {
 
-    voters = allVoters.filter(voter =>
-      String(voter.ward_number) === selectedWard
+    voters = allVoters.filter(
+      voter =>
+        String(
+          voter.ward_number
+        ) === selectedWard
     );
-
   }
 
-  // Update statistics for selected ward
-  updateStatistics(voters);
-
-  // Update table
   displayVoters();
-
 }
 
 // =====================================
@@ -169,195 +204,335 @@ function updateStatistics(records) {
 
   const total = records.length;
 
-  const male = records.filter(voter => {
+  const male =
+    records.filter(voter => {
 
-    const gender = String(voter.gender || "")
-      .trim()
-      .toLowerCase();
+      const gender =
+        String(
+          voter.gender || ""
+        )
+          .trim()
+          .toLowerCase();
 
-    return gender === "male" || gender === "m";
+      return (
+        gender === "male" ||
+        gender === "m"
+      );
 
-  }).length;
+    }).length;
 
-  const female = records.filter(voter => {
+  const female =
+    records.filter(voter => {
 
-    const gender = String(voter.gender || "")
-      .trim()
-      .toLowerCase();
+      const gender =
+        String(
+          voter.gender || ""
+        )
+          .trim()
+          .toLowerCase();
 
-    return gender === "female" || gender === "f";
+      return (
+        gender === "female" ||
+        gender === "f"
+      );
 
-  }).length;
+    }).length;
 
-  document.getElementById("totalVoters").textContent =
+  document.getElementById(
+    "totalVoters"
+  ).textContent =
     total.toLocaleString("en-IN");
 
-  document.getElementById("maleCount").textContent =
+  document.getElementById(
+    "maleCount"
+  ).textContent =
     male.toLocaleString("en-IN");
 
-  document.getElementById("femaleCount").textContent =
+  document.getElementById(
+    "femaleCount"
+  ).textContent =
     female.toLocaleString("en-IN");
-
 }
 
 // =====================================
-// SEARCH AND DISPLAY TABLE
+// FAMILY GROUPS
 // =====================================
 
-function updateStatistics(records) {
+function updateFamilyGroups(records) {
 
-  const total = records.length;
+  if (!familyContainer) return;
 
-  const male = records.filter(voter => {
-    const gender = String(voter.gender || "")
-      .trim().toLowerCase();
+  familyContainer.innerHTML = "";
 
-    return gender === "male" || gender === "m";
-  }).length;
+  const familyMap = {};
 
-  const female = records.filter(voter => {
-    const gender = String(voter.gender || "")
-      .trim().toLowerCase();
+  records.forEach(voter => {
 
-    return gender === "female" || gender === "f";
-  }).length;
+    const voterName =
+      String(
+        voter.voter_name || ""
+      ).trim();
 
-  document.getElementById("totalVoters").textContent = total;
-  document.getElementById("maleCount").textContent = male;
-  document.getElementById("femaleCount").textContent = female;
+    if (!voterName) return;
+
+    const parts =
+      voterName.split(/\s+/);
+
+    const surname =
+      parts[
+        parts.length - 1
+      ];
+
+    if (!familyMap[surname]) {
+
+      familyMap[surname] = {
+        male: 0,
+        female: 0,
+        total: 0
+      };
+    }
+
+    const gender =
+      String(
+        voter.gender || ""
+      )
+        .trim()
+        .toLowerCase();
+
+    if (
+      gender === "male" ||
+      gender === "m"
+    ) {
+      familyMap[surname].male++;
+    }
+
+    if (
+      gender === "female" ||
+      gender === "f"
+    ) {
+      familyMap[surname].female++;
+    }
+
+    familyMap[surname].total++;
+  });
+
+  const families =
+    Object.entries(familyMap)
+      .sort(
+        (a, b) =>
+          b[1].total -
+          a[1].total
+      );
+
+  familyCount.textContent =
+    families.length.toLocaleString("en-IN") +
+    " Families";
+
+  if (families.length === 0) {
+
+    familyContainer.innerHTML = `
+      <div class="empty-message">
+        No Family Groups Found
+      </div>
+    `;
+
+    return;
+  }
+
+  families.forEach(
+    ([surname, stats]) => {
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "family-card";
+
+      card.innerHTML = `
+        <div class="family-name">
+          ${surname} Family
+        </div>
+
+        <div class="family-stats">
+
+          <div class="family-item">
+            <span>Male</span>
+            <strong class="family-male">
+              👨 ${stats.male}
+            </strong>
+          </div>
+
+          <div class="family-item">
+            <span>Female</span>
+            <strong class="family-female">
+              👩 ${stats.female}
+            </strong>
+          </div>
+
+        </div>
+
+        <div class="family-total">
+          Total Members :
+          ${stats.total}
+        </div>
+      `;
+
+      familyContainer.appendChild(
+        card
+      );
+    }
+  );
 }
+
+// =====================================
+// DISPLAY VOTERS
+// =====================================
 
 function displayVoters() {
 
-  const search = searchInput.value
-    .trim()
-    .toLowerCase();
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
 
-  const filteredVoters = voters
-    .filter(voter => {
+  const filteredVoters =
+    voters
+      .filter(voter => {
 
-      const searchableFields = [
-        voter.voter_name,
-        voter.voter_no,
-        voter.voter_id_no,
-        voter.relation_type,
-        voter.relation_name,
-        voter.house_no,
-        voter.gender,
-        voter.age,
-        voter.ward_number
-      ];
+        const searchableFields = [
+          voter.voter_name,
+          voter.voter_no,
+          voter.voter_id_no,
+          voter.relation_type,
+          voter.relation_name,
+          voter.house_no,
+          voter.gender,
+          voter.age,
+          voter.ward_number
+        ];
 
-      return searchableFields.some(value =>
-        String(value ?? "")
-          .toLowerCase()
-          .includes(search)
-      );
-
-    })
-
-    .sort((a, b) => {
-
-      return String(a.voter_name || "")
-        .localeCompare(
-          String(b.voter_name || ""),
-          undefined,
-          { sensitivity: "base" }
+        return searchableFields.some(
+          value =>
+            String(value ?? "")
+              .toLowerCase()
+              .includes(search)
         );
+      })
 
-    });
+      .sort((a, b) => {
 
-  // Clear previous rows
+        return String(
+          a.voter_name || ""
+        ).localeCompare(
+          String(
+            b.voter_name || ""
+          ),
+          undefined,
+          {
+            sensitivity:
+              "base"
+          }
+        );
+      });
+
   voterTable.innerHTML = "";
 
-  // Generate table rows
-  filteredVoters.forEach((voter, index) => {
+  filteredVoters.forEach(
+    (voter, index) => {
 
-    const row = document.createElement("tr");
+      const row =
+        document.createElement("tr");
 
-    const values = [
-      index + 1,
-      voter.ward_number,
-      voter.voter_no,
-      voter.voter_id_no,
-      voter.voter_name,
-      voter.relation_type,
-      voter.relation_name,
-      voter.age,
-      voter.gender,
-      voter.house_no
-    ];
+      const values = [
+        index + 1,
+        voter.ward_number,
+        voter.voter_no,
+        voter.voter_id_no,
+        voter.voter_name,
+        voter.relation_type,
+        voter.relation_name,
+        voter.age,
+        voter.gender,
+        voter.house_no
+      ];
 
-    values.forEach(value => {
+      values.forEach(value => {
 
-      const cell = document.createElement("td");
+        const cell =
+          document.createElement("td");
 
-      cell.textContent =
-        value === null ||
-        value === undefined ||
-        value === ""
-          ? "-"
-          : String(value);
+        cell.textContent =
+          value === null ||
+          value === undefined ||
+          value === ""
+            ? "-"
+            : String(value);
 
-      row.appendChild(cell);
+        row.appendChild(cell);
+      });
 
-    });
+      voterTable.appendChild(row);
+    }
+  );
 
-    voterTable.appendChild(row);
-
-  });
-
-  // UPDATE MALE, FEMALE AND TOTAL COUNTS
   updateStatistics(filteredVoters);
 
-  // Update record count
+  updateFamilyGroups(
+    filteredVoters
+  );
+
   count.textContent =
-    filteredVoters.length.toLocaleString("en-IN") +
-    " Records";
+    filteredVoters.length.toLocaleString(
+      "en-IN"
+    ) + " Records";
 
-  // Update grand total
-  document.getElementById("grandTotal").textContent =
-    filteredVoters.length.toLocaleString("en-IN");
+  document.getElementById(
+    "grandTotal"
+  ).textContent =
+    filteredVoters.length.toLocaleString(
+      "en-IN"
+    );
 
-  // Empty results message
   emptyMessage.hidden =
     filteredVoters.length !== 0;
-
 }
 
 // =====================================
-// EVENT LISTENERS
+// EVENTS
 // =====================================
 
-// Ward selection
-wardSelect.addEventListener("change", () => {
+wardSelect.addEventListener(
+  "change",
+  () => {
 
-  searchInput.value = "";
+    searchInput.value = "";
 
-  filterRecords();
+    filterRecords();
+  }
+);
 
-});
+searchInput.addEventListener(
+  "input",
+  () => {
 
-// Live search
-searchInput.addEventListener("input", () => {
+    displayVoters();
+  }
+);
 
-  displayVoters();
+clearBtn.addEventListener(
+  "click",
+  () => {
 
-});
+    searchInput.value = "";
 
-// Clear search
-clearBtn.addEventListener("click", () => {
+    displayVoters();
 
-  searchInput.value = "";
-
-  displayVoters();
-
-  searchInput.focus();
-
-});
+    searchInput.focus();
+  }
+);
 
 // =====================================
-// INITIALIZE WEBSITE
+// INIT
 // =====================================
 
 loadVoters();
