@@ -281,7 +281,7 @@ function updateFamilyGroups(records) {
     const surname =
       parts[
         parts.length - 1
-      ];
+      ].toUpperCase();
 
     if (!familyMap[surname]) {
 
