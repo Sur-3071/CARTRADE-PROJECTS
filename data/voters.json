@@ -14211,7 +14211,7 @@
     },
     {
       "voter_no": 1332,
-      "voter_id_no": "YAY1758127",
+      "voter_id_no": "YAY0375022",
       "voter_name": "Durga Pentagatla",
       "relative_name": "Yesubabu Pentagatla",
       "relation_type": "Husband",
@@ -14221,6 +14221,17 @@
     }
   ],
 "7":[
+   {
+      "assembly_serial_no": "4.2.2.2.2.49-153-938",
+      "voter_no": "1333",
+      "voter_name": "Naga Mani Pentagatla",
+      "relation_type": "Husband",
+      "relation_name": "Satti Babu Pentagatla",
+      "age": 53,
+      "gender": "Female",
+      "house_no": "2-130",
+      "voter_id_no": "YAY1758093"
+    },
     {
       "assembly_serial_no": "4.2.2.2.2.49-153-938",
       "voter_no": "1334",
