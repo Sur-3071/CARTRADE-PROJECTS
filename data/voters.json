@@ -2662,7 +2662,7 @@
     "age": 51,
     "gender": "Male",
     "house_no": "1-55",
-    "voter_id_no": "YAY1754522"
+    "voter_id_no": "MRG4313342"
   }
 ],
 
@@ -5101,7 +5101,7 @@
     {
       "ward_number": 2,
       "voter_no": 444,
-      "voter_id_no": "YAY1921105",
+      "voter_id_no": "YAY1081348",
       "voter_name": "Chakrarao unknown",
       "relation_type": "Father",
       "relation_name": "Chakrarao",
@@ -9767,7 +9767,7 @@
     },
     {
       "voter_no": 888,
-      "voter_id_no": "YAY1755487",
+      "voter_id_no": "MRG4316535",
       "voter_name": "Kumari Sundaranidi",
       "relative_name": "Satyanarayana",
       "relation_type": "House_no",
@@ -14224,13 +14224,13 @@
    {
       "assembly_serial_no": "4.2.2.2.2.49-153-938",
       "voter_no": "1333",
-      "voter_name": "Naga Mani Pentagatla",
+      "voter_name": "Naga Mani RAYUDU",
       "relation_type": "Husband",
-      "relation_name": "Satti Babu Pentagatla",
-      "age": 53,
+      "relation_name": "Surya Rao RAYUDU",
+      "age": 58,
       "gender": "Female",
-      "house_no": "2-130",
-      "voter_id_no": "YAY1758093"
+      "house_no": "2-132",
+      "voter_id_no": "YAY1758127"
     },
     {
       "assembly_serial_no": "4.2.2.2.2.49-153-938",
@@ -23993,7 +23993,7 @@
       "age": 30,
       "gender": "Male",
       "house_no": "3-143",
-      "voter_id_no": "YAY1758960"
+      "voter_id_no": "YAY1290063"
     }
   ],
 "11":[
@@ -26437,7 +26437,7 @@
       "age": 45,
       "gender": "Female",
       "house_no": "3-192",
-      "voter_id_no": "YAY0211870"
+      "voter_id_no": "YAY0211896"
     }
   ],
 "12":[
