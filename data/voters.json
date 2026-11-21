@@ -12612,7 +12612,7 @@
     {
       "voter_no": 1172,
       "voter_id_no": "YAY1178441",
-      "voter_name": "Pulleśwararao Nalla",
+      "voter_name": "Ayyappa Nalla",
       "relative_name": "Nalla Veerraju",
       "relation_type": "Father",
       "age": 24,
@@ -13320,7 +13320,7 @@
       "house_no": "2-108"
     },
     {
-      "voter_no": 1243,
+      "voter_no": 1244,
       "voter_id_no": "YAY2169209",
       "voter_name": "Satyaveni Maddireddy",
       "relative_name": "Govindu Maddireddy",
@@ -13330,13 +13330,13 @@
       "house_no": "2-108"
     },
     {
-      "voter_no": 1244,
+      "voter_no": 1243,
       "voter_id_no": "YAY1757731",
       "voter_name": "Rama Krishna Maddireddy",
       "relative_name": "Chinna Burayya Maddireddy",
       "relation_type": "Father",
       "age": 25,
-      "gender": "Female",
+      "gender": "Male",
       "house_no": "2-109"
     },
     {
@@ -13920,7 +13920,7 @@
       "house_no": "2-122"
     },
     {
-      "voter_no": 1303,
+      "voter_no": 1304,
       "voter_id_no": "YAY1757947",
       "voter_name": "Burramma Kone",
       "relative_name": "Rudrarao",
@@ -13930,7 +13930,7 @@
       "house_no": "2-124"
     },
     {
-      "voter_no": 1304,
+      "voter_no": 1305,
       "voter_id_no": "YAY1757962",
       "voter_name": "Venkatesulu Kone",
       "relative_name": "Rudrarao Kone",
@@ -13940,7 +13940,7 @@
       "house_no": "2-124"
     },
     {
-      "voter_no": 1305,
+      "voter_no": 1303,
       "voter_id_no": "YAY0507012",
       "voter_name": "Raveendra Pentagatla",
       "relative_name": "Dasharadhudu Pentagatla",
@@ -19237,7 +19237,7 @@
       "relation_type": "Father's Name",
       "relation_name": "Ramayya",
       "age": 31,
-      "gender": "Female",
+      "gender": "Male",
       "house_no": "3-61",
       "voter_id_no": "YAY1017011"
     },
